@@ -1,0 +1,17 @@
+/*
+ * CSS which is site-specific, little chance of being used elsewhere.
+ */
+
+/* Site Navigation */
+#nasa__sub-navigation .nasa__sub-navigation-section__600:hover, .nasa__sub-navigation-section__600 { background-color: #1b6d85; }
+#nasa__sub-navigation .nasa__sub-navigation-section__610:hover, .nasa__sub-navigation-section__610 { background-color: #316855; }
+#nasa__sub-navigation .nasa__sub-navigation-section__660:hover, .nasa__sub-navigation-section__660 { background-color: #4a385f; }
+#nasa__sub-navigation .nasa__sub-navigation-section__670:hover, .nasa__sub-navigation-section__670 { background-color: #a07326; }
+#nasa__sub-navigation .nasa__sub-navigation-section__690:hover, .nasa__sub-navigation-section__690 { background-color: #7f3c18; }
+
+/* Tool Legend */
+.tool-legend div { padding: 5px 0; }
+.tool-legend span:not(.label) { padding-left: 5px; }
+
+/* Tool List */
+#tool-list .btn { float: right; }

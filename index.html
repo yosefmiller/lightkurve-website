@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exoplanet Modeling and Analysis Center - NASA/GSFC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="img/nasa_favicon.ico" rel="icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/emac/site.css" rel="stylesheet">
+</head>
+<body>
+<!-- MAIN NASA HEADER -->
+<nav id="nasa__main-navigation" class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar__main">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <a class="navbar-brand_logo" href="https://www.nasa.gov/">
+                    <img src="img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
+                </a>
+                <div class="navbar-brand_heading">
+                    <a style="font-size: 18px;" href="https://www.nasa.gov/">National Aeronautics and Space Administration</a>
+                    <a style="font-size: 16px;" href="https://www.nasa.gov/goddard/">Goddard Space Flight Center</a>
+                </div>
+            </div>
+        </div>
+        <div id="navbar__main" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="https://science.gsfc.nasa.gov">GSFC Sciences and Exploration</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Simulation Tools <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="https://coronagraph.emac.gsfc.nasa.gov">Coronagraphic Mission Simulator</a></li>
+                        <li><a href="https://pandexo.emac.gsfc.nasa.gov">PandExo JWST/HST Simulator</a></li>
+                        <li><a href="https://ssed.gsfc.nasa.gov/psg/">Planetary Spectrum Generator</a></li>
+                        <li><a href="https://ccmc.gsfc.nasa.gov/community/EXO/">CCMC Heliophysics Models</a></li>
+                        <!--<li class="divider"></li>-->
+                        <!--<li class="dropdown-header">Nav header</li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                        <!--<li><a href="#">One more separated link</a></li>-->
+                    </ul>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-form-search" role="search" method="get" action="https://www.google.com/search">
+                        <div id="search-input-container">
+                            <div class="search-input-group">
+                                <button type="button" class="btn btn-default" id="hide-search-input-container"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></button>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search for...">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hq" value="intitle:EMAC ">
+                        <button type="submit" class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END MAIN NASA HEADER -->
+
+<!-- NASA SUB-SITE INFO -->
+<nav id="nasa__subsite-section" class="nasa__subsite-section-mini">
+    <!-- NASA SUB-SITE NAVIGATION BAR -->
+    <div id="nasa__sub-navigation" class="hiddenn">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov">Directorate & Offices (600)</a></li>
+                <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov">Earth Sciences (610)</a></li>
+                <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov">Astrophysics (660)</a></li>
+                <li><a class="nasa__sub-navigation-section__670" href="https://science.gsfc.nasa.gov">Heliophysics (670)</a></li>
+                <li class="active"><a class="nasa__sub-navigation-section__690" href="https://science.gsfc.nasa.gov">Solar System (690)</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- END NASA SUB-SITE NAVIGATION BAR -->
+
+    <!-- NASA SUB-SITE NAVIGATION DROPDOWN -->
+    <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__600">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Directorate Offices</span></div>
+                <ul class="col-md-4">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=603&navTab=nav_about_us">Administration & Resources Management Office (603)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=605&navTab=nav_about_us">Science Proposal Support Office (605)</a></li>
+                </ul>
+                <ul class="col-md-4">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606&navTab=nav_about_us">CISTO (606)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.1&navTab=nav_about_us">Networks and IT Security (606.1)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.2&navTab=nav_about_us">High-Performance Computing (606.2)</a></li>
+                </ul>
+                <ul class="col-md-4">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.3&navTab=nav_about_us">Information Science & Technology Research (606.3)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.4&navTab=nav_about_us">Scientific Visualization Studio Group (606.4)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__610">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Earth Sciences Offices</span></div>
+                <ul>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.1&navTab=nav_about_us">Global Modeling and Assimilation Office (610.1)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.2&navTab=nav_about_us">Global Change Data Center (610.2)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.W&navTab=nav_about_us">Field Support Office (610.W)</a></li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Earth Sciences Labs</span></div>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=611&navTab=nav_about_us">Goddard Institute for Space Studies (611)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=612&navTab=nav_about_us">Mesoscale Atmospheric Processes (612)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=613&navTab=nav_about_us">Climate and Radiation Laboratory (613)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=614&navTab=nav_about_us">Atmospheric Chemistry and Dynamics Laboratory (614)</a></li>
+                </ul>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=615&navTab=nav_about_us">Cryospheric Sciences Laboratory (615)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=616&navTab=nav_about_us">Ocean Ecology Laboratory (616)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=617&navTab=nav_about_us">Hydrological Sciences Laboratory (617)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=618&navTab=nav_about_us">Biospheric Sciences Laboratory (618)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=619&navTab=nav_about_us">Terrestrial Information Systems Laboratory (619)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=61A&navTab=nav_about_us">Geodesy and Geophysics Laboratory (61A)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__660">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Astrophysics Science Offices</span></div>
+                <ul>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.1&navTab=nav_about_us">High Energy Astrophysics Science Archive Research Center Office (660.1)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.2&navTab=nav_about_us">Office of Scientific Computing (660.2)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.3&navTab=nav_about_us">Instrument Development Group (660.3)</a></li>
+                    </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Astrophysics Science Labs</span></div>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=661&navTab=nav_about_us">Astroparticle Physics (661)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=662&navTab=nav_about_us">X-ray Astrophysics (662)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=663&navTab=nav_about_us">Gravitational Astrophysics (663)</a></li>
+                </ul>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=665&navTab=nav_about_us">Observational Cosmology (665)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=667&navTab=nav_about_us">ExoPlanets and Stellar Astrophysics (667)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__670">
+        <div class="container">
+            <div class="col-md-8 col-md-push-4">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Heliophysics Science Labs</span></div>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=671&navTab=nav_about_us">Solar Physics Laboratory (671)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=672&navTab=nav_about_us">Heliospheric Physics Laboratory (672)</a></li>
+                </ul>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=673&navTab=nav_about_us">Geospace Physics Laboratory (673)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=674">Space Weather Laboratory (674)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__690">
+        <div class="container">
+            <div class="col-md-4">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Solar System Science Offices</span></div>
+                <ul>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690.1&navTab=nav_about_us">Solar System Exploration Data Services Office (690.1)</a></li>
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="nasa__sub-navigation-dropdown-heading"><span>Solar System Science Labs</span></div>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=691&navTab=nav_about_us">Astrochemistry Laboratory (691)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=691.1&navTab=nav_about_us">Solar System Exploration Grants Support Office (691.1)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=693&navTab=nav_about_us">Planetary Systems Laboratory (693)</a></li>
+                </ul>
+                <ul class="col-md-6">
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=695&navTab=nav_about_us">Planetary Magnetospheres Laboratory (695)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=698&navTab=nav_about_us">Planetary Geology, Geophysics, and Geochemistry Laboratory (698)</a></li>
+                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=699&navTab=nav_about_us">Planetary Environments Laboratory (699)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- END NASA SUB-SITE NAVIGATION DROPDOWN -->
+
+    <!-- NASA SUB-SITE INFORMATION -->
+    <div class="container">
+        <div class="nasa__sub-logo nasa__sub-logo-left col-md-3">
+            <img src="img/emac/emac_logo_cropped.jpg" />
+        </div>
+        <div class="nasa__sub-name col-md-9">
+            <div>
+                <a href="https://emac.gsfc.nasa.gov/">
+                    Exoplanet Modeling and Analysis Center (EMAC)
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- END NASA SUB-SITE INFORMATION -->
+</nav>
+<!-- END NASA SUB-SITE INFO -->
+
+<!-- MAIN PAGE CONTENT -->
+<section id="nasa__main-section">
+    <div class="container">
+        <div class="row">
+            <!-- SIDEBAR -->
+            <div id="nasa__main-sidebar" class="col-md-3 hidden-sm hidden-xs">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5><strong>Legend:</strong></h5>
+                    </div>
+                    <div class="col-md-12 tool-legend">
+                        <div>
+                            <span class="label label-large label-important">Star</span>
+                            <span>Stellar Flux & Interaction Models</span>
+                        </div>
+                        <div>
+                            <span class="label label-large label-warning">1D Atm</span>
+                            <span>1D Atmosphere Models</span>
+                        </div>
+                        <div>
+                            <span class="label label-large label-yellow">3D Atm</span>
+                            <span>3D Atmosphere Models</span>
+                        </div>
+                        <div>
+                            <span class="label label-large label-success">RT</span>
+                            <span>Radiative Transfer Tools</span>
+                        </div>
+                        <div>
+                            <span class="label label-large label-info">Obs</span>
+                            <span>Observatory Models</span>
+                        </div>
+                        <div>
+                            <span class="label label-large label-purple">Atm Fit</span>
+                            <span>Atmosphere Model Fitting Tool</span>
+                        </div>
+                        <div style="height: 15px;"></div>
+                        <p class="text-muted">Note: Lighter colors indicate that pre-computed model templates are available but no new models can be run.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div id="nasa__main-content" class="col-md-9">
+                <div id="tool-list" class="row">
+                    <!-- DESCRIPTION -->
+                    <div class="col-xs-12">
+                        <h4>Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
+                        <p>EMAC serves as a repository and integration platform for modeling and analysis tools focused on the study of exoplanetary atmospheres. EMAC is continually being updated with new software applications; if you have suggestions for improvements or new applications, please email us at gsfc.emac at gmail.com.</p>
+                        <p>EMAC is a collaboration between the GSFC Sellers Exoplanet Environments Collaboration (SEEC) and the GSFC Community Coordinated Modeling Center (CCMC). The P.I. is Avi M. Mandell, and the Deputy P.I. is Antti Pulkinnen; more information on EMAC staffing and organization will be posted shortly.</p>
+                    </div>
+
+                    <!-- SPACER -->
+                    <div class="col-xs-12" style="height: 15px;"></div>
+
+                    <!-- TOOL LIST -->
+                    <div class="col-xs-12">
+                        <!-- TOOL -->
+                        <div class="well clearfix">
+                            <div class="col-md-3 col-xs-9">
+                                <strong>Coronagraphic Mission Simulator</strong><br/>
+                                <small>(Arney et al.)</small>
+                            </div>
+                            <div class="col-md-2 col-md-push-7 col-xs-3">
+                                <a href="https://coronagraph.emac.gsfc.nasa.gov">
+                                    <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
+                                </a>
+                            </div>
+                            <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
+                            <div class="col-md-7 col-md-pull-2 col-xs-12">
+                                <p>This simplified coronagraph simulator tool is based on the coronagraph noise model in Robinson et al. 2016, adapted by J. Lustig-Yaeger, G. Arney and J. Tumlinson.</p>
+                                <div>
+                                    <span class="label label-large label-warning label-dim arrowed-right">1D Atm</span>
+                                    <span class="label label-large label-info arrowed-in">Obs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOOL -->
+                        <div class="well clearfix">
+                            <div class="col-md-3 col-xs-9">
+                                <strong>PandExo JWST/HST Simulator</strong><br/>
+                                <small>(Batalha et al.)</small>
+                            </div>
+                            <div class="col-md-2 col-md-push-7 col-xs-3">
+                                <a href="https://pandexo.emac.gsfc.nasa.gov">
+                                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Launch</button>
+                                </a>
+                            </div>
+                            <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
+                            <div class="col-md-7 col-md-pull-2 col-xs-12">
+                                <p>PandExo is both an online tool and a Python package for generating instrument simulations of JWST's NIRSpec, NIRCam, NIRISS and NIRCam and HST WFC3. It uses throughput calculations from STScI's Exposure Time Calculator, Pandeia.</p>
+                                <div>
+                                    <span class="label label-large label-info">Obs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOOL -->
+                        <div class="well clearfix">
+                            <div class="col-md-3 col-xs-9">
+                                <strong>Planetary Spectrum Generator</strong><br/>
+                                <small>(Villanueva et al.)</small>
+                            </div>
+                            <div class="col-md-2 col-md-push-7 col-xs-3">
+                                <a href="https://ssed.gsfc.nasa.gov/psg/">
+                                    <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
+                                </a>
+                            </div>
+                            <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
+                            <div class="col-md-7 col-md-pull-2 col-xs-12">
+                                <p>The Planetary Spectrum Generator (PSG) is an online tool for synthesizing planetary spectra (atmospheres and surfaces) for a broad range of wavelengths (100 nm to 100 mm, UV/Vis/near-IR/IR/far-IR/THz/sub-mm/Radio) from any observatory (e.g., JWST, ALMA, Keck, SOFIA).</p>
+                                <div>
+                                    <span class="label label-large label-important label-dim arrowed-right">Star</span>
+                                    <span class="label label-large label-warning label-dim arrowed-in arrowed-right">1D Atm</span>
+                                    <span class="label label-large label-success arrowed-in arrowed-right">RT</span>
+                                    <span class="label label-large label-info arrowed-in">Obs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TOOL -->
+                        <div class="well clearfix">
+                            <div class="col-md-3 col-xs-9">
+                                <strong>CCMC Heliophysics Models</strong><br/>
+                                <small>(SWMF team, Glocer, Usmanov, et al.)</small>
+                                <a class="hidden-xs visible-md" style="display:block;padding-top: 10px" href="https://ccmc.gsfc.nasa.gov/" target="_blank"><img style="width: 100%;max-width: 165px;" src="img/emac/ccmc_logo.gif" alt="CCMC Logo, Community Coordinated Modeling Center, National Aeronautics and Space Administration"></a>
+                            </div>
+                            <div class="col-md-2 col-md-push-7 col-xs-3">
+                                <a href="https://ccmc.gsfc.nasa.gov/community/EXO/">
+                                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Launch</button>
+                                </a>
+                            </div>
+                            <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
+                            <div class="col-md-7 col-md-pull-2 col-xs-12">
+                                <p>In the initial CCMC exoplanet applications adaptation, users are able to view and analyze simulations carried out with three different models: SWMF, PWOM and ALF3D. These simulations are used to demonstrate how heliophysics models hosted at CCMC can be used to explore exoplanetary problems. Please follow the links to individual models for more details and to access the simulation results.</p>
+                                <div>
+                                    <span class="label label-large label-important">Star</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT -->
+        </div>
+    </div>
+</section>
+<!-- END MAIN PAGE CONTENT -->
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-brand_logo" href="https://www.nasa.gov/goddard/">
+                <img src="img/goddard_logo.png" alt="Goddard Space Flight Center">
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <span>NASA Official: </span>
+                <script type="text/javascript" language="javascript">
+			    <!--
+			    // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+			    // Random encryption key feature coded by Andrew Moulden
+			    // This code is freeware provided these four comment lines remain intact
+			    // A wizard to generate this code is at http://www.jottings.com/obfuscator/
+			    { coded = "d2o.sdhVPZZ@hdgd.lm2";
+				    key = "K4dgQoOxbt2TY9nqc1AyWuVlSmCMB80z3ehHrjL6XfRZasDiIpENvPUJF7kwG5";
+				    shift=coded.length;
+				    link="";
+				    for (var i=0; i<coded.length; i++) {
+					    var ltr, link;
+				    	if (key.indexOf(coded.charAt(i))===-1) {
+						    ltr = coded.charAt(i);
+						    link += (ltr);
+					    }
+					    else {
+						    ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
+						    link += (key.charAt(ltr));
+					    }
+				    }
+				    document.write("<a href='mailto:"+link+"'>Avi Mandell</a>");
+			    }
+			    //-->
+            </script>
+                <noscript><a href="#">Avi Mandell</a></noscript>
+            </li>
+            <li>
+                <span>Curator: </span>
+                <script type="text/javascript" language="javascript">
+			    <!--
+			    // Email obfuscator script 2.1 by Tim Williams, University of Arizona
+			    // Random encryption key feature coded by Andrew Moulden
+			    // This code is freeware provided these four comment lines remain intact
+			    // A wizard to generate this code is at http://www.jottings.com/obfuscator/
+			    { coded = "Jos9.A.cEif1ff1s@7oio.6Ez";
+				    key = "rh3vp7ZO2ImHRTFUlNjA4g1doscMzVxtWqwCSXyKB9nDGQ6bLEiJ50Pkf8Yeua";
+				    shift=coded.length;
+				    link="";
+				    for (i=0; i<coded.length; i++) {
+				    	var ltr, link;
+					    if (key.indexOf(coded.charAt(i))===-1) {
+						    ltr = coded.charAt(i);
+						    link += (ltr);
+					    }
+					    else {
+						    ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
+						    link += (key.charAt(ltr));
+					    }
+				    }
+				    document.write("<a href='mailto:"+link+"'>Carl F. Hostetter</a>");
+			    }
+			    //-->
+            </script>
+                <noscript><a href="#">Carl F. Hostetter</a></noscript>
+            </li>
+            <li>
+                <a href="https://www.nasa.gov/about/highlights/HP_Privacy.html">Privacy and Security Notices</a>
+            </li>
+        </ul>
+        <div class="nav navbar-nav navbar-right hidden">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="text-muted">
+                        © 2017 NASA Goddard, All rights reserved
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END FOOTER -->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
