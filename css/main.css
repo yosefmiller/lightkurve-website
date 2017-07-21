@@ -89,6 +89,9 @@
     margin: 0 auto;
     display: table;
 }
+#nasa__sub-navigation .nav.navbar-collapse.collapse:not(.in) {
+    display: none;
+}
 #nasa__sub-navigation .nav > li > a {
     padding: 15px 15px;
 }
@@ -112,10 +115,6 @@
     position: absolute;
     width: 100%;
     z-index: 100;
-}
-.nasa__sub-navigation-dropdown.active {
-    display: block;
-    height: auto;
 }
 .nasa__sub-navigation-dropdown-heading span {
     font-family: Lato, sans-serif;
@@ -200,6 +199,21 @@
     padding: 10px 0;
 }
 
+/* Sub-site sidebar */
+#nasa__main-sidebar {
+    width: 25%;
+}
+#nasa__main-section .navbar-toggle {
+    margin: 0 10px;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}
+#nasa__main-section .navbar-toggle .icon-bar {
+    height: 1px;
+    background-color: #333;
+}
+
 /* Navigation list */
 .nav > li {
     transition: opacity 0.3s, visibility 0.3s;
@@ -231,6 +245,7 @@
 .navbar-form-search {
     padding: 23px 3px;
     margin: 0;
+    border: none;
 }
 .navbar-form-search #search-input-container {
     text-align: right;
@@ -259,7 +274,10 @@
     vertical-align: middle;
 }
 .navbar-form-search input[type="text"] {
-    width: 250px;
+    width: inherit;
+    border: black;
+    background-color: #eee;
+    box-shadow: inset 0px 0px 11px 0px rgba(0, 0, 0, 0.73);
 }
 
 /* Footer */
@@ -305,6 +323,9 @@
     }
 }
 @media (max-width: 991px) {   /*sm*/
+    .navbar-brand_heading {
+        display: none;
+    }
     .nasa__sub-logo {
         display: none;
     }
@@ -313,11 +334,40 @@
     .navbar-brand_heading, #hide-search-input-container, .footer .nav {
         display: none;
     }
-    .search-input-container {
-        text-align: left;
+    .navbar-form-search {
+        position: absolute;
+        z-index: 50;
+        top: -65px;
+        right: 0;
+    }
+    .navbar-search-open .navbar-form-search {
+        left: 0;
+        background-color: black;
+    }
+    #search-input-container {
+        /*text-align: left;*/
         left: 60px;
+    }
+    .navbar-search-open .nav > li {
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    .nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
     .nasa__sub-name a {
         font-size: 24px;
+    }
+    #nasa__sub-navigation {
+        background-color: black;
+    }
+    #nasa__sub-navigation .nav {
+        float: left;
+        padding-left: 0;
+        border: none;
+    }
+    #nasa__main-sidebar {
+        width: auto;
     }
 }

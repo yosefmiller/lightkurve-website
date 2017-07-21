@@ -15,7 +15,7 @@
 <nav id="nasa__main-navigation" class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".nasa__navigation-bar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar__main">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -25,18 +25,15 @@
                 <a class="navbar-brand_logo" href="https://www.nasa.gov/">
                     <img src="img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
                 </a>
-                <a class="navbar-brand_logo hidden visible-sm visible-xs" style="padding-left: 0" href="/">
-                    <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC Logo" style="padding: 5px;">
-                </a>
                 <div class="navbar-brand_heading">
                     <a style="font-size: 18px;" href="https://www.nasa.gov/">National Aeronautics and Space Administration</a>
                     <a style="font-size: 16px;" href="https://www.nasa.gov/goddard/">Goddard Space Flight Center</a>
                 </div>
             </div>
         </div>
-        <div id="navbar__main" class="nasa__navigation-bar navbar-collapse collapse">
+        <div id="navbar__main" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active hidden-sm"><a href="/">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="https://science.gsfc.nasa.gov">GSFC Sciences and Exploration</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Simulation Tools <span class="caret"></span></a>
@@ -78,7 +75,7 @@
     <!-- To remove, add class 'hidden' -->
     <div id="nasa__sub-navigation">
         <div class="container">
-            <ul class="nasa__navigation-bar nav navbar-nav navbar-collapse collapse">
+            <ul class="nav navbar-nav">
                 <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov">Directorate & Offices (600)</a></li>
                 <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov">Earth Sciences (610)</a></li>
                 <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov">Astrophysics (660)</a></li>
@@ -147,7 +144,7 @@
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.1&navTab=nav_about_us">High Energy Astrophysics Science Archive Research Center Office (660.1)</a></li>
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.2&navTab=nav_about_us">Office of Scientific Computing (660.2)</a></li>
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.3&navTab=nav_about_us">Instrument Development Group (660.3)</a></li>
-                    </ul>
+                </ul>
             </div>
             <div class="col-md-8">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Astrophysics Science Labs</span></div>
@@ -207,7 +204,7 @@
     <div class="container">
         <div class="row">
             <div class="nasa__sub-logo nasa__sub-logo-left col-md-3">
-                <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC" />
+                <img src="img/emac/emac_logo_cropped.jpg" />
             </div>
             <div class="nasa__sub-name col-md-9">
                 <div>
@@ -226,16 +223,8 @@
 <section id="nasa__main-section">
     <div class="container">
         <div class="row">
-            <!-- SIDEBAR TRIGGER -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nasa__main-sidebar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-
             <!-- SIDEBAR -->
-            <div id="nasa__main-sidebar" class="navbar-collapse collapse col-sm-3 col-sm-push-9 col-md-push-0">
+            <div id="nasa__main-sidebar" class="col-md-3 hidden-sm hidden-xs">
                 <div class="row">
                     <div class="col-md-12">
                         <h5><strong>Legend:</strong></h5>
@@ -272,11 +261,11 @@
             </div>
 
             <!-- MAIN CONTENT -->
-            <div id="nasa__main-content" class="col-sm-9 col-sm-pull-3 col-md-pull-0">
+            <div id="nasa__main-content" class="col-md-9">
                 <div id="tool-list" class="row">
                     <!-- DESCRIPTION -->
                     <div class="col-xs-12">
-                        <h4 style="margin-right: 50px;">Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
+                        <h4>Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
                         <p>EMAC serves as a repository and integration platform for modeling and analysis tools focused on the study of exoplanetary atmospheres. EMAC is continually being updated with new software applications; if you have suggestions for improvements or new applications, please email us at gsfc.emac at gmail.com.</p>
                         <p>EMAC is a collaboration between the GSFC Sellers Exoplanet Environments Collaboration (SEEC) and the GSFC Community Coordinated Modeling Center (CCMC). The P.I. is Avi M. Mandell, and the Deputy P.I. is Antti Pulkinnen; more information on EMAC staffing and organization will be posted shortly.</p>
                     </div>
@@ -391,59 +380,59 @@
             <li>
                 <span>NASA Official: </span>
                 <script type="text/javascript" language="javascript">
-			    <!--
-			    // Email obfuscator script 2.1 by Tim Williams, University of Arizona
-			    // Random encryption key feature coded by Andrew Moulden
-			    // This code is freeware provided these four comment lines remain intact
-			    // A wizard to generate this code is at http://www.jottings.com/obfuscator/
-			    { coded = "d2o.sdhVPZZ@hdgd.lm2";
-				    key = "K4dgQoOxbt2TY9nqc1AyWuVlSmCMB80z3ehHrjL6XfRZasDiIpENvPUJF7kwG5";
-				    shift=coded.length;
-				    link="";
-				    for (var i=0; i<coded.length; i++) {
-					    var ltr, link;
-				    	if (key.indexOf(coded.charAt(i))===-1) {
-						    ltr = coded.charAt(i);
-						    link += (ltr);
-					    }
-					    else {
-						    ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
-						    link += (key.charAt(ltr));
-					    }
-				    }
-				    document.write("<a href='mailto:"+link+"'>Avi Mandell</a>");
-			    }
-			    //-->
-            </script>
+					<!--
+					// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+					// Random encryption key feature coded by Andrew Moulden
+					// This code is freeware provided these four comment lines remain intact
+					// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+					{ coded = "d2o.sdhVPZZ@hdgd.lm2";
+						key = "K4dgQoOxbt2TY9nqc1AyWuVlSmCMB80z3ehHrjL6XfRZasDiIpENvPUJF7kwG5";
+						shift=coded.length;
+						link="";
+						for (var i=0; i<coded.length; i++) {
+							var ltr, link;
+							if (key.indexOf(coded.charAt(i))===-1) {
+								ltr = coded.charAt(i);
+								link += (ltr);
+							}
+							else {
+								ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
+								link += (key.charAt(ltr));
+							}
+						}
+						document.write("<a href='mailto:"+link+"'>Avi Mandell</a>");
+					}
+					//-->
+                </script>
                 <noscript><a href="#">Avi Mandell</a></noscript>
             </li>
             <li>
                 <span>Curator: </span>
                 <script type="text/javascript" language="javascript">
-			    <!--
-			    // Email obfuscator script 2.1 by Tim Williams, University of Arizona
-			    // Random encryption key feature coded by Andrew Moulden
-			    // This code is freeware provided these four comment lines remain intact
-			    // A wizard to generate this code is at http://www.jottings.com/obfuscator/
-			    { coded = "Jos9.A.cEif1ff1s@7oio.6Ez";
-				    key = "rh3vp7ZO2ImHRTFUlNjA4g1doscMzVxtWqwCSXyKB9nDGQ6bLEiJ50Pkf8Yeua";
-				    shift=coded.length;
-				    link="";
-				    for (i=0; i<coded.length; i++) {
-				    	var ltr, link;
-					    if (key.indexOf(coded.charAt(i))===-1) {
-						    ltr = coded.charAt(i);
-						    link += (ltr);
-					    }
-					    else {
-						    ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
-						    link += (key.charAt(ltr));
-					    }
-				    }
-				    document.write("<a href='mailto:"+link+"'>Carl F. Hostetter</a>");
-			    }
-			    //-->
-            </script>
+					<!--
+					// Email obfuscator script 2.1 by Tim Williams, University of Arizona
+					// Random encryption key feature coded by Andrew Moulden
+					// This code is freeware provided these four comment lines remain intact
+					// A wizard to generate this code is at http://www.jottings.com/obfuscator/
+					{ coded = "Jos9.A.cEif1ff1s@7oio.6Ez";
+						key = "rh3vp7ZO2ImHRTFUlNjA4g1doscMzVxtWqwCSXyKB9nDGQ6bLEiJ50Pkf8Yeua";
+						shift=coded.length;
+						link="";
+						for (i=0; i<coded.length; i++) {
+							var ltr, link;
+							if (key.indexOf(coded.charAt(i))===-1) {
+								ltr = coded.charAt(i);
+								link += (ltr);
+							}
+							else {
+								ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
+								link += (key.charAt(ltr));
+							}
+						}
+						document.write("<a href='mailto:"+link+"'>Carl F. Hostetter</a>");
+					}
+					//-->
+                </script>
                 <noscript><a href="#">Carl F. Hostetter</a></noscript>
             </li>
             <li>
