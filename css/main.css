@@ -145,14 +145,15 @@
 }
 
 /* Sub-site information */
-#nasa__subsite-section > .container {
+#nasa__subsite-section .nasa__sub-name,
+#nasa__subsite-section .nasa__sub-logo {
     height: 140px;
 }
-#nasa__subsite-section.nasa__subsite-section-mini > .container {
+#nasa__subsite-section.nasa__subsite-section-mini .nasa__sub-name,
+#nasa__subsite-section.nasa__subsite-section-mini .nasa__sub-logo {
     height: 65px;
 }
 .nasa__sub-name {
-    height: 100%;
     padding-left: 15px;
     float: left;
     display: flex;
@@ -183,14 +184,17 @@
 /* Sub-site logo */
 .nasa__sub-logo {
     float: right;
-    height: 100%;
-    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
 }
 .nasa__sub-logo-left {
     float: left;
 }
 .nasa__sub-logo img {
-    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 .nasa__subsite-section-mini .nasa__sub-logo {
     padding: 10px 0;
@@ -293,6 +297,13 @@
 }
 
 /* Responsive Rules */
+@media (max-width: 1199px) {   /*md*/
+    #nasa__main-navigation .container {
+        margin: 0;
+        width: 100%;
+        padding: 0 30px;
+    }
+}
 @media (max-width: 991px) {   /*sm*/
     .nasa__sub-logo {
         display: none;

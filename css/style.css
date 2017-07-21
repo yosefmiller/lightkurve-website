@@ -151,11 +151,11 @@
 .label-grey.arrowed-in:before { border-color: #a0a0a0 }
 .label-grey.arrowed-right:after { border-left-color: #a0a0a0 }
 .label-grey.arrowed-in-right:after { border-color: #a0a0a0 }
-.label-large { font-size: 13px; padding: 3px 8px 4px }
+.label-large { font-size: 13px; padding: 3px 8px 4px; height: 22px; display: inline-block; }
 .label-large.arrowed,
 .label-large.arrowed-in { margin-left: -3px }
 .label-large.arrowed:before,
-.label-large.arrowed-in:before { left: -16px; border-width: 10.6px 8px }
+.label-large.arrowed-in:before { left: -16px; border-width: 11px 8px }
 .label-large.arrowed-in:before { left: -12px }
 .label-large.arrowed-right,
 .label-large.arrowed-in-right { margin-right: 11px }
