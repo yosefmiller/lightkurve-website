@@ -20,14 +20,27 @@ $(document).ready(function () {
 	
 	/* Sub-site Navigation */
 	var NavTimeout;
-	$("#nasa__sub-navigation").find(".nav li a").on("mouseenter touch", function (e) {
+	var hideSubDropdown = function () {
+		$(".nasa__sub-navigation-dropdown").css({ opacity: 0, transition: 'opacity 0.5s' }).slideUp();
+	};
+	var cancelHideSubDropdown = function () {
+		clearTimeout(NavTimeout);
+	};
+	var showSubDropdown = function (nav_class, isScroll) {
+		// Cancel any current animations and begin a new animation
+		cancelHideSubDropdown();
+		$(".nasa__sub-navigation-dropdown:not(."+nav_class+")").stop(true, true).css({"display": "none", "opacity": 0});
+		$(".nasa__sub-navigation-dropdown."+nav_class+"").slideDown().css({ opacity: 1, transition: 'opacity 0.5s' });
+		if (isScroll){ $('html, body').animate({ scrollTop: $(".nasa__sub-navigation-dropdown."+nav_class+"").offset().top }, 500); }
+	};
+	
+	/* Sub-site Navigation Handlers */
+	$("#nasa__sub-navigation").find(".nav li a").on("mouseenter touchstart", function (e) {
 		// Display dropdown on hover or touch
 		var nav_class = $(this).prop("class");
 		if (nav_class) {
-			// Cancel any current animations and begin a new animation
-			clearTimeout(NavTimeout);
-			$(".nasa__sub-navigation-dropdown:not(."+nav_class+")").stop(true, true).css({"display": "none", "opacity": 0});
-			$(".nasa__sub-navigation-dropdown."+nav_class+"").slideDown().css({ opacity: 1, transition: 'opacity 0.5s' });
+			// Show dropdown. Scroll to the dropdown on touchscreens.
+			showSubDropdown(nav_class, e.type === "touchstart");
 		}
 	}).on("touchend", function (e) {
 		// Treat as dropdown on touch devices, not as a link
@@ -35,9 +48,14 @@ $(document).ready(function () {
 		return false;
 	});
 	$(".nasa__sub-navigation-dropdown, #nasa__sub-navigation .nav li a").mouseleave(function () {
-		NavTimeout = setTimeout(function () { $(".nasa__sub-navigation-dropdown").css({ opacity: 0, transition: 'opacity 0.5s' }).slideUp(); }, 100);
+		NavTimeout = setTimeout(function () { hideSubDropdown(); }, 300);
+	}).on("touchstart", function (e) {
+		e.stopPropagation();
 	});
 	$(".nasa__sub-navigation-dropdown").mouseover(function () {
-		clearTimeout(NavTimeout);
+		cancelHideSubDropdown();
 	});
+	$("body").on("touchstart", function () {
+		hideSubDropdown();
+	})
 });

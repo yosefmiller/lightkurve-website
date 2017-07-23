@@ -26,7 +26,7 @@
                     <img src="img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
                 </a>
                 <a class="navbar-brand_logo hidden visible-sm visible-xs" style="padding-left: 0" href="/">
-                    <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC Logo" style="padding: 5px;">
+                    <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC Logo" style="padding: 7px 0;">
                 </a>
                 <div class="navbar-brand_heading">
                     <a style="font-size: 18px;" href="https://www.nasa.gov/">National Aeronautics and Space Administration</a>
@@ -36,6 +36,20 @@
         </div>
         <div id="navbar__main" class="nasa__navigation-bar navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form class="navbar-form navbar-form-search" role="search" method="get" action="https://www.google.com/search">
+                        <div id="search-input-container">
+                            <div class="search-input-group">
+                                <button type="button" class="btn btn-default" id="hide-search-input-container"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></button>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="q" placeholder="Search for...">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hq" value="intitle:EMAC ">
+                        <button type="submit" class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </form>
+                </li>
                 <li class="active hidden-sm"><a href="/">Home</a></li>
                 <li><a href="https://science.gsfc.nasa.gov">GSFC Sciences and Exploration</a></li>
                 <li class="dropdown">
@@ -51,20 +65,6 @@
                         <!--<li><a href="#">One more separated link</a></li>-->
                     </ul>
                 </li>
-                <li>
-                    <form class="navbar-form navbar-form-search" role="search" method="get" action="https://www.google.com/search">
-                        <div id="search-input-container">
-                            <div class="search-input-group">
-                                <button type="button" class="btn btn-default" id="hide-search-input-container"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></button>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="q" placeholder="Search for...">
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" name="hq" value="intitle:EMAC ">
-                        <button type="submit" class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </form>
-                </li>
             </ul>
         </div>
     </div>
@@ -79,11 +79,11 @@
     <div id="nasa__sub-navigation">
         <div class="container">
             <ul class="nasa__navigation-bar nav navbar-nav navbar-collapse collapse">
-                <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov">Directorate & Offices (600)</a></li>
-                <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov">Earth Sciences (610)</a></li>
-                <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov">Astrophysics (660)</a></li>
-                <li><a class="nasa__sub-navigation-section__670" href="https://science.gsfc.nasa.gov">Heliophysics (670)</a></li>
-                <li class="active"><a class="nasa__sub-navigation-section__690" href="https://science.gsfc.nasa.gov">Solar System (690)</a></li>
+                <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=600&navTab=nav_about_us">Directorate & Offices (600)</a></li>
+                <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610&navTab=nav_about_us">Earth Sciences (610)</a></li>
+                <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660&navTab=nav_about_us">Astrophysics (660)</a></li>
+                <li><a class="nasa__sub-navigation-section__670" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=670&navTab=nav_about_us">Heliophysics (670)</a></li>
+                <li class="active"><a class="nasa__sub-navigation-section__690" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690&navTab=nav_about_us">Solar System (690)</a></li>
             </ul>
         </div>
     </div>
@@ -92,6 +92,9 @@
     <!-- NASA SUB-SITE NAVIGATION DROPDOWN -->
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__600">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=600&navTab=nav_about_us"><span>Directorate & Offices (600)</span></a></div>
+            </div>
             <div class="col-md-12">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Directorate Offices</span></div>
                 <ul class="col-md-4">
@@ -112,6 +115,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__610">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610&navTab=nav_about_us"><span>Earth Sciences (610)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Earth Sciences Offices</span></div>
                 <ul>
@@ -141,6 +147,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__660">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660&navTab=nav_about_us"><span>Astrophysics (660)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Astrophysics Science Offices</span></div>
                 <ul>
@@ -165,6 +174,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__670">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=670&navTab=nav_about_us"><span>Heliophysics (670)</span></a></div>
+            </div>
             <div class="col-md-8 col-md-push-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Heliophysics Science Labs</span></div>
                 <ul class="col-md-6">
@@ -180,6 +192,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__690">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690&navTab=nav_about_us"><span>Solar System (690)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Solar System Science Offices</span></div>
                 <ul>
