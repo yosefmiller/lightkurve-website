@@ -71,7 +71,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("../img/emac/background_galaxy_blue.jpg");
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -87,10 +86,7 @@
 #nasa__sub-navigation .nav {
     float: none;
     margin: 0 auto;
-    display: table;
-}
-#nasa__sub-navigation .nav.navbar-collapse.collapse:not(.in) {
-    display: none;
+    display: table !important;
 }
 #nasa__sub-navigation .nav > li > a {
     padding: 15px 15px;
@@ -174,7 +170,7 @@
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6), 1px 1px 12px rgba(0, 0, 0, 0.8);
 }
 .nasa__sub-name a div {
-    font-size: 20px;
+    font-size: 19px;
 }
 .nasa__subsite-section-mini .nasa__sub-name a {
     font-size: 22px;
@@ -204,7 +200,7 @@
     width: 25%;
 }
 #nasa__main-section .navbar-toggle {
-    margin: 0 10px;
+    margin: 10px;
     position: absolute;
     right: 0;
     z-index: 10;
@@ -231,11 +227,7 @@
     color: #9d9d9d;
 }
 
-/* Search bar */
-.navbar-search-open .nav > li:not(:last-child) {
-    /*visibility: hidden;*/
-    /*opacity: 0;*/
-}
+/* Navigation search bar */
 .navbar-search-open #search-input-container {
     width: 300px !important;
     background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 10%, black 50%, black 100%);
@@ -280,7 +272,63 @@
     width: inherit;
     border: black;
     background-color: #eee;
-    box-shadow: inset 0px 0px 11px 0px rgba(0, 0, 0, 0.73);
+    box-shadow: inset 0 0 11px 0 rgba(0, 0, 0, 0.73);
+}
+
+/* Sidebar */
+#nasa__main-sidebar .navbar-collapse {
+    padding: 0;
+}
+#nasa__main-sidebar li {
+    float: none;
+}
+#nasa__main-sidebar li a {
+    padding: 7px 15px;
+    display: block;
+    color: #333;
+    letter-spacing: 0.3px;
+}
+#nasa__main-sidebar li a:hover {
+    background-color: #428bca;
+    color: white !important;
+}
+#nasa__main-sidebar li.always-open > a {
+    cursor: default;
+    background-color: inherit;
+    color: #333 !important;
+}
+
+/* Sidebar Navigation Dropdown Trigger (Caret) */
+#nasa__main-sidebar li a div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px 15px 14px;
+}
+#nasa__main-sidebar li a div:hover {
+    background-color: #347bb8;
+}
+
+/* Sidebar Navigation Dropdown */
+#nasa__main-sidebar li > div {
+    padding: 0 15px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    display: block;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+#nasa__main-sidebar li > div.open,
+#nasa__main-sidebar li.always-open > div {
+    max-height: 500px;
+    opacity: 1;
+}
+#nasa__main-sidebar li > div a {
+    color: #428bca;
 }
 
 /* Footer */
@@ -309,8 +357,8 @@
 }
 .footer .nav > li:not(:last-child):after {
     content: '';
-    height: 20px;
     border-right: 1px solid #9d9d9d;
+    height: 20px;
     position: absolute;
     top: 0;
     right: 0;
@@ -329,7 +377,7 @@
     .navbar-brand_heading {
         display: none;
     }
-    .nasa__sub-logo {
+    .nasa__sub-logo, .nasa__sub-name-right {
         display: none;
     }
 }
@@ -337,6 +385,8 @@
     .navbar-brand_heading, #hide-search-input-container, .footer .nav {
         display: none;
     }
+
+    /* Search bar */
     .navbar-form-search {
         position: absolute;
         z-index: 50;
@@ -349,13 +399,11 @@
         background-color: black;
     }
     #search-input-container {
-        /*text-align: left;*/
         left: 60px;
         padding: 10px 0 !important;
     }
-    #nasa__main-navigation .nav > li:last-child {
-        border-bottom: 1px solid;
-    }
+
+    /* Navigation items */
     .navbar-search-open .nav > li {
         visibility: visible !important;
         opacity: 1 !important;
@@ -364,6 +412,31 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+
+    /* Separator between main and sub navigation */
+    #nasa__main-navigation .nav > li:last-child {
+        border-bottom: 1px solid;
+    }
+
+    /* Sub-site navigation */
+    #nasa__sub-navigation {
+        background-color: black;
+    }
+    #nasa__sub-navigation .nav {
+        float: left;
+        display: block !important;
+        padding-left: 0;
+        border: none;
+        box-shadow: none;
+    }
+    #nasa__sub-navigation .nav.navbar-collapse.collapse:not(.in) {
+        display: none !important;
+    }
+    #nasa__sub-navigation .nav li a {
+        background-color: transparent;
+    }
+
+    /* Sub-site background */
     #nasa__subsite-section:after {
         background-size: auto 140px;
         background-position: center bottom 0;
@@ -371,20 +444,12 @@
     .nasa__sub-name a {
         font-size: 24px;
     }
-    #nasa__sub-navigation {
-        background-color: black;
-    }
-    #nasa__sub-navigation .nav {
-        float: left;
-        display: block;
-        padding-left: 0;
-        border: none;
-        box-shadow: none;
-    }
-    #nasa__sub-navigation .nav li a {
-        background-color: transparent;
-    }
+
+    /* Sidebar */
     #nasa__main-sidebar {
         width: auto;
+    }
+    #nasa__main-sidebar .navbar-collapse {
+        padding-right: 50px;
     }
 }

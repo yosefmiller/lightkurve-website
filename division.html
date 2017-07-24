@@ -15,7 +15,7 @@
 <nav id="nasa__main-navigation" class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar__main">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".nasa__navigation-bar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -31,23 +31,8 @@
                 </div>
             </div>
         </div>
-        <div id="navbar__main" class="navbar-collapse collapse">
+        <div id="navbar__main" class="nasa__navigation-bar navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="https://science.gsfc.nasa.gov">GSFC Sciences and Exploration</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Simulation Tools <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="https://coronagraph.emac.gsfc.nasa.gov">Coronagraphic Mission Simulator</a></li>
-                        <li><a href="https://pandexo.emac.gsfc.nasa.gov">PandExo JWST/HST Simulator</a></li>
-                        <li><a href="https://ssed.gsfc.nasa.gov/psg/">Planetary Spectrum Generator</a></li>
-                        <li><a href="https://ccmc.gsfc.nasa.gov/community/EXO/">CCMC Heliophysics Models</a></li>
-                        <!--<li class="divider"></li>-->
-                        <!--<li class="dropdown-header">Nav header</li>-->
-                        <!--<li><a href="#">Separated link</a></li>-->
-                        <!--<li><a href="#">One more separated link</a></li>-->
-                    </ul>
-                </li>
                 <li>
                     <form class="navbar-form navbar-form-search" role="search" method="get" action="https://www.google.com/search">
                         <div id="search-input-container">
@@ -62,6 +47,9 @@
                         <button type="submit" class="btn btn-default" id="search-button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </form>
                 </li>
+                <li class="active hidden-sm"><a href="/">Home</a></li>
+                <li><a href="http://fpd.gsfc.nasa.gov/">Flight Projects</a></li>
+                <li><a href="https://science.gsfc.nasa.gov">Sciences and Exploration</a></li>
             </ul>
         </div>
     </div>
@@ -75,12 +63,12 @@
     <!-- To remove, add class 'hidden' -->
     <div id="nasa__sub-navigation">
         <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov">Directorate & Offices (600)</a></li>
-                <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov">Earth Sciences (610)</a></li>
-                <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov">Astrophysics (660)</a></li>
-                <li><a class="nasa__sub-navigation-section__670" href="https://science.gsfc.nasa.gov">Heliophysics (670)</a></li>
-                <li class="active"><a class="nasa__sub-navigation-section__690" href="https://science.gsfc.nasa.gov">Solar System (690)</a></li>
+            <ul class="nasa__navigation-bar nav navbar-nav navbar-collapse collapse">
+                <li><a class="nasa__sub-navigation-section__600" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=600&navTab=nav_about_us">Directorate & Offices (600)</a></li>
+                <li><a class="nasa__sub-navigation-section__610" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610&navTab=nav_about_us">Earth Sciences (610)</a></li>
+                <li><a class="nasa__sub-navigation-section__660" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660&navTab=nav_about_us">Astrophysics (660)</a></li>
+                <li><a class="nasa__sub-navigation-section__670" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=670&navTab=nav_about_us">Heliophysics (670)</a></li>
+                <li class="active"><a class="nasa__sub-navigation-section__690" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690&navTab=nav_about_us">Solar System (690)</a></li>
             </ul>
         </div>
     </div>
@@ -89,6 +77,9 @@
     <!-- NASA SUB-SITE NAVIGATION DROPDOWN -->
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__600">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=600&navTab=nav_about_us"><span>Directorate & Offices (600)</span></a></div>
+            </div>
             <div class="col-md-12">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Directorate Offices</span></div>
                 <ul class="col-md-4">
@@ -109,6 +100,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__610">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610&navTab=nav_about_us"><span>Earth Sciences (610)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Earth Sciences Offices</span></div>
                 <ul>
@@ -138,6 +132,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__660">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660&navTab=nav_about_us"><span>Astrophysics (660)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Astrophysics Science Offices</span></div>
                 <ul>
@@ -162,6 +159,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__670">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=670&navTab=nav_about_us"><span>Heliophysics (670)</span></a></div>
+            </div>
             <div class="col-md-8 col-md-push-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Heliophysics Science Labs</span></div>
                 <ul class="col-md-6">
@@ -177,6 +177,9 @@
     </div>
     <div class="nasa__sub-navigation-dropdown nasa__sub-navigation-section__690">
         <div class="container">
+            <div class="col-md-12 hidden visible-xs">
+                <div class="nasa__sub-navigation-dropdown-heading"><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690&navTab=nav_about_us"><span>Solar System (690)</span></a></div>
+            </div>
             <div class="col-md-4">
                 <div class="nasa__sub-navigation-dropdown-heading"><span>Solar System Science Offices</span></div>
                 <ul>
@@ -203,13 +206,18 @@
     <!-- NASA SUB-SITE INFORMATION -->
     <div class="container">
         <div class="row">
-            <div class="nasa__sub-logo nasa__sub-logo-left col-md-3">
-                <img src="img/emac/emac_logo_cropped.jpg" />
+            <div class="nasa__sub-name nasa__sub-name-right col-md-3">
+                <div>
+                    <a href="https://emac.gsfc.nasa.gov/">
+                        Code 690
+                    </a>
+                </div>
             </div>
             <div class="nasa__sub-name col-md-9">
                 <div>
                     <a href="https://emac.gsfc.nasa.gov/">
-                        Exoplanet Modeling and Analysis Center (EMAC)
+                        <div>Sciences and Exploration Directorate</div>
+                        Solar System Exploration Division
                     </a>
                 </div>
             </div>
@@ -223,49 +231,108 @@
 <section id="nasa__main-section">
     <div class="container">
         <div class="row">
+            <!-- SIDEBAR TRIGGER -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nasa__main-sidebar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
             <!-- SIDEBAR -->
-            <div id="nasa__main-sidebar" class="col-md-3 hidden-sm hidden-xs">
+            <div id="nasa__main-sidebar" class="navbar-collapse collapse col-sm-3 col-sm-push-9 col-md-push-0">
                 <div class="row">
                     <div class="col-md-12">
-                        <h5><strong>Legend:</strong></h5>
-                    </div>
-                    <div class="col-md-12 tool-legend">
-                        <div>
-                            <span class="label label-large label-important">Star</span>
-                            <span>Stellar Flux & Interaction Models</span>
+                        <div class="navbar-collapse sidebar-navbar-collapse">
+                            <ul class="nav navbar-nav" style="float: none;display: block;">
+                                <li>
+                                    <a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.staffList&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__1">
+                                        People &amp; Organizations
+                                        <div class="pull-right"><span class="caret pull-right"></span></div>
+                                    </a>
+                                    <div class="collapse" id="sidebar-dropdown__1">
+                                        <ul class="nav nav-list">
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.staffList&navOrgCode=690">Staff List</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.mgmt&navOrgCode=690">Management Staff</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.orgChart&navOrgCode=690">Org Chart</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.orgList&navOrgCode=690">Org List</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.main&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__2">
+                                        Missions &amp; Projects
+                                        <div class="pull-right"><span class="caret pull-right"></span></div>
+                                    </a>
+                                    <div class="collapse" id="sidebar-dropdown__2">
+                                        <ul class="nav nav-list">
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.featured&navOrgCode=690">Featured</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.alphabetical&navOrgCode=690">Full Alphabetical List</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=publications.main&navOrgCode=690">Publications</a></li>
+                                <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=featured.main">Today's Science</a></li>
+                                <li>
+                                    <a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight.main&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__3">
+                                        Highlights
+                                        <div class="pull-right"><span class="caret pull-right"></span></div>
+                                    </a>
+                                    <div class="collapse" id="sidebar-dropdown__3">
+                                        <ul class="nav nav-list">
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_prweb.main&navOrgCode=690">Press Releases & Feature Stories</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_pres.main&navOrgCode=690">Presentations</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_report.main&navOrgCode=690">Reports</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=localnews.main&navOrgCode=690">Local News</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_image.main&navOrgCode=690">Images</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_arch.ed&navOrgCode=690&filt=true">STEM Resources</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_arch.ap&navOrgCode=690">Goddard Apps</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=community.main&navOrgCode=690">Calendar</a></li>
+                                <li>
+                                    <a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight.main&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__4">
+                                        Awards
+                                        <div class="pull-right"><span class="caret pull-right"></span></div>
+                                    </a>
+                                    <div class="collapse" id="sidebar-dropdown__4">
+                                        <ul class="nav nav-list">
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=award.AwardsWon&navOrgCode=690">Awards Won</a></li>
+                                            <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=award.AwardsNominate&navOrgCode=690">How to Nominate</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=faq.main&navOrgCode=690">FAQ</a></li>
+                                <li><hr/></li>
+                                <li><a href="https://science.gsfc.nasa.gov/690/seminars.html">Seminars and Meetings</a></li>
+                                <li><a href="https://science.gsfc.nasa.gov/690/multimedia.html">Multimedia</a></li>
+                                <li><a href="https://science.gsfc.nasa.gov/690/photos.html">Photos</a></li>
+                                <li><a href="https://science.gsfc.nasa.gov/690/solarsystemtour.html">Solar System Tour</a></li>
+                                <li><hr/></li>
+                                <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=comment.main&navOrgCode=690">Comment Form</a></li>
+                                <li><hr/></li>
+                                <li class="always-open">
+                                    <a href="#">Quick Links</a>
+                                    <div class="collapse" id="sidebar-dropdown__quick-links">
+                                        <ul class="nav nav-list">
+                                            <li><a href="http://astrobiology.gsfc.nasa.gov/">Goddard Center for Astrobiology</a></li>
+                                            <li><a href="http://ssed.gsfc.nasa.gov/dream/">Goddard DREAM Center for Lunar Studies</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                        <div>
-                            <span class="label label-large label-warning">1D Atm</span>
-                            <span>1D Atmosphere Models</span>
-                        </div>
-                        <div>
-                            <span class="label label-large label-yellow">3D Atm</span>
-                            <span>3D Atmosphere Models</span>
-                        </div>
-                        <div>
-                            <span class="label label-large label-success">RT</span>
-                            <span>Radiative Transfer Tools</span>
-                        </div>
-                        <div>
-                            <span class="label label-large label-info">Obs</span>
-                            <span>Observatory Models</span>
-                        </div>
-                        <div>
-                            <span class="label label-large label-purple">Atm Fit</span>
-                            <span>Atmosphere Model Fitting Tool</span>
-                        </div>
-                        <div style="height: 15px;"></div>
-                        <p class="text-muted">Note: Lighter colors indicate that pre-computed model templates are available but no new models can be run.</p>
                     </div>
                 </div>
             </div>
 
             <!-- MAIN CONTENT -->
-            <div id="nasa__main-content" class="col-md-9">
+            <div id="nasa__main-content" class="col-sm-9 col-sm-pull-3 col-md-pull-0">
                 <div id="tool-list" class="row">
                     <!-- DESCRIPTION -->
                     <div class="col-xs-12">
-                        <h4>Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
+                        <h4 style="margin-right: 50px;">Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
                         <p>EMAC serves as a repository and integration platform for modeling and analysis tools focused on the study of exoplanetary atmospheres. EMAC is continually being updated with new software applications; if you have suggestions for improvements or new applications, please email us at gsfc.emac at gmail.com.</p>
                         <p>EMAC is a collaboration between the GSFC Sellers Exoplanet Environments Collaboration (SEEC) and the GSFC Community Coordinated Modeling Center (CCMC). The P.I. is Avi M. Mandell, and the Deputy P.I. is Antti Pulkinnen; more information on EMAC staffing and organization will be posted shortly.</p>
                     </div>
@@ -344,7 +411,7 @@
                             <div class="col-md-3 col-xs-9">
                                 <strong>CCMC Heliophysics Models</strong><br/>
                                 <small>(SWMF team, Glocer, Usmanov, et al.)</small>
-                                <a class="hidden-xs visible-md" style="display:block;padding-top: 10px" href="https://ccmc.gsfc.nasa.gov/" target="_blank"><img style="width: 100%;max-width: 165px;" src="img/emac/ccmc_logo.gif" alt="CCMC Logo, Community Coordinated Modeling Center, National Aeronautics and Space Administration"></a>
+                                <a class="hidden-xs visible-md visible-lg" style="display:block;padding-top: 10px" href="https://ccmc.gsfc.nasa.gov/" target="_blank"><img style="width: 100%;max-width: 165px;" src="img/emac/ccmc_logo.gif" alt="CCMC Logo, Community Coordinated Modeling Center, National Aeronautics and Space Administration"></a>
                             </div>
                             <div class="col-md-2 col-md-push-7 col-xs-3">
                                 <a href="https://ccmc.gsfc.nasa.gov/community/EXO/">

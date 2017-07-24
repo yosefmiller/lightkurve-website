@@ -2,6 +2,9 @@
  * CSS which is site-specific, little chance of being used elsewhere.
  */
 
+/* Site background */
+#nasa__subsite-section:after { background-image: url("../../img/emac/background_galaxy_blue.jpg"); }
+
 /* Site Navigation */
 #nasa__sub-navigation .nasa__sub-navigation-section__600:hover, .nasa__sub-navigation-section__600 { background-color: #1b6d85; }
 #nasa__sub-navigation .nasa__sub-navigation-section__610:hover, .nasa__sub-navigation-section__610 { background-color: #316855; }

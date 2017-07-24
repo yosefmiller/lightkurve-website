@@ -27,11 +27,14 @@ $(document).ready(function () {
 		clearTimeout(NavTimeout);
 	};
 	var showSubDropdown = function (nav_class, isScroll) {
+		var nav_not_element = $(".nasa__sub-navigation-dropdown:not(."+nav_class+")");
+		var nav_element = $(".nasa__sub-navigation-dropdown."+nav_class+"");
+		
 		// Cancel any current animations and begin a new animation
 		cancelHideSubDropdown();
-		$(".nasa__sub-navigation-dropdown:not(."+nav_class+")").stop(true, true).css({"display": "none", "opacity": 0});
-		$(".nasa__sub-navigation-dropdown."+nav_class+"").slideDown().css({ opacity: 1, transition: 'opacity 0.5s' });
-		if (isScroll){ $('html, body').animate({ scrollTop: $(".nasa__sub-navigation-dropdown."+nav_class+"").offset().top }, 500); }
+		nav_not_element.stop(true, true).css({"display": "none", "opacity": 0});
+		nav_element.slideDown().css({ opacity: 1, transition: 'opacity 0.5s' });
+		if (isScroll){ $('html, body').animate({ scrollTop: nav_element.offset().top }, 500); }
 	};
 	
 	/* Sub-site Navigation Handlers */
@@ -57,5 +60,15 @@ $(document).ready(function () {
 	});
 	$("body").on("touchstart", function () {
 		hideSubDropdown();
-	})
+	});
+	
+	/* Sidebar Navigation */
+	$("#nasa__main-sidebar").find("li a").click(function (e) {
+		if ( !$(e.target).hasClass("pull-right") && $(this).attr("href") !== "#" ) {
+			e.stopPropagation();
+			return true;
+		} else {
+			e.preventDefault();
+		}
+	});
 });
