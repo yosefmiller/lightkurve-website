@@ -25,6 +25,7 @@ $klein = new \Klein\Klein();
 /* Configure main layout (for all pages): */
 $klein->respond(function ($req, $res, $service, $app) {
     $service->layout('pages/partials/master-layout.php');
+    $service->subNavigation = json_decode(file_get_contents("pages/models/sub-navigation.json"), true);
 });
 
 /* Main Routing: */

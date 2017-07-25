@@ -1,0 +1,294 @@
+{
+  "1": {
+    "id": "600",
+    "title": "Directorate & Offices (600)",
+    "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=600&navTab=nav_about_us",
+    "hex_color": "#1b6d85",
+    "branches": {
+      "1": {
+        "title": "Directorate Offices",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Administration & Resources Management Office (603)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=603&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Science Proposal Support Office (605)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=605&navTab=nav_about_us"
+              }
+            }
+          },
+          "2": {
+            "codes": {
+              "1": {
+                "title": "CISTO (606)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Networks and IT Security (606.1)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.1&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "High-Performance Computing (606.2)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.2&navTab=nav_about_us"
+              }
+            }
+          },
+          "3": {
+            "codes": {
+              "1": {
+                "title": "Information Science & Technology Research (606.3)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.3&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Scientific Visualization Studio Group (606.4)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=606.4&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "2": {
+    "id": "610",
+    "title": "Earth Sciences (610)",
+    "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610&navTab=nav_about_us",
+    "hex_color": "#316855",
+    "branches": {
+      "1": {
+        "title": "Earth Sciences Offices",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Global Modeling and Assimilation Office (610.1)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.1&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Global Change Data Center (610.2)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.2&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Field Support Office (610.W)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=610.W&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      },
+      "2": {
+        "title": "Earth Sciences Labs",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Goddard Institute for Space Studies (611)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=611&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Mesoscale Atmospheric Processes (612)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=612&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Climate and Radiation Laboratory (613)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=613&navTab=nav_about_us"
+              },
+              "4": {
+                "title": "Atmospheric Chemistry and Dynamics Laboratory (614)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=614&navTab=nav_about_us"
+              }
+            }
+          },
+          "2": {
+            "codes": {
+              "1": {
+                "title": "Cryospheric Sciences Laboratory (615)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=615&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Ocean Ecology Laboratory (616)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=616&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Hydrological Sciences Laboratory (617)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=617&navTab=nav_about_us"
+              },
+              "4": {
+                "title": "Biospheric Sciences Laboratory (618)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=618&navTab=nav_about_us"
+              },
+              "5": {
+                "title": "Terrestrial Information Systems Laboratory (619)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=619&navTab=nav_about_us"
+              },
+              "6": {
+                "title": "Geodesy and Geophysics Laboratory (61A)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=61A&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "3": {
+    "id": "660",
+    "title": "Astrophysics (660)",
+    "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660&navTab=nav_about_us",
+    "hex_color": "#4a385f",
+    "branches": {
+      "1": {
+        "title": "Astrophysics Science Offices",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "High Energy Astrophysics Science Archive Research Center Office (660.1)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.1&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Office of Scientific Computing (660.2)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.2&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Instrument Development Group (660.3)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=660.3&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      },
+      "2": {
+        "title": "Astrophysics Science Labs",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Astroparticle Physics (661)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=661&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "X-ray Astrophysics (662)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=662&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Gravitational Astrophysics (663)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=663&navTab=nav_about_us"
+              }
+            }
+          },
+          "2": {
+            "codes": {
+              "1": {
+                "title": "Observational Cosmology (665)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=665&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "ExoPlanets and Stellar Astrophysics (667)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=667&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "4": {
+    "id": "670",
+    "title": "Heliophysics (670)",
+    "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=670&navTab=nav_about_us",
+    "hex_color": "#a07326",
+    "branches": {
+      "1": {
+        "title": "Heliophysics Science Labs",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Solar Physics Laboratory (671)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=671&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Heliospheric Physics Laboratory (672)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=672&navTab=nav_about_us"
+              }
+            }
+          },
+          "2": {
+            "codes": {
+              "1": {
+                "title": "Geospace Physics Laboratory (673)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=673&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Space Weather Laboratory (674)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&&navOrgCode=674"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "5": {
+    "id": "690",
+    "title": "Solar System (690)",
+    "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690&navTab=nav_about_us",
+    "hex_color": "#7f3c18",
+    "branches": {
+      "1": {
+        "title": "Solar System Science Offices",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Solar System Exploration Data Services Office (690.1)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=690.1&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      },
+      "2": {
+        "title": "Solar System Science Labs",
+        "columns": {
+          "1": {
+            "codes": {
+              "1": {
+                "title": "Astrochemistry Laboratory (691)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=691&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Solar System Exploration Grants Support Office (691.1)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=691.1&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Planetary Systems Laboratory (693)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=693&navTab=nav_about_us"
+              }
+            }
+          },
+          "2": {
+            "codes": {
+              "1": {
+                "title": "Planetary Magnetospheres Laboratory (695)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=695&navTab=nav_about_us"
+              },
+              "2": {
+                "title": "Planetary Geology, Geophysics, and Geochemistry Laboratory (698)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=698&navTab=nav_about_us"
+              },
+              "3": {
+                "title": "Planetary Environments Laboratory (699)",
+                "url": "https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=home.main&navOrgCode=699&navTab=nav_about_us"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
