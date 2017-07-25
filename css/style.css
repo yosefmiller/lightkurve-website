@@ -1,6 +1,91 @@
 /*
- * CSS for additional layout components that might be useful for other sites.
+ * CSS for additional components that might be useful for other sites.
  */
+
+/* Content Section */
+.content-section {
+    font-family: Lato, sans-serif;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.content-section .content-section__title {
+    border-bottom: 2px solid;
+    border-color: #ccc;
+    padding-bottom: 6px;
+    padding-left: 4px;
+    font-size: 19px;
+    margin-top: 5px;
+    margin-right: 50px;
+    margin-bottom: 15px;
+}
+.content-section .content-section__subtitle {
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+}
+.content-section .content-section__date {
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: -12px;
+}
+.content-section p {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+
+/* Image Caption */
+.img-caption {
+    position: relative;
+}
+.img-caption img {
+    width: 100%;
+}
+.img-caption span {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    color: white;
+    padding: 40px 20px 20px;
+    margin: 0 auto;
+    text-align: center;
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0));
+    font-size: 16px;
+    font-weight: 100;
+    text-shadow: 0 0 3px #000000;
+}
+
+/* Story with image caption */
+.story-section {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 4px;
+    border: none;
+}
+.story-section-split {
+    width: 50%;
+    display: inline-block;
+    margin: 0   -1px;
+}
+.story-section .img-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.story-section:hover .img-background,
+.story-section:active .img-background {
+    box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.35);
+}
 
 /* 3D Button */
 .btn-3d {
