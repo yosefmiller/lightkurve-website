@@ -32,6 +32,9 @@
     font-size: 13px;
     letter-spacing: 0.2px;
 }
+.content-section .content-section__link:after {
+    content: ' »';
+}
 
 /* Image Caption */
 .img-caption {
@@ -65,10 +68,12 @@
     padding: 4px;
     border: none;
 }
-.story-section-split {
-    width: 50%;
-    display: inline-block;
-    margin: 0   -1px;
+@media (min-width: 600px) {
+    .story-section-split {
+        width: 50%;
+        display: inline-block;
+        margin: 0 -1px;
+    }
 }
 .story-section .img-background {
     background-size: cover;

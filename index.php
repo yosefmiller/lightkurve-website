@@ -33,10 +33,12 @@ $klein->respond('/', function ($req, $res, $service) {
     $res->redirect('home/main')->send();
 });
 $klein->respond('/home/main', function ($req, $res, $service) {
-    // $service->settings = json_decode(file_get_contents("pages/models/settings.json"), true);
     $service->pageTitle = 'Home Page - Solar System Exploration Division - 690';
-    // $service->cssFile = 'about';
     $service->render('pages/home-main.php');
+});
+$klein->respond('/projects/featured', function ($req, $res, $service) {
+    $service->pageTitle = 'Home Page - Solar System Exploration Division - 690';
+    $service->render('pages/projects-featured.php');
 });
 
 /* Handle errors (if no route is found): */

@@ -14,6 +14,7 @@
             <div class="img-background" style="background-image: url('https://science.gsfc.nasa.gov/sed/images/highlight_thumbs/HighLightID_7288.png')"></div>
             <span>FEATURED STORY<br/><b>1,000 Days in Orbit: MAVEN’s Top 10 Discoveries at Mars</b></span>
         </a>
+        <p><a class="content-section__link" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=highlight_prweb.main&navOrgCode=690&navTab=nav_about_us">See all Press Releases & Feature Stories</a></p>
     </div>
     <div class="content-section">
         <h4 class="content-section__title">Division News</h4>
@@ -35,6 +36,8 @@
             <img class="img-thumbnail" src="https://science.gsfc.nasa.gov/600/images/scijamboree2017/SciJam17_40.jpg"/>
             <span>The Science Jamboree was a huge success.<br/><small>Photos are available (click the title of this item).</small></span>
         </div>
+        <br/>
+        <p><a class="content-section__link" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=localnews.main&navOrgCode=690">More Division News</a></p>
     </div>
 </div>
 <!-- END MAIN SECTION -->
