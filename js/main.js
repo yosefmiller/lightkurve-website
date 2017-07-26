@@ -1,7 +1,6 @@
 $(document).ready(function () {
-	var main_navbar = $("#navbar__main");
-	
 	/* Search icon displays input if closed */
+	var main_navbar = $("#navbar__main");
 	$('#search-button').on('click', function(e) {
 		if(!main_navbar.hasClass('navbar-search-open')) {
 			e.preventDefault();
@@ -71,4 +70,13 @@ $(document).ready(function () {
 			e.preventDefault();
 		}
 	});
+	
+	/* Select2 Dropdown */
+	if ( $.isFunction($.fn.select2) ){
+		$("select").select2({
+			theme: "bootstrap",
+			width: "100%",
+			minimumResultsForSearch: 7
+		});
+	}
 });

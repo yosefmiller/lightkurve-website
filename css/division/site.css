@@ -10,3 +10,6 @@
     /*border-color: #828ab2;*/
     border-color: #b28282;
 }
+.label-accent {
+    background-color: #b28282 !important;
+}

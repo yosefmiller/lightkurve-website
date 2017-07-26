@@ -37,8 +37,12 @@ $klein->respond('/home/main', function ($req, $res, $service) {
     $service->render('pages/home-main.php');
 });
 $klein->respond('/projects/featured', function ($req, $res, $service) {
-    $service->pageTitle = 'Home Page - Solar System Exploration Division - 690';
+    $service->pageTitle = 'Missions & Projects - Solar System Exploration Division - 690';
     $service->render('pages/projects-featured.php');
+});
+$klein->respond('/projects/alphabetical', function ($req, $res, $service) {
+    $service->pageTitle = 'Missions & Projects - Solar System Exploration Division - 690';
+    $service->render('pages/projects-alphabetical.php');
 });
 
 /* Handle errors (if no route is found): */

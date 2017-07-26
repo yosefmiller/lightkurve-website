@@ -7,6 +7,8 @@
     <base href="/nasa/template/" />
     <link href="img/nasa_favicon.ico" rel="icon">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/select2-bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/division/site.css" rel="stylesheet">
@@ -62,8 +64,10 @@
 </div>
 <!-- END FOOTER -->
 
+<!-- Include JS Libraries -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/select2.min.js"></script>s
 <script src="js/main.js"></script>
 </body>
 </html>

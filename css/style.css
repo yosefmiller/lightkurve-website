@@ -110,12 +110,21 @@
     text-decoration: none;
     color: #fff;
 }
+.btn-3d.btn-light {
+    background: transparent;
+    font-weight: 900;
+    box-shadow: none;
+}
 
 /* Button colors: sky */
 .btn-sky {
     color: #fff;
     background-color: #0bacd3;
+    border:1px solid #0bacd3;
     border-bottom:2px solid #098aa9;
+}
+.btn-sky.btn-light {
+    color: #098aa9;
 }
 .btn-sky:hover,.btn-sky.active:focus, .btn-sky:focus, .open>.dropdown-toggle.btn-sky {
     color: #fff;
@@ -134,7 +143,11 @@
 .btn-fresh {
     color: #fff;
     background-color: #51bf87;
+    border: 1px solid #51bf87;
     border-bottom:2px solid #41996c;
+}
+.btn-fresh.btn-light {
+    color: #41996c;
 }
 .btn-fresh:hover, .btn-sky.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
     color: #fff;
@@ -147,6 +160,29 @@
     background-color: #47a877;
     border-top:2px solid #39865f;
     outline: none;
+    margin-top: 2px;
+}
+
+/* Button colors: sunny */
+.btn-sunny {
+    color: #fff;
+    background-color: #f4ad49;
+    border: 1px solid #f4ad49;
+    border-bottom:2px solid #c38a3a;
+}
+.btn-sunny.btn-light {
+    color: #c38a3a;
+}
+.btn-sunny:hover, .btn-sky.active:focus, .btn-sunny:focus, .open>.dropdown-toggle.btn-sunny {
+    color: #fff;
+    background-color: #f5b75f;
+    border-bottom:2px solid #c4924c;
+    outline: none;
+}
+.btn-sunny:active, .btn-sunny.active {
+    color: #fff;
+    background-color: #d69840;
+    border-top:2px solid #ab7a33;
     margin-top: 2px;
 }
 
@@ -241,7 +277,7 @@
 .label-grey.arrowed-in:before { border-color: #a0a0a0 }
 .label-grey.arrowed-right:after { border-left-color: #a0a0a0 }
 .label-grey.arrowed-in-right:after { border-color: #a0a0a0 }
-.label-large { font-size: 13px; padding: 3px 8px 4px; height: 22px; display: inline-block; }
+.label-large { font-size: 13px; padding: 5px 8px 5px; height: 22px; display: inline-block; }
 .label-large.arrowed,
 .label-large.arrowed-in { margin-left: -3px }
 .label-large.arrowed:before,
@@ -252,4 +288,5 @@
 .label-large.arrowed-right:after,
 .label-large.arrowed-in-right:after { right: -16px; border-width: 11px 8px }
 .label-large.arrowed-in-right:after { right: -12px }
+.label-fieldset { padding: 6px 9px 6px; height: 28px; width: auto; margin-bottom: 0; text-align: left; }
 .label-dim { opacity: 0.5; }

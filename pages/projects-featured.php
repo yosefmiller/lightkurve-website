@@ -34,7 +34,7 @@
             </div>
         </div>
         <hr class="col-md-12"/>
-        <p><a class="content-section__link" href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.alphabetical&fooonavOrgCode=690&navTab=nav_about_us">See Full Alphabetical List</a></p>
+        <p><a class="content-section__link" href="projects/alphabetical">See Full Alphabetical List</a></p>
     </div>
 </div>
 <!-- END MAIN SECTION -->

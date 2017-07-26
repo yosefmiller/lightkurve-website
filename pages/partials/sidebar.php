@@ -15,14 +15,17 @@
             </div>
         </li>
         <li>
-            <a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.main&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__2">
+            <!--<a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.main&navOrgCode=690" data-toggle="dropdown" data-target="#sidebar-dropdown__2">-->
+            <a href="projects/featured" data-toggle="dropdown" data-target="#sidebar-dropdown__2">
                 Missions &amp; Projects
                 <div class="pull-right"><span class="caret pull-right"></span></div>
             </a>
             <div class="collapse" id="sidebar-dropdown__2">
                 <ul class="nav nav-list">
-                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.featured&navOrgCode=690">Featured</a></li>
-                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.alphabetical&navOrgCode=690">Full Alphabetical List</a></li>
+                    <li><a href="projects/featured">Featured</a></li>
+                    <li><a href="projects/alphabetical">Full Alphabetical List</a></li>
+                    <!--<li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.featured&navOrgCode=690">Featured</a></li>-->
+                    <!--<li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=projects.alphabetical&navOrgCode=690">Full Alphabetical List</a></li>-->
                 </ul>
             </div>
         </li>
