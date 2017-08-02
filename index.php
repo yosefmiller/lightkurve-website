@@ -39,6 +39,13 @@ $klein->respond('/home', function ($req, $res, $service) {
     $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
     $service->render('pages/emac-home.php');
 });
+$klein->respond('/docs', function ($req, $res, $service) {
+    require_once('api/markup-parser/simplest-markdown-parser.php');
+    $docs_title = 'Documentation | EMAC Template';
+    $docs_markdown = MD(file_get_contents("README.md"));
+    $css_markdown = file_get_contents("api/markup-parser/github-markdown.css");
+    $res->body("<title>$docs_title</title><style>$css_markdown</style><div class='markdown-body'>$docs_markdown</div>");
+});
 
 /* Handle errors (if no route is found): */
 $klein->onHttpError(function ($code, $router, $matched, $method_matched, $http_exception) {
