@@ -7,6 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <!-- Logo -->
             <div class="navbar-brand">
                 <a class="navbar-brand_logo" href="https://www.nasa.gov/">
                     <img src="img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
@@ -34,8 +35,20 @@
                     </form>
                 </li>
                 <li class="active hidden-sm"><a href="/">Home</a></li>
-                <li><a href="http://fpd.gsfc.nasa.gov/">Flight Projects</a></li>
-                <li><a href="https://science.gsfc.nasa.gov">Sciences and Exploration</a></li>
+                <li><a href="https://science.gsfc.nasa.gov">GSFC Sciences and Exploration</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Simulation Tools <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="https://coronagraph.emac.gsfc.nasa.gov">Coronagraphic Mission Simulator</a></li>
+                        <li><a href="https://pandexo.emac.gsfc.nasa.gov">PandExo JWST/HST Simulator</a></li>
+                        <li><a href="https://ssed.gsfc.nasa.gov/psg/">Planetary Spectrum Generator</a></li>
+                        <li><a href="https://ccmc.gsfc.nasa.gov/community/EXO/">CCMC Heliophysics Models</a></li>
+                        <!--<li class="divider"></li>-->
+                        <!--<li class="dropdown-header">Nav header</li>-->
+                        <!--<li><a href="#">Separated link</a></li>-->
+                        <!--<li><a href="#">One more separated link</a></li>-->
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <!-- NASA SUB-SITE NAVIGATION BAR -->
-<!-- To remove, add class 'hidden' -->
+<!-- To remove, add class 'hidden' or comment out in `sub-header.php` -->
 <div id="nasa__sub-navigation">
     <div class="container">
         <ul class="nasa__navigation-bar nav navbar-nav navbar-collapse collapse">

@@ -109,12 +109,12 @@ Create the actual page:
 ##### Data
 
 _You can use this method to pass information to the page._
-
+<br/>
 Example of using json to generate content:
 
 ###### index.php
 
-```` php
+````php
 /* Place within the route, or global route */ 
 $service->someVariable = json_decode(file_get_contents("pages/models/some-variable.json"), true);
 ````
@@ -144,7 +144,64 @@ $service->someVariable = json_decode(file_get_contents("pages/models/some-variab
 <?php } ?>
 ````
 
-# Examples
+<br/>
 
-### Pages
-To preview a specific page, create a new route pointing to the file. 
+---
+# Layout Customization
+
+### Sub-header
+
+##### Mini-header
+To display just a _mini-header_, simply set the `isMiniHeader` value to the route (before `render`):
+
+###### index.php
+
+````php
+$klein->respond('/home', function ($req, $res, $service) {
+    $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
+    $service->isMiniHeader = true;
+    $service->render('pages/emac-home.php');
+});
+````
+
+##### Site information
+Here's how to change the information about the site _(see comments in code)_:
+
+###### pages/partials/sub-header.php
+
+````html
+...
+<!-- NASA SUB-SITE INFORMATION -->
+<div class="container">
+    <div class="row">
+        <!-- Remember to correct the bootstrap column widths appropriately. -->
+        <!-- Default: left. To align right, add class `nasa__sub-name-right` -->
+        <div class="nasa__sub-name col-md-3">
+            <div><a href="/">Code 690</a></div>
+        </div>
+        
+        <!-- Default: right. To align left, add class `nasa__sub-logo-left` -->
+        <div class="nasa__sub-logo col-md-3">
+            <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC" />
+        </div>
+        
+        <!-- Leave this last so the others are displayed in the right order. -->
+        <div class="nasa__sub-name col-md-6">
+            <div>
+                <a href="/">
+                    <!-- Add a `div` for a subtitle, like so: -->
+                    <div>Sciences and Exploration Directorate</div>
+                    Solar System Exploration Division
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END NASA SUB-SITE INFORMATION -->
+...
+````
+
+##### Sub Navigation
+To remove, delete the reference to the _partial_ in `pages/partial/sub-header.php`
+<br/>
+To update the data, modify `pages/models/sub-navigation.json` file appropriately.

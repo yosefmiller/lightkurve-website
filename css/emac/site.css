@@ -3,7 +3,16 @@
  */
 
 /* Site background */
-#nasa__subsite-section:after { background-image: url("../../img/emac/background_galaxy_blue.jpg"); }
+#nasa__subsite-section:after {
+    background-image: url("../../img/emac/background_galaxy_blue.jpg");
+}
+#nasa__subsite-section.nasa__subsite-section-mini:after {
+    background-image: linear-gradient(rgba(60, 60, 60, 0.4),rgba(60, 60, 60, 0.4)), url("../../img/emac/background_galaxy_blue.jpg");
+}
+
+/* Content Section Theme */
+.content-section .content-section__title { border-color: #2d5ca9; }
+.label-accent { background-color: #2d5ca9 !important; }
 
 /* Site Navigation */
 #nasa__sub-navigation .nasa__sub-navigation-section__600:hover, .nasa__sub-navigation-section__600 { background-color: #1b6d85; }

@@ -8,7 +8,7 @@
  *
  * @author Yosef Miller
  * @email yosefmiller613@gmail.com
- * @date July 25, 2017
+ * @date August 2, 2017
  * @docs https://github.com/klein/klein.php
  * @licence Klein router is under the MIT Licence
  **/
@@ -37,6 +37,7 @@ $klein->respond('/', function ($req, $res, $service) {
 });
 $klein->respond('/home', function ($req, $res, $service) {
     $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
+    // $service->isMiniHeader = true;
     $service->render('pages/emac-home.php');
 });
 $klein->respond('/docs', function ($req, $res, $service) {

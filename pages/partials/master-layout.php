@@ -11,7 +11,7 @@
     <link href="css/select2-bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/division/site.css" rel="stylesheet">
+    <link href="css/emac/site.css" rel="stylesheet">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
 <script src="js/main.js"></script>
 
 <!-- MAIN NASA HEADER -->
-<?= $this->partial("pages/partials/main-header.php"); ?>
+<?= $this->isMiniHeader ? "" : $this->partial("pages/partials/main-header.php"); ?>
 <!-- END MAIN NASA HEADER -->
 
 <!-- NASA SUB-SITE INFO -->

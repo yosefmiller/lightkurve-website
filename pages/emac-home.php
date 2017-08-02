@@ -1,4 +1,4 @@
-<div id="tool-list" class="row">
+<div id="tool-list">
     <!-- DESCRIPTION -->
     <div class="col-xs-12">
         <h4 style="margin-right: 50px;">Welcome to the GSFC Exoplanet Modeling and Analysis Center (EMAC).</h4>
@@ -18,7 +18,7 @@
                 <small>(Arney et al.)</small>
             </div>
             <div class="col-md-2 col-md-push-7 col-xs-3">
-                <a href="https://coronagraph.emac.gsfc.nasa.gov">
+                <a target="_blank" href="https://coronagraph.emac.gsfc.nasa.gov">
                     <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
                 </a>
             </div>
@@ -39,8 +39,11 @@
                 <small>(Batalha et al.)</small>
             </div>
             <div class="col-md-2 col-md-push-7 col-xs-3">
-                <a href="https://pandexo.emac.gsfc.nasa.gov">
-                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Launch</button>
+                <a target="_blank" href="https://pandexo.emac.gsfc.nasa.gov">
+                    <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
+                </a>
+                <a target="_blank" href="https://natashabatalha.github.io/PandExo/">
+                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Docs</button>
                 </a>
             </div>
             <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
@@ -59,7 +62,7 @@
                 <small>(Villanueva et al.)</small>
             </div>
             <div class="col-md-2 col-md-push-7 col-xs-3">
-                <a href="https://ssed.gsfc.nasa.gov/psg/">
+                <a target="_blank" href="https://ssed.gsfc.nasa.gov/psg/">
                     <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
                 </a>
             </div>
@@ -83,8 +86,8 @@
                 <a class="hidden-xs visible-md visible-lg" style="display:block;padding-top: 10px" href="https://ccmc.gsfc.nasa.gov/" target="_blank"><img style="width: 100%;max-width: 165px;" src="img/emac/ccmc_logo.gif" alt="CCMC Logo, Community Coordinated Modeling Center, National Aeronautics and Space Administration"></a>
             </div>
             <div class="col-md-2 col-md-push-7 col-xs-3">
-                <a href="https://ccmc.gsfc.nasa.gov/community/EXO/">
-                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Launch</button>
+                <a target="_blank" href="https://ccmc.gsfc.nasa.gov/community/EXO/">
+                    <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
                 </a>
             </div>
             <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>

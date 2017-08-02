@@ -144,6 +144,9 @@
 #nasa__subsite-section .nasa__sub-logo {
     height: 140px;
 }
+#nasa__subsite-section.nasa__subsite-section-mini {
+    box-shadow: inset 0 0 4px 0 #454545;
+}
 #nasa__subsite-section.nasa__subsite-section-mini .nasa__sub-name,
 #nasa__subsite-section.nasa__subsite-section-mini .nasa__sub-logo {
     height: 65px;
