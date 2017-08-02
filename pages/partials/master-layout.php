@@ -14,6 +14,13 @@
     <link href="css/division/site.css" rel="stylesheet">
 </head>
 <body>
+
+<!-- Include JS Libraries -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/main.js"></script>
+
 <!-- MAIN NASA HEADER -->
 <?= $this->partial("pages/partials/main-header.php"); ?>
 <!-- END MAIN NASA HEADER -->
@@ -64,10 +71,5 @@
 </div>
 <!-- END FOOTER -->
 
-<!-- Include JS Libraries -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/select2.min.js"></script>s
-<script src="js/main.js"></script>
 </body>
 </html>

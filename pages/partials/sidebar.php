@@ -9,7 +9,7 @@
                 <ul class="nav nav-list">
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.staffList&navOrgCode=690">Staff List</a></li>
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.mgmt&navOrgCode=690">Management Staff</a></li>
-                    <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.orgChart&navOrgCode=690">Org Chart</a></li>
+                    <li><a href="people/org/chart">Org Chart</a></li>
                     <li><a href="https://science.gsfc.nasa.gov/sed/index.cfm?fuseAction=people.orgList&navOrgCode=690">Org List</a></li>
                 </ul>
             </div>

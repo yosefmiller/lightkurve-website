@@ -44,6 +44,10 @@ $klein->respond('/projects/alphabetical', function ($req, $res, $service) {
     $service->pageTitle = 'Missions & Projects - Solar System Exploration Division - 690';
     $service->render('pages/projects-alphabetical.php');
 });
+$klein->respond('/people/org/chart', function ($req, $res, $service) {
+    $service->pageTitle = 'Org Chart - Solar System Exploration Division - 690';
+    $service->render('pages/people-org-chart.php');
+});
 
 /* Handle errors (if no route is found): */
 $klein->onHttpError(function ($code, $router, $matched, $method_matched, $http_exception) {
