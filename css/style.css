@@ -216,11 +216,11 @@
 .label-purple,
 .badge-purple { background-color: #9585bf!important }
 .label-yellow,
-.badge-yellow { background-color: #fee188!important }
+.badge-yellow { background-color: #e7f62b!important }
 .label-light,
 .badge-light { background-color: #e7e7e7!important }
 .badge-yellow,
-.label-yellow { color: #963!important; border-color: #fee188 }
+.label-yellow { color: #963!important; border-color: #e7f62b }
 .badge-light,
 .label-light { color: #888!important }
 .label.arrowed,
@@ -265,10 +265,10 @@
 .label-purple.arrowed-in:before { border-color: #9585bf }
 .label-purple.arrowed-right:after { border-left-color: #9585bf }
 .label-purple.arrowed-in-right:after { border-color: #9585bf }
-.label-yellow.arrowed:before { border-right-color: #fee188 }
-.label-yellow.arrowed-in:before { border-color: #fee188 }
-.label-yellow.arrowed-right:after { border-left-color: #fee188 }
-.label-yellow.arrowed-in-right:after { border-color: #fee188 }
+.label-yellow.arrowed:before { border-right-color: #e7f62b }
+.label-yellow.arrowed-in:before { border-color: #e7f62b }
+.label-yellow.arrowed-right:after { border-left-color: #e7f62b }
+.label-yellow.arrowed-in-right:after { border-color: #e7f62b }
 .label-light.arrowed:before { border-right-color: #e7e7e7 }
 .label-light.arrowed-in:before { border-color: #e7e7e7 }
 .label-light.arrowed-right:after { border-left-color: #e7e7e7 }

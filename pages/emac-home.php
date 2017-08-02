@@ -43,7 +43,7 @@
                     <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
                 </a>
                 <a target="_blank" href="https://natashabatalha.github.io/PandExo/">
-                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">Docs</button>
+                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">About</button>
                 </a>
             </div>
             <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
@@ -95,6 +95,26 @@
                 <p>In the initial CCMC exoplanet applications adaptation, users are able to view and analyze simulations carried out with three different models: SWMF, PWOM and ALF3D. These simulations are used to demonstrate how heliophysics models hosted at CCMC can be used to explore exoplanetary problems. Please follow the links to individual models for more details and to access the simulation results.</p>
                 <div>
                     <span class="label label-large label-important">Star</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOOL -->
+        <div class="well clearfix">
+            <div class="col-md-3 col-xs-9">
+                <strong>ATMOS</strong><br/>
+                <small><!--Replace with name here--></small>
+            </div>
+            <div class="col-md-2 col-md-push-7 col-xs-3">
+                <a target="_blank" href="javascript:void()" disabled="">
+                    <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm disabled">Launch</button>
+                </a>
+            </div>
+            <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
+            <div class="col-md-7 col-md-pull-2 col-xs-12">
+                <p>"Atmos" is a packaged photochemical model and climate model used to understand the vertical structure of various terrestrial atmospheres. Its photochemical model calculates the profiles of various chemicals in the atmosphere, including both gaseous and aerosol phases. Its climate model calculates the temperature profile of the atmosphere. While individually these models may be run for useful information, when coupled they offer a detailed analysis of atmospheric steady-state structures.</p>
+                <div>
+                    <!--Replace with labels here-->
                 </div>
             </div>
         </div>
