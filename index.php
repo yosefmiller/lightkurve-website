@@ -37,15 +37,17 @@ $klein->respond('/', function ($req, $res, $service) {
 });
 $klein->respond('/home', function ($req, $res, $service) {
     $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
-    // $service->isMiniHeader = true;
     $service->render('pages/emac-home.php');
 });
 $klein->respond('/docs', function ($req, $res, $service) {
     require_once('api/markup-parser/simplest-markdown-parser.php');
-    $docs_title = 'Documentation | EMAC Template';
+    $service->pageTitle = 'Documentation | EMAC Template';
+    $service->isMiniHeader = true;
+    $service->isHiddenSidebar = true;
     $docs_markdown = MD(file_get_contents("README.md"));
     $css_markdown = file_get_contents("api/markup-parser/github-markdown.css");
-    $res->body("<title>$docs_title</title><style>$css_markdown</style><div class='markdown-body'>$docs_markdown</div>");
+    // Changed yieldView function of Klein\ServiceProvider to enable rendering of a string
+    $service->render("<style>$css_markdown</style><div class='markdown-body'>$docs_markdown</div>");
 });
 
 /* Handle errors (if no route is found): */

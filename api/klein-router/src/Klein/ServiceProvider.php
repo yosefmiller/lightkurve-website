@@ -300,7 +300,11 @@ class ServiceProvider
      */
     public function yieldView()
     {
-        require $this->view;
+        if (file_exists($this->view)) {
+            require $this->view;
+        } else {
+            echo (string) $this->view;
+        }
     }
 
     /**

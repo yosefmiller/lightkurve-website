@@ -205,3 +205,87 @@ Here's how to change the information about the site _(see comments in code)_:
 To remove, delete the reference to the _partial_ in `pages/partial/sub-header.php`
 <br/>
 To update the data, modify `pages/models/sub-navigation.json` file appropriately.
+
+### Sidebar
+
+##### To Remove
+
+To remove the sidebar altogether, simply set the `isHiddenSidebar` value to the route (before `render`)
+
+###### index.php
+
+````php
+$klein->respond('/home', function ($req, $res, $service) {
+    $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
+    $service->isHiddenSidebar = true;
+    $service->render('pages/emac-home.php');
+});
+````
+
+##### Change Style
+
+Refer to `examples/partials/sidebar.php` for a navigation bar which includes dropdowns.
+
+<br/>
+
+---
+# Directory Structure
+
+###### index.php
+It all begins here. Handles all the routing.
+
+### API
+
+Hosts the `Klein.php` router. The customized _PSR-0_ `autoloader.php` script imports the Klein api.
+
+### CSS
+
+###### bootstrap.css
+> [Bootstrap](http://getbootstrap.com/) is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
+
+###### select2.min.css, select2-bootstrap-theme.min.css
+> [Select2](http://select2.github.io/) is the jQuery replacement for select boxes.
+
+###### main.css
+This contains styling for all the layout components: headers, sidebar, footer, etc.
+<br/>
+It has everything but the main content.
+
+###### style.css
+This contains styling for components that may be useful within the main content.
+<br/>
+It contains 3D buttons, arrowed labels, image captions, and story sections (for articles, blogs).
+<br/>
+Refer to `examples/pages/home-main.php` for an example of story sections and image captions.
+<br/>
+Also, the 404 page provides a very basic example.
+
+###### emac/site.css
+This contains site-specific styling and color settings.
+<br/>
+_Change this file_ according to the site's color theme and desired background images.
+
+### Examples
+Stuff to refer to.
+
+### Fonts
+Glyphicons and the Lato font.
+
+### Img
+Images and logos. Site specific images belong in a sub-directory, eg. `img/emac`
+
+### JS
+Javascript libraries such as _bootstrap_, _jquery_ and _select2_.
+
+###### main.js
+Handles headers, navigation dropdowns, search bar, etc.
+
+### Pages
+###### pages
+The main content for each page goes in here, ending in `.php`.
+
+###### pages/models
+Data files go here, in `json` format. Refer to the data section on how to use.
+
+###### pages/partials
+Layout components go here. `master-layout.php` pulls the `main-header.php`, `sub-header.php` (which pulls `sub-navigation.php`), `sidebar.php`, and `footer.php`.

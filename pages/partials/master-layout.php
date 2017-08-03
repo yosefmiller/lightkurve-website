@@ -33,6 +33,7 @@
 <section id="nasa__main-section">
     <div class="container">
         <div class="row">
+            <?php if (!$this->isHiddenSidebar) { ?>
             <!-- SIDEBAR TRIGGER -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nasa__main-sidebar">
                 <span class="sr-only">Toggle navigation</span>
@@ -49,9 +50,10 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
 
             <!-- MAIN CONTENT -->
-            <div id="nasa__main-content" class="col-sm-9 col-sm-pull-3 col-md-pull-0">
+            <div id="nasa__main-content" class="<?= (!$this->isHiddenSidebar) ? "col-sm-9 col-sm-pull-3 col-md-pull-0" : "col-sm-12"; ?>">
                 <div class="row">
                     <!-- INSERT CONTENT HERE -->
                     <?= $this->yieldview(); ?>
