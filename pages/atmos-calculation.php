@@ -1,12 +1,8 @@
-<!-- Load CSS -->
-<link href="assets/css/form.css" rel="stylesheet">
-<link href="assets/css/bootstrapValidator.min.css" rel="stylesheet">
-
 <div class="col-md-12">
     <!-- Title -->
     <h1 class="page-header">New ATMOS Calculation</h1>
 
-    <!-- Form -->
+    <!-- Calculation Form -->
     <form enctype="multipart/form-data" class="form-horizontal" action="atmos/run" method="post" id="calculation-form">
 
         <div class="form-group">
@@ -29,7 +25,75 @@
                     <option value="mars">Mars</option>
                     <option value="venus">Venus</option>
                 </select>
-                <p class="help-block">This is some random text. Please change me!!</p>
+            </div>
+        </div>
+
+        <div class="form-group hidden" id="planet_options">
+            <label class="col-md-3 control-label" for="planet_template">Planet Options</label>
+            <div class="col-md-9">
+                <!-- Volcanism -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="checkbox icheck-pumpkin">
+                            <input type="checkbox" disabled id="isVolcanism" />
+                            <label for="isVolcanism">Volcanism</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group hidden" id="volcanism-section">
+                        <div class="range-container">
+                            <div class="input-group">
+                                <input title="Volcanism" type="text" class="form-control" name="volcanism" value="1.00">
+                                <span class="input-group-addon">g<sub>&oplus;</sub></span>
+                            </div>
+                            <div class="range">
+                                <input title="Volcanism Slider" type="range" name="volcanism_slider" min="0.75" max="1.5" value="1" step="0.01">
+                            </div>
+                        </div>
+                        <p class="help-block">Adjusts the gravity at the bottom of the atmospheric model. For large atmospheres this may be above the true "surface". (In units of cm/s^2)</p>
+                    </div>
+                </div>
+
+                <!-- Methanogen Biosphere -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="checkbox icheck-carrot">
+                            <input type="checkbox" disabled id="isMethane" />
+                            <label for="isMethane">Methanogen Biosphere</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group hidden" id="methane-section">
+                        <div class="range-container">
+                            <div class="input-group">
+                                <input title="Volcanism" type="text" class="form-control" name="methane" value="1.00">
+                                <span class="input-group-addon">g<sub>&oplus;</sub></span>
+                            </div>
+                            <div class="range">
+                                <input title="Volcanism Slider" type="range" name="methane_slider" min="0.75" max="1.5" value="1" step="0.01">
+                            </div>
+                        </div>
+                        <p class="help-block">Adjusts the gravity at the bottom of the atmospheric model. For large atmospheres this may be above the true "surface". (In units of cm/s^2)</p>
+                    </div>
+                </div>
+
+                <!-- Oxygenic Photosynthesis -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="checkbox icheck-greensea">
+                            <input type="checkbox" disabled id="isOxygenPhotosynthesis" />
+                            <label for="isOxygenPhotosynthesis">Oxygenic Photosynthesis</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organic Sulfur Gases -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="checkbox icheck-sunflower">
+                            <input type="checkbox" disabled id="isSulfur" />
+                            <label for="isSulfur">Organic Sulfur Gases</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -38,12 +102,14 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="surface_gravity">Surface Gravity</label>
             <div class="col-md-4">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="surface_gravity" name="surface_gravity" value="1.00">
-                    <span class="input-group-addon">g<sub>&oplus;</sub></span>
-                </div>
-                <div class="range">
-                    <input title="Surface Gravity Slider" type="range" name="surface_gravity_range" min="0.75" max="1.5" value="1" id="surface_gravity_range" step="0.01">
+                <div class="range-container">
+                    <div class="input-group">
+                        <input title="Surface Gravity" type="text" class="form-control" name="surface_gravity" value="1.00">
+                        <span class="input-group-addon">g<sub>&oplus;</sub></span>
+                    </div>
+                    <div class="range">
+                        <input title="Surface Gravity Slider" type="range" name="surface_gravity_range" min="0.75" max="1.5" value="1" step="0.01">
+                    </div>
                 </div>
                 <p class="help-block">Adjusts the gravity at the bottom of the atmospheric model. For large atmospheres this may be above the true "surface". (In units of cm/s^2)</p>
             </div>
@@ -52,12 +118,14 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="planet_radius">Planet Radius</label>
             <div class="col-md-4">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="planet_radius" name="planet_radius" value="1.00">
-                    <span class="input-group-addon">R<sub>&oplus;</sub></span>
-                </div>
-                <div class="range">
-                    <input title="Planet Radius Slider" type="range" name="planet_radius_slider" min="0.5" max="2.0" value="1" id="planet_radius_slider" step="0.01">
+                <div class="range-container">
+                    <div class="input-group">
+                        <input title="Planet Radius" type="text" class="form-control" name="planet_radius" value="1.00">
+                        <span class="input-group-addon">R<sub>&oplus;</sub></span>
+                    </div>
+                    <div class="range">
+                        <input title="Planet Radius Slider" type="range" name="planet_radius_slider" min="0.5" max="2.0" value="1" step="0.01">
+                    </div>
                 </div>
                 <p class="help-block">Changes the radius of the planet, affecting where the surface is defined.</p>
             </div>
@@ -92,10 +160,13 @@
         </div>
     </div>
 
+    <!-- Results -->
     <div id="calculation-result" class="hidden">
         <div class="col-md-12">
             <h2 class="page-header">Calculation Results</h2>
         </div>
+
+        <!-- Input data -->
         <div class="col-md-12">
             <h4>Input Data</h4>
             <table id="input-table" class="table table-striped">
@@ -108,9 +179,16 @@
                 <tbody></tbody>
             </table>
         </div>
+
+        <!-- Plots -->
+        <div class="col-md-12">
+            <h4>Plots</h4>
+            <div class="col-md-6">
+                <div id="vmrPlot" style="width: 100%;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="tpPlot" style="width: 100%;"></div>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- Leave Javascript for last -->
-<script type="text/javascript" src="assets/js/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="assets/js/atmos/atmos-calculation.js"></script>

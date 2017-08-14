@@ -76,11 +76,22 @@ $(document).ready(function(){
 		}
 	});
 	
+	/* Planet Template */
+	$("#planet_template").change(function () {
+		$("#planet_options").removeClass("hidden");
+	});
+	$("#isVolcanism").change(function () {
+		if ($(this).is(":checked")) { $("#volcanism-section").removeClass("hidden"); }
+		else { $("#volcanism-section").addClass("hidden"); }
+	});
+	$("#isMethane").change(function () {
+		if ($(this).is(":checked")) { $("#methane-section").removeClass("hidden"); }
+		else { $("#methane-section").addClass("hidden"); }
+	});
+	
 	/* Number slider */
-	$("#surface_gravity").on("input", function(){ $("#surface_gravity_range").val($(this).val()); });
-	$("#surface_gravity_range").on("input", function(){ $("#surface_gravity").val($(this).val()); });
-	$("#planet_radius").on("input", function(){ $("#planet_radius_slider").val($(this).val()); });
-	$("#planet_radius_slider").on("input", function(){ $("#planet_radius").val($(this).val()); });
+	$(".range-container input[type=text]").on("input", function(){ $(this).closest(".range-container").find("input[type=range]").val($(this).val()); });
+	$(".range-container input[type=range]").on("input", function(){ $(this).closest(".range-container").find("input[type=text]").val($(this).val()); });
 	
 	/* Form Validation */
 	var validationConfigFields = {
@@ -332,11 +343,76 @@ $(document).ready(function(){
 		
 		// Display result panel
 		$("#calculation-result").removeClass("hidden");
+		$('html, body').animate({ scrollTop: $("#calculation-result").offset().top }, 500);
+		
+		// Display inputs
 		var input_table = $("#input-table").find("tbody");
 		input_table.html("");
 		$.each(response.input, function (name, value) {
 			input_table.append('<tr><th>'+name.replace("_", " ")+'</th><td>'+value+'</td></tr>');
 		});
+		
+		// VMR Plot
+		var vmrFile = "python/outputs/profile2.pt";
+		var vmrPlot = $('#vmrPlot')[0];
+		var vmrLayout = {
+			xaxis: { type: "log", range:[-11,0.5],      title: "Abundance",      titlefont:{size:12}},
+			yaxis: { type: "log", autorange:"reversed", title: "Pressure [bar]", titlefont:{size:12}},
+			legend: { xanchor: "left", yanchor:"top", y:1.0, x:0.0},
+			margin: { l:50, r:0, b:30, t:0, pad:0 }
+		};
+		var vmrY = "Press";
+		var vmrX = ["H2O", "CH4", "C2H6", "CO2", "O2", "O3", "CO", "H2CO", "HNO3", "NO2", "SO2", "OCS"];
+		plotData(vmrPlot, vmrLayout, vmrFile, vmrY, vmrX);
+		
+		// TP Plot
+		var tpFile = "python/outputs/profile2.pt";
+		var tpPlot = $('#tpPlot')[0];
+		var tpLayout = {
+			xaxis: { type: "linear", autorange:true,       title: "Temperature [K]", titlefont:{size:12}},
+			yaxis: { type: "log",    autorange:"reversed", title: "Pressure [bar]",  titlefont:{size:12}},
+			legend: { xanchor: "right", yanchor: "bottom", y: 0.05, x: 1.0},
+			margin: { l:50, r:0, b:30, t:0, pad:0 }
+		};
+		var tpY = "Press";
+		var tpX = ["Temp"];
+		plotData(tpPlot, tpLayout, tpFile, tpY, tpX);
+		
 		return false;
+	}
+	function plotData (plot, layout, output_file_url, yTitle, xList) {
+		// var output_file_url = "python/outputs/profile2.pt";
+		$.get(output_file_url, function (file) {
+			var rows = file.split("\n");
+			
+			// Parse column titles (first column)
+			var columns = [];
+			var columnText = rows[0];
+			columnText = columnText.trim().split(/\s+/);
+			for (var c = 0; c < columnText.length; c++) { columns.push([]); }
+			
+			// Add data to columns
+			for (var i = 1; i < rows.length; i++) {
+				// Skip empty rows
+				if (rows[i].length === 0) continue;
+				var row = rows[i].trim().split(/\s+/);
+				
+				// Push values to column list
+				for (var j = 0; j < row.length; j++) {
+					columns[j].push(row[j]);
+				}
+			}
+			
+			var data = [];
+			var yData = columns[columnText.indexOf(yTitle)];
+			for (var x = 0; x < xList.length; x++) {
+				var columnIndex = columnText.indexOf(xList[x]);
+				var name = columnText[columnIndex];
+				var xData = columns[columnIndex];
+				data.push({x: xData, y: yData, name: name, type: "line"});
+			}
+			
+			Plotly.plot(plot, data, layout);
+		});
 	}
 });

@@ -12,14 +12,24 @@
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/emac/site.css" rel="stylesheet">
+    <?php if ($this->isForm) { ?>
+        <link href="assets/css/form.css" rel="stylesheet">
+        <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet">
+        <link href="assets/css/icheck-bootstrap.min.css" rel="stylesheet">
+    <?php } ?>
 </head>
 <body>
 
 <!-- Include JS Libraries -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/select2.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/main.js"></script>
+<?php if ($this->isForm) { ?>
+    <script type="text/javascript" src="assets/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="assets/js/atmos/atmos-calculation.js"></script>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<?php } ?>
 
 <!-- MAIN NASA HEADER -->
 <?= $this->isMiniHeader ? "" : $this->partial("pages/partials/main-header.php"); ?>

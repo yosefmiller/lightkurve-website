@@ -44,6 +44,7 @@ $klein->with('/atmos', function () use ($klein) {
         $service->pageTitle = 'ATMOS @ EMAC';
         $service->isMiniHeader = true;
         $service->isHiddenSidebar = true;
+        $service->isForm = true;
         $service->render('pages/atmos-calculation.php');
     });
     $klein->respond('POST', '/run', function ($req, $res, $service) {
@@ -65,7 +66,13 @@ $klein->with('/atmos', function () use ($klein) {
 
         /* Validate input data */
         $calc_name = filter_var($calc_name, FILTER_SANITIZE_STRING);
+        $planet_template = filter_var($planet_template, FILTER_SANITIZE_STRING);
+        $surface_gravity = filter_var($surface_gravity, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $planet_radius = filter_var($planet_radius, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         if (!$calc_name) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid calculation name."]); }
+        if (!$planet_template) { $res->json(["status" => "error", "type" => "validation", "message" => "Please select a valid planet template."]); }
+        if (!$surface_gravity) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid surface gravity."]); }
+        if (!$planet_radius) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid planet radius."]); }
 
         /* Store data */
         $form_data = [
@@ -83,7 +90,7 @@ $klein->with('/atmos', function () use ($klein) {
         /* Parse result to json */
         $result_json = json_decode($result_text);
 
-        sleep(2);
+        sleep(1);
         /* Proceed */
         $res->json($result_json);
         //$res->redirect('running')->send();

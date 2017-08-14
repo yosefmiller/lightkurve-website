@@ -8,6 +8,8 @@ planet_template = form_data["planet_template"]
 surface_gravity = form_data["surface_gravity"]
 planet_radius = form_data["planet_radius"]
 
+# Run calculations...
+
 # Prepare response
 response = {}
 response["input"] = form_data
