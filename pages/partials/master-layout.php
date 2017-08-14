@@ -5,21 +5,21 @@
     <title><?= $this->escape($this->pageTitle); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/nasa/template/" />
-    <link href="img/nasa_favicon.ico" rel="icon">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/select2.min.css" rel="stylesheet">
-    <link href="css/select2-bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/emac/site.css" rel="stylesheet">
+    <link href="assets/img/nasa_favicon.ico" rel="icon">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/select2.min.css" rel="stylesheet">
+    <link href="assets/css/select2-bootstrap-theme.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/emac/site.css" rel="stylesheet">
 </head>
 <body>
 
 <!-- Include JS Libraries -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/select2.min.js"></script>
-<script src="js/main.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/select2.min.js"></script>
+<script src="assets/js/main.js"></script>
 
 <!-- MAIN NASA HEADER -->
 <?= $this->isMiniHeader ? "" : $this->partial("pages/partials/main-header.php"); ?>

@@ -65,7 +65,7 @@ $klein->respond(function ($req, $res, $service, $app) {
 <head>
     <title><?= $this->escape($this->pageTitle); ?></title>
     <base href="/path/to/directory/" /><!-- TODO: change this appropriately -->
-    <link href="css/emac/site.css" rel="stylesheet">
+    <link href="assets/css/emac/site.css" rel="stylesheet">
 </head>
 <body>
     <?= $this->partial("pages/partials/header.php"); ?>
@@ -182,7 +182,7 @@ Here's how to change the information about the site _(see comments in code)_:
         
         <!-- Default: right. To align left, add class `nasa__sub-logo-left` -->
         <div class="nasa__sub-logo col-md-3">
-            <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC" />
+            <img src="assets/img/emac/emac_logo_cropped.jpg" alt="EMAC" />
         </div>
         
         <!-- Leave this last so the others are displayed in the right order. -->
@@ -238,7 +238,12 @@ It all begins here. Handles all the routing.
 
 Hosts the `Klein.php` router. The customized _PSR-0_ `autoloader.php` script imports the Klein api.
 
-### CSS
+### Examples
+Stuff to refer to.
+
+### Assets
+
+#### CSS
 
 ###### bootstrap.css
 > [Bootstrap](http://getbootstrap.com/) is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
@@ -260,21 +265,21 @@ Refer to `examples/pages/home-main.php` for an example of story sections and ima
 <br/>
 Also, the 404 page provides a very basic example.
 
+###### form.css
+This contains styling for calculation forms. Include this file for such a page.
+
 ###### emac/site.css
 This contains site-specific styling and color settings.
 <br/>
 _Change this file_ according to the site's color theme and desired background images.
 
-### Examples
-Stuff to refer to.
-
-### Fonts
+#### Fonts
 Glyphicons and the Lato font.
 
-### Img
+#### Img
 Images and logos. Site specific images belong in a sub-directory, eg. `img/emac`
 
-### JS
+#### JS
 Javascript libraries such as _bootstrap_, _jquery_ and _select2_.
 
 ###### main.js

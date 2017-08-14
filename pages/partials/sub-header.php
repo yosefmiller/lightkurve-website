@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="nasa__sub-logo nasa__sub-logo-left col-md-3">
-                <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC" />
+                <img src="assets/img/emac/emac_logo_cropped.jpg" alt="EMAC" />
             </div>
             <div class="nasa__sub-name col-md-9">
                 <div>

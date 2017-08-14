@@ -444,6 +444,9 @@
         background-size: auto 140px;
         background-position: center bottom 0;
     }
+    #nasa__subsite-section.nasa__subsite-section-mini:after {
+        background-position: center top 0;
+    }
     .nasa__sub-name a {
         font-size: 24px;
     }

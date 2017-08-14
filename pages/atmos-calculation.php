@@ -1,6 +1,6 @@
 <!-- Load CSS -->
-<link href="css/form.css" rel="stylesheet">
-<link href="css/bootstrapValidator.min.css" rel="stylesheet">
+<link href="assets/css/form.css" rel="stylesheet">
+<link href="assets/css/bootstrapValidator.min.css" rel="stylesheet">
 
 <div class="col-md-12">
     <!-- Title -->
@@ -66,7 +66,7 @@
         <hr class="col-md-11 col-md-offset-1">
 
         <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
+            <div class="col-md-offset-3 col-md-9">
                 <input type="hidden" name="tracking_id" id="tracking_id" value="0" />
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
@@ -112,5 +112,5 @@
 </div>
 
 <!-- Leave Javascript for last -->
-<script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="js/atmos/atmos-calculation.js"></script>
+<script type="text/javascript" src="assets/js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="assets/js/atmos/atmos-calculation.js"></script>

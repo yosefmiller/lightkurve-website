@@ -15,7 +15,7 @@
 
             <!-- Default: right. To align left, add class `nasa__sub-logo-left` -->
             <div class="nasa__sub-logo col-md-3">
-                <img src="img/emac/emac_logo_cropped.jpg" alt="EMAC" />
+                <img src="assets/img/emac/emac_logo_cropped.jpg" alt="EMAC" />
             </div>
 
             <!-- Leave this last so the others are displayed in the right order. -->

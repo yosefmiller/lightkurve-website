@@ -1,6 +1,6 @@
 <div class="navbar-brand">
     <a class="navbar-brand_logo" href="https://www.nasa.gov/goddard/">
-        <img src="img/goddard_logo.png" alt="Goddard Space Flight Center">
+        <img src="assets/img/goddard_logo.png" alt="Goddard Space Flight Center">
     </a>
 </div>
 <ul class="nav navbar-nav navbar-right">
