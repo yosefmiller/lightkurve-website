@@ -65,6 +65,9 @@
                 <a target="_blank" href="https://ssed.gsfc.nasa.gov/psg/">
                     <button type="button" class="btn btn-3d btn-sky text-uppercase btn-sm">Launch</button>
                 </a>
+                <a target="_blank" href="https://ssed.gsfc.nasa.gov/psg/help.html">
+                    <button type="button" class="btn btn-3d btn-fresh text-uppercase btn-sm">About</button>
+                </a>
             </div>
             <div class="visible-xs visible-sm hidden-md col-xs-12" style="height: 15px;"></div>
             <div class="col-md-7 col-md-pull-2 col-xs-12">
@@ -102,7 +105,7 @@
         <!-- TOOL -->
         <div class="well clearfix">
             <div class="col-md-3 col-xs-9">
-                <strong>ATMOS</strong><br/>
+                <strong>ATMOS Model</strong><br/>
                 <small><!--Replace with name here--></small>
             </div>
             <div class="col-md-2 col-md-push-7 col-xs-3">
@@ -114,7 +117,8 @@
             <div class="col-md-7 col-md-pull-2 col-xs-12">
                 <p>"Atmos" is a packaged photochemical model and climate model used to understand the vertical structure of various terrestrial atmospheres. Its photochemical model calculates the profiles of various chemicals in the atmosphere, including both gaseous and aerosol phases. Its climate model calculates the temperature profile of the atmosphere. While individually these models may be run for useful information, when coupled they offer a detailed analysis of atmospheric steady-state structures.</p>
                 <div>
-                    <!--Replace with labels here-->
+                    <span class="label label-large label-important label-dim arrowed-right">Star</span>
+                    <span class="label label-large label-warning arrowed-in">1D Atm</span>
                 </div>
             </div>
         </div>

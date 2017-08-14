@@ -88,3 +88,105 @@ body{
 .form-group.has-feedback.has-error .radio-chooser, .form-group.has-feedback.has-error .radio-chooser-item {
     border-color: #bd8484;
 }
+
+/* Range Slider */
+.range {
+    width: 100%;
+    display: table;
+    position: relative;
+    height: 25px;
+    margin-top: 5px;
+    background-color: rgb(245, 245, 245);
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.range input {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    display: table-cell;
+    width: 100%;
+    background-color: transparent;
+    height: 25px;
+    cursor: pointer;
+    outline: none;
+}
+.range input::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: rgb(153, 153, 153);
+}
+.range input::-moz-slider-thumb {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    -ms-appearance: none !important;
+    -o-appearance: none !important;
+    appearance: none !important;
+
+    width: 11px;
+    height: 25px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0;
+    background-color: rgb(153, 153, 153);
+}
+.form-group.has-success .range input {
+    outline-color: rgb(92, 184, 92);
+}
+.form-group.has-success .range input::-webkit-slider-thumb {
+    background-color: rgb(92, 184, 92);
+}
+.form-group.has-success .range input::-moz-slider-thumb {
+    background-color: rgb(92, 184, 92);
+}
+
+/* New Calculation Form */
+#calculation-table .status-running-text,
+#calculation-table .status-cancelled-text,
+#calculation-table .status-finished-text,
+#calculation-table .status-error-text,
+#calculation-table .status-pending-text { display: none; }
+#calculation-table tr.calculation-running .status-running-text { display: block; }
+#calculation-table tr.calculation-cancelled .status-cancelled-text { display: block; }
+#calculation-table tr.calculation-finished .status-finished-text { display: block; }
+#calculation-table tr.calculation-error .status-error-text { display: block; }
+#calculation-table tr.calculation-pending .status-pending-text { display: block; }
+#calculation-table tbody > tr > td { vertical-align: middle; }
+
+/*Animated loading icon*/
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -ms-animation: spin .7s infinite linear;
+    -webkit-animation: spinw .7s infinite linear;
+    -moz-animation: spinm .7s infinite linear;
+}
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+@-webkit-keyframes spinw {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}

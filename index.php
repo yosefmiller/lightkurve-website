@@ -39,6 +39,82 @@ $klein->respond('/home', function ($req, $res, $service) {
     $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
     $service->render('pages/emac-home.php');
 });
+$klein->with('/atmos', function () use ($klein) {
+    $klein->respond('/?', function ($req, $res, $service) {
+        $service->pageTitle = 'ATMOS @ EMAC';
+        $service->isMiniHeader = true;
+        $service->isHiddenSidebar = true;
+        $service->render('pages/atmos-calculation.php');
+    });
+    $klein->respond('POST', '/run', function ($req, $res, $service) {
+        /* Initialize response */
+        $json = [];
+
+        /* Retrieve input values */
+        $tracking_id = $req->param('tracking_id');
+        $calc_name = $req->param('calc_name');
+        $planet_template = $req->param('planet_template');
+        $surface_gravity = $req->param('surface_gravity');
+        $planet_radius = $req->param('planet_radius');
+
+        /* Validate inputs */
+        if (empty($calc_name)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a calculation name."]); }
+        if (empty($planet_template)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please select a planet template."]); }
+        if (empty($surface_gravity)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter the surface gravity."]); }
+        if (empty($planet_radius)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a planet radius."]); }
+
+        /* Validate input data */
+        $calc_name = filter_var($calc_name, FILTER_SANITIZE_STRING);
+        if (!$calc_name) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid calculation name."]); }
+
+        /* Store data */
+        $form_data = [
+            "tracking_id" => $tracking_id,
+            "calc_name" => $calc_name,
+            "planet_template" => $planet_template,
+            "surface_gravity" => $surface_gravity,
+            "planet_radius" => $planet_radius
+        ];
+
+        /* Execute Python script */
+        $python_script = "python/atmos-calculation.py";
+        $result_text = shell_exec("python3 $python_script " . escapeshellarg(json_encode($form_data)));
+
+        /* Parse result to json */
+        $result_json = json_decode($result_text);
+
+        sleep(2);
+        /* Proceed */
+        $res->json($result_json);
+        //$res->redirect('running')->send();
+    });
+});
+$klein->with('/example/calculation', function () use ($klein) {
+    $klein->respond('/?', function ($req, $res, $service) {
+        $service->pageTitle = 'New Calculation | Pandexo';
+        $service->isMiniHeader = true;
+        $service->isHiddenSidebar = true;
+        $service->render('examples/pages/form-calculation.php');
+    });
+    $klein->respond('/running', function ($req, $res, $service) {
+        $service->pageTitle = 'Running Calculation | Pandexo';
+        $service->isMiniHeader = true;
+        $service->isHiddenSidebar = true;
+        $service->render("Running Calculation...");
+    });
+    $klein->respond('POST', '/run', function ($req, $res, $service) {
+        // retrieve input values
+        $name = $req->param('calcName');
+
+        // validate inputs
+        if (empty($name)){ echo "Please enter a calculation name."; die(); }
+        $name = filter_var($name, FILTER_SANITIZE_STRING);
+        if (!$name) { echo "Please enter a valid calculation name."; die(); }
+
+        // proceed
+        $res->redirect('running')->send();
+    });
+});
 $klein->respond('/docs', function ($req, $res, $service) {
     require_once('api/markup-parser/simplest-markdown-parser.php');
     $service->pageTitle = 'Documentation | EMAC Template';
