@@ -143,7 +143,7 @@
     </form>
 
     <!-- Result list -->
-    <div id="calculation-list" class="hidden">
+    <div id="calculation-list" class="clearfix hidden">
         <div class="col-md-12">
             <h2 class="page-header">Calculation Dashboard</h2>
         </div>
@@ -161,7 +161,7 @@
     </div>
 
     <!-- Results -->
-    <div id="calculation-result" class="hidden">
+    <div id="calculation-result" class="clearfix hidden">
         <div class="col-md-12">
             <h2 class="page-header">Calculation Results</h2>
         </div>

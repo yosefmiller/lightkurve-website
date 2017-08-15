@@ -418,7 +418,7 @@ $(document).ready(function(){
 		});
 		
 		// VMR Plot
-		var vmrFile = "python/outputs/profile2.pt";
+		var vmrFile = response.vmr_file;
 		var vmrPlot = $('#vmrPlot')[0];
 		var vmrLayout = {
 			xaxis: { type: "log", range:[-11,0.5],      title: "Abundance",      titlefont:{size:12}},
@@ -431,7 +431,7 @@ $(document).ready(function(){
 		plotData(vmrPlot, vmrLayout, vmrFile, vmrY, vmrX);
 		
 		// TP Plot
-		var tpFile = "python/outputs/profile2.pt";
+		var tpFile = response.tp_file;
 		var tpPlot = $('#tpPlot')[0];
 		var tpLayout = {
 			xaxis: { type: "linear", autorange:true,       title: "Temperature [K]", titlefont:{size:12}},
@@ -476,7 +476,7 @@ $(document).ready(function(){
 				data.push({x: xData, y: yData, name: name, type: "line"});
 			}
 			
-			Plotly.plot(plot, data, layout);
+			Plotly.newPlot(plot, data, layout);
 		});
 	}
 	function isCookiesEnabled () {

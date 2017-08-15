@@ -9,12 +9,15 @@ surface_gravity = form_data["surface_gravity"]
 planet_radius = form_data["planet_radius"]
 
 # Run calculations...
+import time
+time.sleep(3)
 
 # Prepare response
 response = {}
 response["input"] = form_data
 response["status"] = "success"
-response["message"] = "This is a message from python in response to '" + calc_name + "'"
+response["vmr_file"] = "python/outputs/profile2.pt"
+response["tp_file"] = "python/outputs/profile2.pt"
 response = json.dumps(response)
 
 # Save data

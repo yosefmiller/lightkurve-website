@@ -8,9 +8,10 @@
  *
  * @author Yosef Miller
  * @email yosefmiller613@gmail.com
- * @date August 2, 2017
- * @docs https://github.com/klein/klein.php
- * @licence Klein router is under the MIT Licence
+ * @date August 15, 2017
+ * @docs http://yosefmiller.com/nasa/template/docs
+ * @api-docs https://github.com/klein/klein.php
+ * @api-licence Klein router is under the MIT Licence
  **/
 
 /* Configure uri for subdirectory: */
