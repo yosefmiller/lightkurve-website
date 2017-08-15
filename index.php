@@ -88,6 +88,7 @@ $klein->with('/atmos', function () use ($klein) {
 
         /* Retrieve input values */
         $tracking_id = $userID . "_" . $req->param('tracking_id');
+        $calc_date = $req->param('calc_date');
         $calc_name = $req->param('calc_name');
         $planet_template = $req->param('planet_template');
         $surface_gravity = $req->param('surface_gravity');
@@ -112,6 +113,7 @@ $klein->with('/atmos', function () use ($klein) {
         /* Store data */
         $form_data = [
             "tracking_id" => $tracking_id,
+            "calc_date" => $calc_date,
             "calc_name" => $calc_name,
             "planet_template" => $planet_template,
             "surface_gravity" => $surface_gravity,
@@ -136,6 +138,18 @@ $klein->with('/atmos', function () use ($klein) {
             $res->json(json_decode(file_get_contents($responseFileLink)));
         }
         $res->json(["status" => "running", "input" => ["tracking_id" => $calculationID]]);
+    });
+    $klein->respond('POST', '/clear/all', function ($req, $res, $service) {
+        /* Get user id */
+        $userID = $service->getUserId->__invoke($res);
+
+        /* Delete files */
+        foreach (glob("python/outputs/".$userID."*") as $filename) {
+            unlink($filename);
+        }
+
+        /* Respond */
+        echo "success"; die();
     });
 });
 $klein->with('/example/calculation', function () use ($klein) {

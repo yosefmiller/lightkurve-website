@@ -135,6 +135,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-3 col-md-9">
+                <input type="hidden" name="calc_date" id="calc_date" value="" />
                 <input type="hidden" name="tracking_id" id="tracking_id" value="0" />
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
@@ -145,13 +146,17 @@
     <!-- Result list -->
     <div id="calculation-list" class="clearfix hidden">
         <div class="col-md-12">
-            <h2 class="page-header">Calculation Dashboard</h2>
+            <h2 class="page-header">
+                Calculation Dashboard
+                <a id="calculation-clear-all" href="#" title="Clear All">Clear All</a>
+            </h2>
         </div>
         <div class="col-md-12">
             <table id="calculation-table" class="table table-hover">
                 <thead><tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Date</th>
                     <th>Status</th>
                     <th>Tools</th>
                 </tr></thead>

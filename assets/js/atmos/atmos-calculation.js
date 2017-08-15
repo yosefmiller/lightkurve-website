@@ -276,13 +276,21 @@ $(document).ready(function(){
 		return false;
 	});
 	
+	$("#calculation-clear-all").click(function (e) {
+		e.preventDefault();
+		resetTrackingID();
+		return false;
+	});
+	
 	/* Form Submission */
-	function createListItem(id, name) {
+	function createListItem(id, name, date) {
 		if (typeof(name) !== "string") { name = ""; }
+		if (typeof(date) !== "string") { date = ""; }
 		var table_item_html = '' +
 			'<tr class="calculation-running" id="' + id + '">' +
 			'<td class="calculation-id">' + id + '</td>' +
 			'<td class="calculation-name">' + name + '</td>' +
+			'<td class="calculation-date">' + date + '</td>' +
 			'<td>' +
 			'<div class="status-running-text"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>&nbsp;&nbsp;Running</div>' +
 			'<div class="status-cancelled-text"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;Cancelled</div>' +
@@ -314,10 +322,13 @@ $(document).ready(function(){
 		// Return current tracking id which represents last calculation's id
 		return current_id;
 	}
-	function setNextTrackingID() {
+	function setNextTrackingID(isReset) {
 		var current_id_elem = $("#tracking_id");
 		var current_id = getCurrentTrackingID();
 		var next_id = current_id + 1;
+		if (typeof(isReset) === "boolean" && isReset) {
+			next_id = 0;
+		}
 		
 		// Set next id element
 		current_id_elem.val(next_id);
@@ -333,6 +344,13 @@ $(document).ready(function(){
 		// Return next tracking id which will be the new calculation's id
 		return next_id;
 	}
+	function resetTrackingID() {
+		$.post("atmos/clear/all", function (response) {
+			if (response !== "success") { console.log(response); return; }
+			setNextTrackingID(true);
+			$("#calculation-table").find("tbody").html("");
+		});
+	}
 	function loadOldCalculations() {
 		var latest_id = getCurrentTrackingID();
 		for (var id = 1; id <= latest_id; id++) {
@@ -345,9 +363,12 @@ $(document).ready(function(){
 		// Increment calculation id
 		var id = setNextTrackingID();
 		
+		
 		// Add calculation to table
 		var name = form.find("#calc_name").val();
-		createListItem(id, name);
+		var date = getDateTimeText();
+		form.find("#calc_date").val(date);
+		createListItem(id, name, date);
 		$("#calculation-list").removeClass("hidden");
 		$('html, body').animate({ scrollTop: $("#calculation-list").offset().top }, 500);
 		
@@ -378,6 +399,7 @@ $(document).ready(function(){
 		if (response.status === "success") {
 			table_item.attr("class", "calculation-finished");
 			table_item.find(".calculation-name").html(response.input.calc_name);
+			table_item.find(".calculation-date").html(response.input.calc_date);
 			table_item.find(".calculation-tools a").removeClass("disabled");
 			table_item.find(".calculation-view").click(displayCalculation);
 		}
@@ -413,6 +435,7 @@ $(document).ready(function(){
 		input_table.html("");
 		$.each(response.input, function (name, value) {
 			if (name.indexOf("tracking") !== -1) { return; }
+			if (name.indexOf("calc") !== -1) { return; }
 			name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 			input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
 		});
@@ -487,6 +510,24 @@ $(document).ready(function(){
 		// delete cookie
 		document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
 		return ret;
+	}
+	function getDateTimeText() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var hh = today.getHours();
+		var min = today.getMinutes();
+		var suffix = "AM";
+		
+		if (dd < 10) { dd = '0'+dd; }
+		if (mm < 10) { mm = '0'+mm; }
+		if (hh >= 12) { suffix = "PM"; }
+		if (hh > 12) { hh -= 12; }
+		if (min < 10) { min = '0'+min; }
+		
+		today = mm + '/' + dd + '/' + yyyy + "  " + hh + ":" + min + " " + suffix;
+		return today;
 	}
 	loadOldCalculations();
 });

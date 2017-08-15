@@ -170,6 +170,11 @@ body{
 #calculation-table tr.calculation-error .status-error-text { display: block; }
 #calculation-table tr.calculation-pending .status-pending-text { display: block; }
 #calculation-table tbody > tr > td { vertical-align: middle; }
+#calculation-clear-all {
+    float: right;
+    padding-top: 15px;
+    font-size: 14px;
+}
 
 /*Animated loading icon*/
 .glyphicon-refresh-animate {
