@@ -277,14 +277,8 @@ $(document).ready(function(){
 	});
 	
 	/* Form Submission */
-	function newCalculation(form) {
-		// Increment calculation id
-		var tracking_id = $("#tracking_id");
-		var id = parseInt(tracking_id.val()) + 1;
-		tracking_id.val(id);
-		
-		// Add calculation to table
-		var name = form.find("#calc_name").val();
+	function createListItem(id, name) {
+		if (typeof(name) !== "string") { name = ""; }
 		var table_item_html = '' +
 			'<tr class="calculation-running" id="' + id + '">' +
 			'<td class="calculation-id">' + id + '</td>' +
@@ -301,37 +295,106 @@ $(document).ready(function(){
 			'<a class="btn btn-default disabled calculation-download" href="#" role="button"><span class="glyphicon glyphicon-download-alt"></span></a>' +
 			'</div></td>' +
 			'</tr>';
-		$("#calculation-list").removeClass("hidden");
 		$("#calculation-table").find("tbody").prepend(table_item_html);
+	}
+	function getCurrentTrackingID() {
+		// Set fallback id
+		var current_id_elem = $("#tracking_id");
+		var current_id = parseInt(current_id_elem.val()); // starts at 0
+		
+		// Use cookies if enabled
+		if (isCookiesEnabled()) {
+			// Get next id, if cookie set
+			var next_id_cookie = document.cookie.match(/(^|;) ?trackingId=([^;]*)(;|$)/);
+			if (next_id_cookie) {
+				current_id = parseInt(next_id_cookie[2]);
+			}
+		}
+		
+		// Return current tracking id which represents last calculation's id
+		return current_id;
+	}
+	function setNextTrackingID() {
+		var current_id_elem = $("#tracking_id");
+		var current_id = getCurrentTrackingID();
+		var next_id = current_id + 1;
+		
+		// Set next id element
+		current_id_elem.val(next_id);
+		
+		// Use cookies if enabled
+		if (isCookiesEnabled()) {
+			// Set next id cookie
+			var expires = new Date();                                       // today
+			expires.setTime(expires.getTime() + (60 * 60 * 24 * 365 * 5));  // 5 years
+			document.cookie = "trackingId=" + next_id + ";expires=" + expires.toUTCString();
+		}
+		
+		// Return next tracking id which will be the new calculation's id
+		return next_id;
+	}
+	function loadOldCalculations() {
+		var latest_id = getCurrentTrackingID();
+		for (var id = 1; id <= latest_id; id++) {
+			createListItem(id);
+			$("#calculation-list").removeClass("hidden");
+			$.post("atmos/check/"+id, handleCalculation);
+		}
+	}
+	function newCalculation(form) {
+		// Increment calculation id
+		var id = setNextTrackingID();
+		
+		// Add calculation to table
+		var name = form.find("#calc_name").val();
+		createListItem(id, name);
+		$("#calculation-list").removeClass("hidden");
 		$('html, body').animate({ scrollTop: $("#calculation-list").offset().top }, 500);
+		
+		// Store a cookie requesting a user id
+		if (isCookiesEnabled()) {
+			document.cookie = "needcookie=1";
+		}
 		
 		// Submit a new calculation using AJAX
 		$.ajax({
 			data: form.serialize(),
 			type: 'POST',
 			url: form.attr("action"),
-			success: successfulCalculation,
+			success: handleCalculation,
 			error: function() {
 				alert('An unexpected error occurred.');
 			}
 		});
 	}
-	function successfulCalculation (response) {
+	function handleCalculation (response) {
 		// Determine action
-		console.log(response);
-		if (response.status === "success") {}
-		else if (response.status === "error") { alert(response.message); return; }
-		else { alert("A server error occurred."); return; }
+		if (!response.status) { alert("A server error occurred."); return; }
 		
 		// Update status
-		var table_item = $("#calculation-table").find("tr#"+response.input.tracking_id);
-		table_item.attr("class", "calculation-finished");
-		table_item.find(".calculation-tools a").removeClass("disabled");
-		table_item.find(".calculation-view").click(displayCalculation);
+		var tracking_number = response.input.tracking_id.split("_")[2];
+		var table_item = $("#calculation-table").find("tr#"+tracking_number);
+		
+		if (response.status === "success") {
+			table_item.attr("class", "calculation-finished");
+			table_item.find(".calculation-name").html(response.input.calc_name);
+			table_item.find(".calculation-tools a").removeClass("disabled");
+			table_item.find(".calculation-view").click(displayCalculation);
+		}
+		else if (response.status === "running") {
+			table_item.attr("class", "calculation-running");
+			table_item.find(".calculation-name").html(response.input.calc_name);
+			setTimeout(function () {
+				$.post("atmos/check/"+tracking_number, handleCalculation);
+			}, 2000);
+		}
+		else if (response.status === "error") {
+			table_item.attr("class", "calculation-error");
+		}
 		
 		// Store response
 		if (!$.calculation) { $.calculation = []; }
-		$.calculation[response.input.tracking_id] = response;
+		$.calculation[response.input.tracking_id.split("_")[2]] = response;
 	}
 	function displayCalculation (e) {
 		e.preventDefault();
@@ -349,7 +412,9 @@ $(document).ready(function(){
 		var input_table = $("#input-table").find("tbody");
 		input_table.html("");
 		$.each(response.input, function (name, value) {
-			input_table.append('<tr><th>'+name.replace("_", " ")+'</th><td>'+value+'</td></tr>');
+			if (name.indexOf("tracking") !== -1) { return; }
+			name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+			input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
 		});
 		
 		// VMR Plot
@@ -381,7 +446,6 @@ $(document).ready(function(){
 		return false;
 	}
 	function plotData (plot, layout, output_file_url, yTitle, xList) {
-		// var output_file_url = "python/outputs/profile2.pt";
 		$.get(output_file_url, function (file) {
 			var rows = file.split("\n");
 			
@@ -415,4 +479,14 @@ $(document).ready(function(){
 			Plotly.plot(plot, data, layout);
 		});
 	}
+	function isCookiesEnabled () {
+		if (navigator.cookieEnabled) return true;
+		// set and read cookie
+		document.cookie = "cookietest=1";
+		var ret = document.cookie.indexOf("cookietest=") !== -1;
+		// delete cookie
+		document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
+		return ret;
+	}
+	loadOldCalculations();
 });

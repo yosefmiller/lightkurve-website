@@ -15,7 +15,9 @@ response = {}
 response["input"] = form_data
 response["status"] = "success"
 response["message"] = "This is a message from python in response to '" + calc_name + "'"
-
-# Return data
 response = json.dumps(response)
-print(response)
+
+# Save data
+output_file_name = "python/outputs/" + form_data["tracking_id"] + "_response.json"
+with open(output_file_name, "w") as f:
+    f.write(response)

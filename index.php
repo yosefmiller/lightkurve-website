@@ -29,6 +29,36 @@ $klein = new \Klein\Klein();
 $klein->respond(function ($req, $res, $service, $app) {
     $service->layout('pages/partials/master-layout.php');
     $service->subNavigation = json_decode(file_get_contents("pages/models/sub-navigation.json"), true);
+    $service->getUserId = function ($response) {
+        /* Configure cookies */
+        if (isset($_COOKIE["userId"])) {
+            // userid is already set - good to go!
+            $userId = $_COOKIE["userId"];
+        } else if (isset($_COOKIE["needcookie"])) {
+            // If cookies are enabled and userId is not set
+            $response->cookie('needcookie', 0, time() - 3600);
+
+            // Generate a new userId
+            $userId = uniqid("user_");
+
+            // And set the cookie
+            $exp = time() + 60*60*24*365*10;  // 10 years
+            $response->cookie('userId', $userId, $exp);
+        } else {
+            // If cookies are disabled, use IP address
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $IPv = $_SERVER['HTTP_CLIENT_IP'];
+            } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ips = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+                $IPv = trim($ips[count($ips) - 1]);
+            } else {
+                $IPv = $_SERVER['REMOTE_ADDR'];
+            }
+            $IP = 'IP_' . $IPv;
+            $userId = str_replace(array(":"," ",".","/"), array("","","",""), $IP);
+        }
+        return $userId;
+    };
 });
 
 /* Main Routing: */
@@ -48,31 +78,35 @@ $klein->with('/atmos', function () use ($klein) {
         $service->render('pages/atmos-calculation.php');
     });
     $klein->respond('POST', '/run', function ($req, $res, $service) {
-        /* Initialize response */
-        $json = [];
+        function errorJson ($message, $id) {
+            return ["status" => "error", "type" => "validation", "message" => $message, "input" => ["tracking_id" => $id]];
+        }
+
+        /* Get user id */
+        $userID = $service->getUserId->__invoke($res);
 
         /* Retrieve input values */
-        $tracking_id = $req->param('tracking_id');
+        $tracking_id = $userID . "_" . $req->param('tracking_id');
         $calc_name = $req->param('calc_name');
         $planet_template = $req->param('planet_template');
         $surface_gravity = $req->param('surface_gravity');
         $planet_radius = $req->param('planet_radius');
 
         /* Validate inputs */
-        if (empty($calc_name)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a calculation name."]); }
-        if (empty($planet_template)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please select a planet template."]); }
-        if (empty($surface_gravity)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter the surface gravity."]); }
-        if (empty($planet_radius)){ $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a planet radius."]); }
+        if (empty($calc_name)){ $res->json(errorJson("Please enter a calculation name.", $tracking_id)); }
+        if (empty($planet_template)){ $res->json(errorJson("Please select a planet template.", $tracking_id)); }
+        if (empty($surface_gravity)){ $res->json(errorJson("Please enter the surface gravity.", $tracking_id)); }
+        if (empty($planet_radius)){ $res->json(errorJson("Please enter a planet radius.", $tracking_id)); }
 
         /* Validate input data */
         $calc_name = filter_var($calc_name, FILTER_SANITIZE_STRING);
         $planet_template = filter_var($planet_template, FILTER_SANITIZE_STRING);
         $surface_gravity = filter_var($surface_gravity, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $planet_radius = filter_var($planet_radius, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        if (!$calc_name) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid calculation name."]); }
-        if (!$planet_template) { $res->json(["status" => "error", "type" => "validation", "message" => "Please select a valid planet template."]); }
-        if (!$surface_gravity) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid surface gravity."]); }
-        if (!$planet_radius) { $res->json(["status" => "error", "type" => "validation", "message" => "Please enter a valid planet radius."]); }
+        if (!$calc_name) { $res->json(errorJson("Please enter a valid calculation name.", $tracking_id)); }
+        if (!$planet_template) { $res->json(errorJson("Please select a valid planet template.", $tracking_id)); }
+        if (!$surface_gravity) { $res->json(errorJson("Please enter a valid surface gravity.", $tracking_id)); }
+        if (!$planet_radius) { $res->json(errorJson("Please enter a valid planet radius.", $tracking_id)); }
 
         /* Store data */
         $form_data = [
@@ -83,17 +117,24 @@ $klein->with('/atmos', function () use ($klein) {
             "planet_radius" => $planet_radius
         ];
 
-        /* Execute Python script */
+        /* Execute Python script in background */
         $python_script = "python/atmos-calculation.py";
-        $result_text = shell_exec("python3 $python_script " . escapeshellarg(json_encode($form_data)));
+        passthru("python3 $python_script " . escapeshellarg(json_encode($form_data)) . " > /dev/null &");
 
-        /* Parse result to json */
-        $result_json = json_decode($result_text);
+        /* Respond */
+        $res->json(["status" => "running", "input" => $form_data]);
+    });
+    $klein->respond('POST', '/check/[i:id]', function ($req, $res, $service) {
+        /* Get user id */
+        $userID = $service->getUserId->__invoke($res);
+        $calculationID = $userID . "_" . $req->param("id");
 
-        sleep(1);
-        /* Proceed */
-        $res->json($result_json);
-        //$res->redirect('running')->send();
+        /* Check if response file exists */
+        $responseFileLink = "python/outputs/" . $calculationID . "_response.json";
+        if (file_exists($responseFileLink)) {
+            $res->json(json_decode(file_get_contents($responseFileLink)));
+        }
+        $res->json(["status" => "running", "input" => ["tracking_id" => $calculationID]]);
     });
 });
 $klein->with('/example/calculation', function () use ($klein) {
