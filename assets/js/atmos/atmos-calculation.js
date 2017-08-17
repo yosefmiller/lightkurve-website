@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	/***** FORM ELEMENTS *****/
 	/* Nice block level radio selection */
 	$(".radio-chooser-content").click(function () {
 		$(".radio-chooser-item").removeClass("radio-chooser-selected");
@@ -92,8 +93,9 @@ $(document).ready(function(){
 	/* Number slider */
 	$(".range-container input[type=text]").on("input", function(){ $(this).closest(".range-container").find("input[type=range]").val($(this).val()); });
 	$(".range-container input[type=range]").on("input", function(){ $(this).closest(".range-container").find("input[type=text]").val($(this).val()); });
+	/***** END FORM ELEMENTS *****/
 	
-	/* Form Validation */
+	/***** FORM VALIDATION *****/
 	var validationConfigFields = {
 		calc_name: {
 			validators: {
@@ -257,24 +259,18 @@ $(document).ready(function(){
 		},
 		fields: validationConfigFields
 	}).on("success.form.bv", function (e) {
-		// Prevent form submission
-		e.preventDefault();
-		
-		// Some instances you can use are
-		var $form = $(e.target);        // The form instance
-		
-		// Enable the submit button
-		var bv = $form.data("bootstrapValidator");
+		e.preventDefault();                         // Prevent form submission
+		var $form = $(e.target);                    // The form instance
+		var bv = $form.data("bootstrapValidator");  // The validator instance
 		if (bv) {
 			if (bv.getSubmitButton()) {
-				bv.disableSubmitButtons(false);
+				bv.disableSubmitButtons(false);     // Enable the submit button
 			}
 		}
-		
-		// Submit the form via ajax
-		newCalculation($form);
+		newCalculation($form);                      // Submit the form via ajax
 		return false;
 	});
+	/***** END FORM VALIDATION *****/
 	
 	$("#calculation-clear-all").click(function (e) {
 		e.preventDefault();
@@ -363,7 +359,6 @@ $(document).ready(function(){
 		// Increment calculation id
 		var id = setNextTrackingID();
 		
-		
 		// Add calculation to table
 		var name = form.find("#calc_name").val();
 		var date = getDateTimeText();
@@ -412,6 +407,7 @@ $(document).ready(function(){
 		}
 		else if (response.status === "error") {
 			table_item.attr("class", "calculation-error");
+			alert("An error occurred with message:\n"+response.message);
 		}
 		
 		// Store response
