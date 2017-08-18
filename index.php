@@ -152,30 +152,32 @@ $klein->with('/atmos', function () use ($klein) {
         echo "success"; die();
     });
 });
-$klein->with('/example/calculation', function () use ($klein) {
+$klein->with('/example', function () use ($klein) {
     $klein->respond('/?', function ($req, $res, $service) {
+        $service->pageTitle = 'Examples';
+        $service->render("Welcome to the examples! Add any of the following to the web address: /calculation, /home, /org/chart, /projects/alphabetical, /projects/featured");
+    });
+    $klein->respond('/calculation', function ($req, $res, $service) {
         $service->pageTitle = 'New Calculation | Pandexo';
         $service->isMiniHeader = true;
         $service->isHiddenSidebar = true;
         $service->render('examples/pages/form-calculation.php');
     });
-    $klein->respond('/running', function ($req, $res, $service) {
-        $service->pageTitle = 'Running Calculation | Pandexo';
-        $service->isMiniHeader = true;
-        $service->isHiddenSidebar = true;
-        $service->render("Running Calculation...");
+    $klein->respond('/home', function ($req, $res, $service) {
+        $service->pageTitle = 'Code 690 Home | Example';
+        $service->render('examples/pages/home-main.php');
     });
-    $klein->respond('POST', '/run', function ($req, $res, $service) {
-        // retrieve input values
-        $name = $req->param('calcName');
-
-        // validate inputs
-        if (empty($name)){ echo "Please enter a calculation name."; die(); }
-        $name = filter_var($name, FILTER_SANITIZE_STRING);
-        if (!$name) { echo "Please enter a valid calculation name."; die(); }
-
-        // proceed
-        $res->redirect('running')->send();
+    $klein->respond('/org/chart', function ($req, $res, $service) {
+        $service->pageTitle = 'Code 690 Org Chart | Example';
+        $service->render('examples/pages/people-org-chart.php');
+    });
+    $klein->respond('/projects/alphabetical', function ($req, $res, $service) {
+        $service->pageTitle = 'Code 690 Projects Alphabetical | Example';
+        $service->render('examples/pages/projects-alphabetical.php');
+    });
+    $klein->respond('/projects/featured', function ($req, $res, $service) {
+        $service->pageTitle = 'Code 690 Projects Featured | Example';
+        $service->render('examples/pages/projects-featured.php');
     });
 });
 $klein->respond('/docs', function ($req, $res, $service) {
