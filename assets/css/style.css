@@ -83,8 +83,6 @@
     width: 100%;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
-    -ms-transition: all 0.2s;
-    -o-transition: all 0.2s;
     transition: all 0.2s;
 }
 .story-section:hover .img-background,
@@ -215,6 +213,8 @@
 .badge-pink { background-color: #d6487e!important }
 .label-purple,
 .badge-purple { background-color: #9585bf!important }
+.label-olive,
+.badge-olive { background-color: olive!important }
 .label-yellow,
 .badge-yellow { background-color: #e7f62b!important }
 .label-light,
@@ -265,6 +265,10 @@
 .label-purple.arrowed-in:before { border-color: #9585bf }
 .label-purple.arrowed-right:after { border-left-color: #9585bf }
 .label-purple.arrowed-in-right:after { border-color: #9585bf }
+.label-olive.arrowed:before { border-right-color: olive; }
+.label-olive.arrowed-in:before { border-color: olive; }
+.label-olive.arrowed-right:after { border-left-color: olive; }
+.label-olive.arrowed-in-right:after { border-color: olive; }
 .label-yellow.arrowed:before { border-right-color: #e7f62b }
 .label-yellow.arrowed-in:before { border-color: #e7f62b }
 .label-yellow.arrowed-right:after { border-left-color: #e7f62b }
