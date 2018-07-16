@@ -437,7 +437,7 @@ $(document).ready(function(){
 		});
 		
 		// VMR Plot
-		var vmrFile = response.vmr_file;
+		var vmrFile = "/atmos/outputs/" + response.vmr_file;
 		var vmrPlot = $('#vmrPlot')[0];
 		var vmrLayout = {
 			xaxis: { type: "log", range:[-11,0.5],      title: "Abundance",      titlefont:{size:12}},
@@ -448,9 +448,9 @@ $(document).ready(function(){
 		var vmrY = "Press";
 		var vmrX = ["H2O", "CH4", "C2H6", "CO2", "O2", "O3", "CO", "H2CO", "HNO3", "NO2", "SO2", "OCS"];
 		plotData(vmrPlot, vmrLayout, vmrFile, vmrY, vmrX);
-		
+
 		// TP Plot
-		var tpFile = response.tp_file;
+		var tpFile = "/atmos/outputs/" + response.tp_file;
 		var tpPlot = $('#tpPlot')[0];
 		var tpLayout = {
 			xaxis: { type: "linear", autorange:true,       title: "Temperature [K]", titlefont:{size:12}},

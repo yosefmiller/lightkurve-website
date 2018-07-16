@@ -10,7 +10,7 @@
             <!-- Logo -->
             <div class="navbar-brand">
                 <a class="navbar-brand_logo" href="https://www.nasa.gov/">
-                    <img src="assets/img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
+                    <img src="img/nasa_header_logo.png" alt="NASA Logo, National Aeronautics and Space Administration">
                 </a>
                 <div class="navbar-brand_heading">
                     <a style="font-size: 18px;" href="https://www.nasa.gov/">National Aeronautics and Space Administration</a>

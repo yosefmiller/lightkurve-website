@@ -15,10 +15,10 @@
  **/
 
 /* Configure uri for subdirectory: */
-/* Might need to comment this out depending on configuration: */
+/* Might need to uncomment this depending on configuration: */
 $base = dirname($_SERVER['PHP_SELF']);
 $orig_uri = $_SERVER['REQUEST_URI'];
-$_SERVER['REQUEST_URI'] = substr($orig_uri, strlen($base));
+//$_SERVER['REQUEST_URI'] = substr($orig_uri, strlen($base));
 
 /* Initialize Klein router: */
 /* Klein can also be installed via Composer */
@@ -64,11 +64,7 @@ $klein->respond(function ($req, $res, $service, $app) {
 
 /* Main Routing: */
 $klein->respond('/', function ($req, $res, $service) {
-    $res->redirect('home')->send();
-});
-$klein->respond('/home', function ($req, $res, $service) {
-    $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
-    $service->render('pages/emac-home.php');
+    $res->redirect('atmos')->send();
 });
 $klein->with('/atmos', function () use ($klein) {
     $klein->respond('/?', function ($req, $res, $service) {
@@ -139,6 +135,11 @@ $klein->with('/atmos', function () use ($klein) {
         }
         $res->json(["status" => "running", "input" => ["tracking_id" => $calculationID]]);
     });
+    $klein->respond('GET', '/outputs/[:filename]', function ($req, $res, $service) {
+        /* Check if response file exists */
+        $responseFileLink = "python/outputs/" . $req->param("filename");
+        $res->file($responseFileLink);
+    });
     $klein->respond('POST', '/clear/all', function ($req, $res, $service) {
         /* Get user id */
         $userID = $service->getUserId->__invoke($res);
@@ -155,7 +156,7 @@ $klein->with('/atmos', function () use ($klein) {
 $klein->with('/example', function () use ($klein) {
     $klein->respond('/?', function ($req, $res, $service) {
         $service->pageTitle = 'Examples';
-        $service->render("Welcome to the examples! Add any of the following to the web address: /calculation, /home, /org/chart, /projects/alphabetical, /projects/featured");
+        $service->render("Welcome to the examples! Add any of the following to the web address: /calculation, /home, /home/emac, /org/chart, /projects/alphabetical, /projects/featured");
     });
     $klein->respond('/calculation', function ($req, $res, $service) {
         $service->pageTitle = 'New Calculation | Pandexo';
@@ -167,8 +168,13 @@ $klein->with('/example', function () use ($klein) {
         $service->pageTitle = 'Code 690 Home | Example';
         $service->render('examples/pages/home-main.php');
     });
+    $klein->respond('/home/emac', function ($req, $res, $service) {
+        $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
+        $service->render('examples/pages/home-emac.php');
+    });
     $klein->respond('/org/chart', function ($req, $res, $service) {
         $service->pageTitle = 'Code 690 Org Chart | Example';
+        $service->isHiddenSidebar = true;
         $service->render('examples/pages/people-org-chart.php');
     });
     $klein->respond('/projects/alphabetical', function ($req, $res, $service) {

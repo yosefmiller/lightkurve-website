@@ -1,6 +1,6 @@
 <!-- Load CSS -->
-<link href="assets/css/form.css" rel="stylesheet">
-<link href="assets/css/bootstrapValidator.min.css" rel="stylesheet">
+<link href="css/form.css" rel="stylesheet">
+<link href="css/vendor/bootstrapValidator.min.css" rel="stylesheet">
 
 <!-- Title -->
 <h1 class="page-header">New JWST Calculation</h1>
@@ -443,7 +443,7 @@
 </form>
 
 <!-- Leave Javascript for last -->
-<script type="text/javascript" src="assets/js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
         /* Nice block level radio selection */

@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <title><?= $this->escape($this->pageTitle); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="/nasa/template/" />
-    <link href="assets/img/nasa_favicon.ico" rel="icon">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/select2.min.css" rel="stylesheet">
-    <link href="assets/css/select2-bootstrap-theme.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/emac/site.css" rel="stylesheet">
+    <base href="/" />
+    <link href="img/nasa_favicon.ico" rel="icon">
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="css/vendor/select2.min.css" rel="stylesheet">
+    <link href="css/vendor/select2-bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/emac/site.css" rel="stylesheet">
     <?php if ($this->isForm) { ?>
-        <link href="assets/css/form.css" rel="stylesheet">
-        <link href="assets/css/bootstrapValidator.min.css" rel="stylesheet">
-        <link href="assets/css/icheck-bootstrap.min.css" rel="stylesheet">
+        <link href="css/form.css" rel="stylesheet">
+        <link href="css/vendor/bootstrapValidator.min.css" rel="stylesheet">
+        <link href="css/vendor/icheck-bootstrap.min.css" rel="stylesheet">
     <?php } ?>
 </head>
 <body>
 
 <!-- Include JS Libraries -->
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="assets/js/select2.min.js"></script>
-<script type="text/javascript" src="assets/js/main.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/select2.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 <?php if ($this->isForm) { ?>
-    <script type="text/javascript" src="assets/js/bootstrapValidator.min.js"></script>
-    <script type="text/javascript" src="assets/js/atmos/atmos-calculation.js"></script>
+    <script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="js/atmos/atmos-calculation.js"></script>
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <?php } ?>
 
@@ -36,7 +36,13 @@
 <!-- END MAIN NASA HEADER -->
 
 <!-- NASA SUB-SITE INFO -->
-<?= $this->partial("pages/partials/sub-header.php"); ?>
+<nav id="nasa__subsite-section" <?= $this->isMiniHeader ? "class='nasa__subsite-section-mini'" : ""; ?>>
+	<!-- NASA SUB-SITE NAVIGATION BAR/DROPDOWN -->
+    <?= $this->isMiniHeader ? "" : $this->partial("pages/partials/sub-navigation.php"); ?>
+	
+	<!-- NASA SUB-SITE INFORMATION -->
+	<?= $this->partial("pages/partials/sub-header.php"); ?>
+</nav>
 <!-- END NASA SUB-SITE INFO -->
 
 <!-- MAIN PAGE CONTENT -->

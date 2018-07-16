@@ -16,8 +16,8 @@ time.sleep(3)
 response = {}
 response["input"] = form_data
 response["status"] = "success"
-response["vmr_file"] = "python/outputs/profile2.pt"
-response["tp_file"] = "python/outputs/profile2.pt"
+response["vmr_file"] = "profile2.pt"
+response["tp_file"] = "profile2.pt"
 response = json.dumps(response)
 
 # Save data
