@@ -9,9 +9,9 @@
     <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
     <link href="css/vendor/select2.min.css" rel="stylesheet">
     <link href="css/vendor/select2-bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/emac/site.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/components.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
     <?php if ($this->isForm) { ?>
         <link href="css/form.css" rel="stylesheet">
         <link href="css/vendor/bootstrapValidator.min.css" rel="stylesheet">
@@ -21,13 +21,13 @@
 <body>
 
 <!-- Include JS Libraries -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/select2.min.js"></script>
+<script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/vendor/select2.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <?php if ($this->isForm) { ?>
-    <script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
-    <script type="text/javascript" src="js/atmos/atmos-calculation.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="js/atmos-calculation.js"></script>
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <?php } ?>
 
@@ -38,7 +38,7 @@
 <!-- NASA SUB-SITE INFO -->
 <nav id="nasa__subsite-section" <?= $this->isMiniHeader ? "class='nasa__subsite-section-mini'" : ""; ?>>
 	<!-- NASA SUB-SITE NAVIGATION BAR/DROPDOWN -->
-    <?= $this->isMiniHeader ? "" : $this->partial("pages/partials/sub-navigation.php"); ?>
+    <?= $this->isMiniHeader || $this->isHiddenSubNav ? "" : $this->partial("pages/partials/sub-navigation.php"); ?>
 	
 	<!-- NASA SUB-SITE INFORMATION -->
 	<?= $this->partial("pages/partials/sub-header.php"); ?>
@@ -62,7 +62,7 @@
             <div id="nasa__main-sidebar" class="navbar-collapse collapse col-sm-3 col-sm-push-9 col-md-push-0">
                 <div class="row">
                     <div class="col-md-12">
-                        <?= $this->partial("pages/partials/sidebar.php"); ?>
+                        <?= $this->partial($this->sidebarPath ?: "pages/partials/sidebar.php"); ?>
                     </div>
                 </div>
             </div>

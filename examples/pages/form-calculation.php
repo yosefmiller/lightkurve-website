@@ -443,7 +443,7 @@
 </form>
 
 <!-- Leave Javascript for last -->
-<script type="text/javascript" src="js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="js/vendor/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
         /* Nice block level radio selection */

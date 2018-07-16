@@ -1,0 +1,22 @@
+/*
+ * CSS which is site-specific, little chance of being used elsewhere.
+ */
+
+/* Site background */
+#nasa__subsite-section:after {
+    background-image: url("../img/emac/background_galaxy_blue.jpg");
+}
+#nasa__subsite-section.nasa__subsite-section-mini:after {
+    background-image: linear-gradient(rgba(60, 60, 60, 0.4),rgba(60, 60, 60, 0.4)), url("../img/emac/background_galaxy_blue.jpg");
+}
+
+/* Content Section Theme */
+.content-section .content-section__title { border-color: #2d5ca9; }
+.label-accent { background-color: #2d5ca9 !important; }
+
+/* Tool Legend */
+.tool-legend div { padding: 5px 0; }
+.tool-legend span:not(.label) { padding-left: 5px; }
+
+/* Tool List */
+#tool-list .btn { float: right; }

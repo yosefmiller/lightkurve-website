@@ -1,5 +1,4 @@
 <!-- NASA SUB-SITE NAVIGATION BAR -->
-<!-- To remove, add class 'hidden' or comment out in `sub-header.php` -->
 <div id="nasa__sub-navigation">
     <div class="container">
         <ul class="nasa__navigation-bar nav navbar-nav navbar-collapse collapse">
@@ -64,7 +63,7 @@
 <!-- NASA NAVIGATION COLORS -->
 <style>
     <?php foreach($this->subNavigation as $nav){
-        echo "#nasa__sub-navigation .nasa__sub-navigation-section__". $nav["id"] .":hover, .nasa__sub-navigation-section__". $nav["id"] ." { background-color: ". $nav["hex_color"] ."; }";
+        echo "#nasa__sub-navigation .nasa__sub-navigation-section__". $nav["id"] .":hover, .nasa__sub-navigation-section__". $nav["id"] ." { background-color: ". $nav["hex_color"] ."; }\n";
     } ?>
 </style>
 <!-- END NASA NAVIGATION COLORS -->

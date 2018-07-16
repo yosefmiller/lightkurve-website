@@ -423,8 +423,9 @@ $(document).ready(function(){
 		console.log(response);
 		
 		// Display result panel
-		$("#calculation-result").removeClass("hidden");
-		$('html, body').animate({ scrollTop: $("#calculation-result").offset().top }, 500);
+		var calculation_result = $("#calculation-result");
+        calculation_result.removeClass("hidden");
+		$('html, body').animate({ scrollTop: calculation_result.offset().top }, 500);
 		
 		// Display inputs
 		var input_table = $("#input-table").find("tbody");

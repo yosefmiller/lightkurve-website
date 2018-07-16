@@ -166,10 +166,13 @@ $klein->with('/example', function () use ($klein) {
     });
     $klein->respond('/home', function ($req, $res, $service) {
         $service->pageTitle = 'Code 690 Home | Example';
+        $service->sidebarPath = 'examples/partials/sidebar.php';
         $service->render('examples/pages/home-main.php');
     });
     $klein->respond('/home/emac', function ($req, $res, $service) {
         $service->pageTitle = 'Exoplanet Modeling and Analysis Center - NASA/GSFC';
+        $service->isHiddenSubNav = true;
+        $service->toolList = json_decode(file_get_contents("examples/models/emac-tool-list.json"), true);
         $service->render('examples/pages/home-emac.php');
     });
     $klein->respond('/org/chart', function ($req, $res, $service) {
