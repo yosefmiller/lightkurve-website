@@ -27,8 +27,10 @@
 <script type="text/javascript" src="js/main.js"></script>
 <?php if ($this->isForm) { ?>
     <script type="text/javascript" src="js/vendor/bootstrapValidator.min.js"></script>
-    <script type="text/javascript" src="js/atmos-calculation.js"></script>
-    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="js/calculation.js"></script>
+    <script defer type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<?php } if ($this->customJSFile) { ?>
+	<script type="text/javascript" src="<?= $this->customJSFile ?>"></script>
 <?php } ?>
 
 <!-- MAIN NASA HEADER -->

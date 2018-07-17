@@ -72,6 +72,7 @@ $klein->with('/atmos', function () use ($klein) {
         $service->isMiniHeader = true;
         $service->isHiddenSidebar = true;
         $service->isForm = true;
+        $service->customJSFile = "js/atmos-calculation.js";
         $service->render('pages/atmos-calculation.php');
     });
     $klein->respond('POST', '/run', function ($req, $res, $service) {
@@ -162,6 +163,7 @@ $klein->with('/example', function () use ($klein) {
         $service->pageTitle = 'New Calculation | Pandexo';
         $service->isMiniHeader = true;
         $service->isHiddenSidebar = true;
+        $service->isForm = true;
         $service->render('examples/pages/form-calculation.php');
     });
     $klein->respond('/home', function ($req, $res, $service) {

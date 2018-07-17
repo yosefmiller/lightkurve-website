@@ -3,7 +3,7 @@
     <h1 class="page-header">New ATMOS Calculation</h1>
 
     <!-- Calculation Form -->
-    <form enctype="multipart/form-data" class="form-horizontal" action="atmos/run" method="post" id="calculation-form">
+    <form enctype="multipart/form-data" class="form-horizontal" action="" method="post" id="calculation-form">
 
         <div class="form-group">
             <label class="col-md-3 control-label" for="calc_name">Name</label>
@@ -144,56 +144,12 @@
     </form>
 
     <!-- Result list -->
-    <div id="calculation-list" class="clearfix hidden">
-        <div class="col-md-12">
-            <h2 class="page-header">
-                Calculation Dashboard
-                <a id="calculation-clear-all" href="#" title="Clear All">Clear All</a>
-            </h2>
-        </div>
-        <div class="col-md-12">
-            <table id="calculation-table" class="table table-hover">
-                <thead><tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Tools</th>
-                </tr></thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Results -->
-    <div id="calculation-result" class="clearfix hidden">
-        <div class="col-md-12">
-            <h2 class="page-header">Calculation Results</h2>
-        </div>
-
-        <!-- Input data -->
-        <div class="col-md-12">
-            <h4>Input Data</h4>
-            <table id="input-table" class="table table-striped">
-                <thead>
-                    <tr style="text-align: right;">
-                        <th>Name</th>
-                        <th>Value</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <!-- Plots -->
+    <div id="calculation-list"></div>
+    <div id="calculation-result">
         <div class="col-md-12">
             <h4>Plots</h4>
-            <div class="col-md-6">
-                <div id="vmrPlot" style="width: 100%;"></div>
-            </div>
-            <div class="col-md-6">
-                <div id="tpPlot" style="width: 100%;"></div>
-            </div>
+            <div class="col-md-6"><div id="vmrPlot" style="width: 100%;"></div></div>
+            <div class="col-md-6"><div id="tpPlot" style="width: 100%;"></div></div>
         </div>
     </div>
 </div>

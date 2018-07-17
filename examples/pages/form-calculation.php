@@ -1,12 +1,8 @@
-<!-- Load CSS -->
-<link href="css/form.css" rel="stylesheet">
-<link href="css/vendor/bootstrapValidator.min.css" rel="stylesheet">
-
 <!-- Title -->
 <h1 class="page-header">New JWST Calculation</h1>
 
 <!-- Form -->
-<form enctype="multipart/form-data" class="form-horizontal" action="example/calculation/run" method="post" id="calculation-form">
+<form enctype="multipart/form-data" class="form-horizontal" action="" method="post" id="calculation-form">
 
     <div class="form-group">
         <label class="col-md-3 control-label" for="calcName">Name</label>
@@ -443,7 +439,6 @@
 </form>
 
 <!-- Leave Javascript for last -->
-<script type="text/javascript" src="js/vendor/bootstrapValidator.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
         /* Nice block level radio selection */
@@ -523,117 +518,7 @@
 			}
 		});
 
-        /* Form Validation */
-		$.fn.bootstrapValidator.validators.choiceTextNumber = {
-			validate: function(validator, $field, options) {
-				var value = $field.val();
-				if (value === '') {
-					return true;
-				}
-
-				// Get validator settings
-				var text = options.text,
-					min  = options.min,
-					max  = options.max;
-
-				// Check if has correct text
-				if (value === text) {
-					return true;
-				}
-
-				// Check if contains number
-				if (!$.isNumeric(value)) {
-					return {
-						valid: false,
-						message: "Must be either '"+text+"' (recommended) or a number between "+min+" and "+max
-					};
-				}
-				value = parseFloat(value);
-
-				// Check the bounds of the number
-				if (value < min || value > max) {
-					return {
-						valid: false,
-						message: "Must be either '"+text+"' (recommended) or a number between "+min+" and "+max
-					};
-				}
-
-				return true;
-			}
-		};
-		$.fn.bootstrapValidator.validators.checkFileColumns = {
-			validate: function(validator, $field, options) {
-				var file = $field.prop("files")[0];
-
-				// Check if FileReader is available
-				if (!window.FileReader) return true;
-
-				// Read text file
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					var customMessage = function (validator, $field, row_num, message) {
-						var message_prefix = "Error on line " + (row_num + 1) + ": ";
-						if (row_num === 0) message_prefix = "";
-						validator.updateMessage($field, "checkFileColumns", message_prefix + message);
-						validator.updateStatus($field, "INVALID", "checkFileColumns");
-					};
-					var data = e.target.result;
-					var rows = data.split("\n");
-					var columns = [[], []];
-					for (var i = 0; i < rows.length; i++) {
-						// Skip empty rows
-						if (rows[i].length === 0) continue;
-						var row = rows[i].split(" ");
-
-						// Check for number of columns
-						if (row.length !== 2) {
-							return customMessage(validator, $field, i, "Must be two columns delimited by spaces");
-						}
-
-						// Check values are numbers
-						if (!$.isNumeric(row[0]) || !$.isNumeric(row[1])) {
-							return customMessage(validator, $field, i, "Must be a valid number");
-						}
-
-						// Push values to column list
-						columns[0].push(row[0]);
-						columns[1].push(row[1]);
-					}
-
-					// Compute column mean values
-					var columnMeans = [0, 0];
-					var numRows = columns[0].length;
-					for (i = 0; i < numRows; i++) {
-						columnMeans[0] += parseFloat(columns[0][i]);
-						columnMeans[1] += parseFloat(columns[1][i]);
-					}
-					columnMeans[0] = columnMeans[0] / numRows;
-					columnMeans[1] = columnMeans[1] / numRows;
-
-					// Detect units
-					var units = "";
-					if (columnMeans[0] < parseFloat("3e-5")) return customMessage(validator, $field, 0, "Wavelength must be in either: cm, um, nm, Angs, Hz, sec");
-					else if ( columnMeans[0] >= parseFloat("3e-5") && columnMeans[0] < parseFloat("3e-1") ) units = "cm";
-					else if ( columnMeans[0] >= parseFloat("3e-1") && columnMeans[0] < parseFloat("3e2") ) units = "um";
-					else if ( columnMeans[0] >= parseFloat("3e2") && columnMeans[0] < parseFloat("3e4") ) units = "nm";
-					else if ( columnMeans[0] >= parseFloat("3e4") && columnMeans[0] < parseFloat("3e5") ) units = "Angs";
-					else if ( columnMeans[0] >= parseFloat("3e5")) units = "Hz";
-
-					// Display the dropdowns
-					if ($field.is("#starFile")) {
-						$("#starwunits").val(units).trigger("change");
-						$("#starwunits, #starfunits").parent().removeClass("hidden");
-					} else if ($field.is("#planFile")) {
-						$("#planwunits").val(units).trigger("change");
-						$("#planwunits, #planfunits").parent().removeClass("hidden");
-					}
-				};
-				reader.readAsText(file);
-				return true;
-			}
-		};
-
-		var validationConfigFields = {
+		$.validationConfigFields = {
 			calcName: {
 				validators: {
 					notEmpty: {
@@ -940,14 +825,6 @@
 			}
 		};
 
-		$('#calculation-form').bootstrapValidator({
-			verbose: false,
-			feedbackIcons: {
-				valid: 'glyphicon glyphicon-ok',
-				invalid: 'glyphicon glyphicon-remove',
-				validating: 'glyphicon glyphicon-refresh'
-			},
-			fields: validationConfigFields
-		});
+        $.initValidation();
 	});
 </script>
