@@ -123,7 +123,7 @@ $klein->with('/atmos', function () use ($klein) {
 
         /* Execute Python script in background */
         $python_script = "python/atmos-calculation.py";
-        passthru("python3 $python_script " . escapeshellarg(json_encode($form_data)) . " > /dev/null &");
+        passthru("python3.5 $python_script " . escapeshellarg(json_encode($form_data)) . " > /dev/null &");
 
         /* Respond */
         $res->json(["status" => "running", "input" => $form_data]);

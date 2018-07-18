@@ -7,7 +7,9 @@ WORKDIR /var/www/html
 COPY . .
 RUN apt-get update && \
     # Curl, zip, custom
-    apt-get install -y libcurl3-dev zlib1g-dev < apt-requirements.txt && \
+    apt-get install -y libcurl3-dev zlib1g-dev && \
+    # Custom requirements
+    xargs apt-get install -y < apt-requirements.txt && \
     # ZIP
     docker-php-ext-configure zip --with-zlib-dir=/usr && \
     # Mysqli, json, curl, zip

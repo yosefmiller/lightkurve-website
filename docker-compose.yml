@@ -15,14 +15,13 @@ services:
 
   php:
     build: ./config
-    image: emac-php-template:v1.0.0
+    image: emac-php-template
     restart: always
     volumes:
       - ./:/var/www/html
 
   myadmin:
       image: phpmyadmin/phpmyadmin
-      container_name: phpmyadmin
       ports:
           - "8080:80"
       environment:
