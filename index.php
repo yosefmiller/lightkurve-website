@@ -15,10 +15,8 @@
  **/
 
 /* Configure uri for subdirectory: */
-/* Might need to uncomment this depending on configuration: */
-$base = dirname($_SERVER['PHP_SELF']);
-$orig_uri = $_SERVER['REQUEST_URI'];
-//$_SERVER['REQUEST_URI'] = substr($orig_uri, strlen($base));
+//$base = dirname($_SERVER['PHP_SELF']);
+//if(ltrim($base, '/')){$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], strlen($base));}
 
 /* Initialize Klein router: */
 /* Klein can also be installed via Composer */

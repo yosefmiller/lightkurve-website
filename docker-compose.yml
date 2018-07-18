@@ -1,9 +1,30 @@
 version: '3'
 services:
-  php-nginx:
-    container_name: php-nginx
-    build: .
+  nginx:
+    image: nginx:1.12
+    ports:
+      - "80:80"
+    links:
+      - php
+      - mysql
+    restart: always
     volumes:
       - ./:/var/www/html
+      - ./config/nginx-site.conf:/etc/nginx/conf.d/default.conf
+      - ./log/nginx:/var/log/nginx
+
+  php:
+    build: ./config
+    image: emac-php-template:v1.0.0
+    volumes:
+      - ./:/var/www/html
+
+  mysql:
+    image: mysql:latest
     ports:
-      - 80:80
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: emacrocks!
+      MYSQL_DATABASE: emac
+      MYSQL_USER: emac
+      MYSQL_PASSWORD: emacrocks!
