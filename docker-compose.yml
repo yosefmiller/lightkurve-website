@@ -4,7 +4,7 @@ services:
     image: nginx:1.12
     ports:
       - "80:80"
-    links:
+    depends_on:
       - php
       - mysql
     restart: always
@@ -16,11 +16,24 @@ services:
   php:
     build: ./config
     image: emac-php-template:v1.0.0
+    restart: always
     volumes:
       - ./:/var/www/html
 
+  myadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      ports:
+          - "8080:80"
+      environment:
+          - PMA_ARBITRARY=1
+          - PMA_HOST=mysql
+      restart: always
+      depends_on:
+          - mysql
+
   mysql:
-    image: mysql:latest
+    image: mysql:5.6
     ports:
       - "3306:3306"
     environment:
@@ -28,3 +41,18 @@ services:
       MYSQL_DATABASE: emac
       MYSQL_USER: emac
       MYSQL_PASSWORD: emacrocks!
+    # To persist db data, uncomment the following volumes statement, and see the outer
+    # volumes section below:
+    #volumes:
+    #    - db_data:/var/lib/mysql
+
+# To persist db data, uncomment at least the next two lines, and see the further note below
+#volumes:
+#   db_data:  # NOTE that this statement alone persists data in Docker's volume storage
+              # area. To clear this data entirely, use: docker volume rm db_data
+              # To persist elsewhere, uncomment the following, and make sure a directory
+              # exists at the desired location as specified by "device:"
+      # driver_opts:
+      #     type: none
+      #     device: data/db
+      #     o: bind

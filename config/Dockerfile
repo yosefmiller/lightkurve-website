@@ -11,7 +11,7 @@ RUN apt-get update && \
     # ZIP
     docker-php-ext-configure zip --with-zlib-dir=/usr && \
     # Mysqli, json, curl, zip
-    docker-php-ext-install curl mysqli json zip && \
+    docker-php-ext-install curl mysqli pdo pdo_mysql json zip && \
     # Remove APT lists
     rm -rf /var/lib/apt/lists/*
 

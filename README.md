@@ -218,12 +218,12 @@ $.initCalculationList();
 
 This is how it works:  
 1. Submission is handled by the `newCalculation` function, which:<br/> Creates a new list item via `createListItem` function.<br/>Submits the form using `POST` to `/run`.<br/>
-1. Javascript identifies and keeps track of each calculation with a number, stored in the `trackingId` cookie.<br/>Call `getCurrentTrackingID()` for the latest calculation number.<br/>Call `setNextTrackingID()` to set and return a new id for the pending calculation.
-1. The user is tracked via HTML Cookies or IP Address:<br/>Javascript requests a user identifier by setting the `needcookie` cookie.<br/>PHP sets the `userId` cookie with a unique generated id.<br/>If neither are set (cookies are disabled), then the user's IP address is used instead.<br/>This identifier can be accessed in PHP by calling `$userID = $service->getUserId->__invoke($res);` from within a route.
-1. PHP processes the form:<br/>Validates the form to prevent hacks.<br/>Executes the given Python script in the background, and passes it the form data as JSON.<br/>Responds to Javascript with JSON (status 'running'), as discussed soon.
-1. Javascript periodically pings PHP (at `/check/<tracking_id>`), listening for the creation of a response file.
-1. Python outputs a response file with calculation results.
-1. Javascript marks the calculation as complete, and displays the results when asked.
+2. Javascript identifies and keeps track of each calculation with a number, stored in the `trackingId` cookie.<br/>Call `getCurrentTrackingID()` for the latest calculation number.<br/>Call `setNextTrackingID()` to set and return a new id for the pending calculation.
+3. The user is tracked via HTML Cookies or IP Address:<br/>Javascript requests a user identifier by setting the `needcookie` cookie.<br/>PHP sets the `userId` cookie with a unique generated id.<br/>If neither are set (cookies are disabled), then the user's IP address is used instead.<br/>This identifier can be accessed in PHP by calling `$userID = $service->getUserId->__invoke($res);` from within a route.
+4. PHP processes the form:<br/>Validates the form to prevent hacks.<br/>Executes the given Python script in the background, and passes it the form data as JSON.<br/>Responds to Javascript with JSON (status 'running'), as discussed soon.
+5. Javascript periodically pings PHP (at `/check/<tracking_id>`), listening for the creation of a response file.
+6. Python outputs a response file with calculation results.
+7. Javascript marks the calculation as complete, and displays the results when asked.
 
 #### Response Data:
 

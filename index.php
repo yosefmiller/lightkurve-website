@@ -58,6 +58,12 @@ $klein->respond(function ($req, $res, $service, $app) {
         }
         return $userId;
     };
+    $app->register('db', function() {
+        $dbname = "emac";
+        $dbuser = "emac";
+        $dbpass = "emacrocks!";
+        return new PDO("mysql:host=mysql;port=3306;dbname=" . $dbname, $dbuser, $dbpass);
+    });
 });
 
 /* Main Routing: */
