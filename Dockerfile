@@ -9,7 +9,7 @@ RUN apt-get update && \
     # Curl, zip, custom
     apt-get install -y libcurl3-dev zlib1g-dev && \
     # Custom requirements
-    xargs apt-get install -y < apt-requirements.txt && \
+    xargs apt-get install -y < config/apt-requirements.txt && \
     # ZIP
     docker-php-ext-configure zip --with-zlib-dir=/usr && \
     # Mysqli, json, curl, zip

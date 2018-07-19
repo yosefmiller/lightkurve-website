@@ -2,7 +2,8 @@
 
 A ready-to-use EMAC model implementation template, with real-time validation, multiple concurrent calculations, persistent session/results, and piped form-data to another language script (eg. python).  
 
-- The `Dockerfile` extends the `balr/php7-fpm-nginx` base image, with a custom `nginx-site.conf` file to point all non-existing public files to `index.php`, which handles routing using the Klein router.  
+- The `dockerfile-compose.yml` pulls the `nginx`, `phpmyadmin`, and `mysql` images, and runs `Dockerfile` which extends `php:7.0-fpm` and installs dependencies from `config/apt-requirements.txt`.  
+- The `nginx-site.conf` file points all non-existing public files to `index.php`, which handles routing using the Klein router.  
 - `javascript` and `jquery` are used for front-end validation and dynamic form controls.  
 - `php` is used to handle forms and keep track of users and their calculations.  
 - `python` (or similar) processes the piped input data and outputs a prespecified file when completed.

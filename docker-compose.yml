@@ -14,7 +14,7 @@ services:
       - ./log/nginx:/var/log/nginx
 
   php:
-    build: ./config
+    build: ./
     image: emac-php-template
     restart: always
     volumes:
