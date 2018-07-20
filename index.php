@@ -20,8 +20,9 @@
 
 /* Initialize Klein router: */
 /* Klein can also be installed via Composer */
-$dir = dirname(__FILE__);
-require "$dir/api/autoloader.php";
+// $dir = dirname(__FILE__);
+// require "$dir/api/autoloader.php";
+require "../vendor/autoload.php";
 $klein = new \Klein\Klein();
 
 /* Configure main layout (for all pages): */
@@ -62,7 +63,7 @@ $klein->respond(function ($req, $res, $service, $app) {
         $dbname = "emac";
         $dbuser = "emac";
         $dbpass = "emacrocks!";
-        return new PDO("mysql:host=mysql;port=3306;dbname=" . $dbname, $dbuser, $dbpass);
+        return new PDO("mysql:host=mysql;port=3306;charset=utf8;dbname=" . $dbname, $dbuser, $dbpass);
     });
 });
 
@@ -123,7 +124,7 @@ $klein->with('/atmos', function () use ($klein) {
 
         /* Execute Python script in background */
         $python_script = "python/atmos-calculation.py";
-        passthru("python3.5 $python_script " . escapeshellarg(json_encode($form_data)) . " > /dev/null &");
+        passthru("python3 $python_script " . escapeshellarg(json_encode($form_data)) . " > /dev/null &");
 
         /* Respond */
         $res->json(["status" => "running", "input" => $form_data]);
@@ -196,14 +197,11 @@ $klein->with('/example', function () use ($klein) {
     });
 });
 $klein->respond('/docs', function ($req, $res, $service) {
-    require_once('api/markup-parser/simplest-markdown-parser.php');
     $service->pageTitle = 'Documentation | EMAC Template';
     $service->isMiniHeader = true;
     $service->isHiddenSidebar = true;
-    $docs_markdown = MD(file_get_contents("README.md"));
-    $css_markdown = file_get_contents("api/markup-parser/github-markdown.css");
-    // Changed yieldView function of Klein\ServiceProvider to enable rendering of a string
-    $service->render("<style>$css_markdown</style><div class='markdown-body'>$docs_markdown</div>");
+    $service->docs_markdown = file_get_contents("README.md");
+    $service->render("pages/documentation.php");
 });
 
 /* Handle errors (if no route is found): */
