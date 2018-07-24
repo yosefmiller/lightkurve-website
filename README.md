@@ -93,9 +93,9 @@ Add a `.htaccess` file to project directory:
 
 ---
 ## Configure Routing
-###### index.php
+###### routes/app.php
 ````php
-$klein->respond('/somepage', function ($req, $res, $service) {
+$klein->respond('/?', function ($req, $res, $service) {
     $service->pageTitle = 'A clever page title goes here | EMAC';   // (required) page/tab title
     $service->isMiniHeader = true;                      // (optional) hides main-header and sub-navigation, shrinks sub-header
     $service->isHiddenSidebar = true;                   // (optional) hides sidebar
@@ -142,6 +142,7 @@ Make sure to set the `isForm` option to true.
 
 <!-- Result list -->
 <div id="calculation-list"></div>
+<div id="calculation-logs"></div>
 <div id="calculation-result">
     <div class="col-md-12">
         <h4>Plots</h4>
@@ -252,7 +253,7 @@ Response must have any of the following formats:<br/>
 }
 ````
 
-###### Outputted by Python code, if successful, to `/python/outputs/<calculation_id>_response.json`:
+###### Outputted by Python code, if successful, to `/outputs/<calculation_id>_response.json`:
 ````json
 {
     "status": "success",
@@ -264,7 +265,7 @@ Response must have any of the following formats:<br/>
 
 #### Python code and output file generation:
 Here's what is needed for php to detect outputted file.<br/>
-Remember to properly set folder permissions for the `/python/outputs` directory to allow Python to write files.
+Remember to properly set folder permissions for the `/outputs` directory to allow Python to write files.
 
 ###### some-calculation.py
 ````python

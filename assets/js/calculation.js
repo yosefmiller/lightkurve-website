@@ -372,7 +372,7 @@ $(document).ready(function(){
     };
 
     /* Helper functions */
-    $.plotData  = function (plot, layout, output_file_url, yTitle, xList, custom) {
+    $.plotData  = function (plot, layout, output_file_url, yTitle, xList, custom, customList) {
         $.get($.FORM_PREFIX + output_file_url, function (file) {
             var rows = file.split("\n");
 
@@ -401,7 +401,7 @@ $(document).ready(function(){
                 var name = columnText[columnIndex];
                 var xData = columns[columnIndex];
                 var dataParams = {x: xData, y: yData, name: name, type: "line"};
-                data.push($.extend({}, dataParams, custom || {}));
+                data.push($.extend({}, dataParams, custom || {}, customList ? customList[x] : {}));
             }
 
             Plotly.newPlot(plot, data, layout);
