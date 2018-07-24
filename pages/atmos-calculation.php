@@ -145,6 +145,7 @@
 
     <!-- Result list -->
     <div id="calculation-list"></div>
+    <div id="calculation-logs"></div>
     <div id="calculation-result">
         <div class="col-md-12">
             <h4>Plots</h4>

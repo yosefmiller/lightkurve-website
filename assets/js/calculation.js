@@ -177,9 +177,10 @@ $(document).ready(function(){
         return next_id;
     };
     $.resetTrackingID = function () {
-        $.post($.FORM_PREFIX + "clear/all", function (response) {
+        $.post($.FORM_PREFIX + "clear", function (response) {
             if (response !== "success") { console.log(response); return; }
             $.setNextTrackingID(true);
+            $("#calculation-list, #calculation-logs, #calculation-result").addClass("hidden");
             $("#calculation-table").find("tbody").html("");
         });
     };
@@ -189,10 +190,17 @@ $(document).ready(function(){
         // Define the html for calculation list and results
         var calculation_list_html = '' +
             '<div class="col-md-12"><h2 class="page-header">Calculation Dashboard<a id="calculation-clear-all" href="#" title="Clear All">Clear All</a></h2></div>' +
-            '<div class="col-md-12"><table id="calculation-table" class="table table-hover"><thead><tr><th>#</th><th>Name</th><th>Date</th><th>Status</th><th>Tools</th></tr></thead><tbody></tbody></table></div>';
+            '<div class="col-md-12"><table id="calculation-table" class="table table-hover">' +
+            '<thead><tr><th>#</th><th>Name</th><th>Date</th><th>Status</th><th>Tools</th></tr></thead>' +
+            '<tbody></tbody></table></div>';
 
         var calculation_result_html = '' +
-            '<div class="col-md-12"><h2 class="page-header">Calculation Results</h2></div>' +
+            '<div class="col-md-12">' +
+            '<h2 class="page-header">Calculation Results' +
+            '<small style="float: right" id="result-date"></small>' +
+            '<small style="float: right; padding-right: 10px" id="result-name"></small>' +
+            '</h2>' +
+            '</div>' +
             '<div class="col-md-12">' +
             '<h4>Input Data</h4>' +
             '<table id="input-table" class="table table-striped">' +
@@ -234,8 +242,9 @@ $(document).ready(function(){
             '<div class="status-pending-text"><span class="glyphicon glyphicon-record"></span>&nbsp;&nbsp;Pending</div>' +
             '</td>' +
             '<td class="calculation-tools"><div class="btn-group" role="group" aria-label="...">' +
-            '<a class="btn btn-default disabled calculation-view" href="#" role="button"><span class="glyphicon glyphicon-eye-open"></span></a>' +
-            '<a class="btn btn-default disabled calculation-download" href="#" role="button"><span class="glyphicon glyphicon-download-alt"></span></a>' +
+            '<a class="btn btn-default disabled calculation-view" title="View Results" href="#" role="button"><span class="glyphicon glyphicon-eye-open"></span></a>' +
+            // '<a class="btn btn-default disabled calculation-download" title="Download Results" href="#" role="button"><span class="glyphicon glyphicon-download-alt"></span></a>' +
+            '<a class="btn btn-default disabled calculation-logs" title="View Log" href="#" role="button"><span class="glyphicon glyphicon-comment"></span></a>' +
             '</div></td>' +
             '</tr>';
         $("#calculation-table").find("tbody").prepend(table_item_html);
@@ -288,7 +297,8 @@ $(document).ready(function(){
             table_item.find(".calculation-name").html(response.input.calc_name);
             table_item.find(".calculation-date").html(response.input.calc_date);
             table_item.find(".calculation-tools a").removeClass("disabled");
-            table_item.find(".calculation-view").click($.displayCalculation);
+            table_item.find(".calculation-view").click($.displayResults);
+            table_item.find(".calculation-logs").click($.displayLogs);
         }
         else if (response.status === "running") {
             table_item.attr("class", "calculation-running");
@@ -299,14 +309,18 @@ $(document).ready(function(){
         }
         else if (response.status === "error") {
             table_item.attr("class", "calculation-error");
-            alert("An error occurred with message:\n"+response.message);
+            table_item.find(".calculation-tools a.calculation-logs").removeClass("disabled");
+            table_item.find(".calculation-logs").click($.displayLogs);
+            if (response.type === "validation") alert("An error occurred with message:\n"+response.message);
         }
 
         // Store response
         if (!$.calculation) { $.calculation = []; }
         $.calculation[response.input.tracking_id.split("_")[2]] = response;
     };
-    $.displayCalculation  = function (e) {
+
+    /* Update display with results */
+    $.displayResults  = function (e) {
         e.preventDefault();
 
         // Load response
@@ -314,28 +328,51 @@ $(document).ready(function(){
         var response = $.calculation[id];
         console.log(response);
 
-        // Display result panel
+        // Display result panel and hide log panel
         var calculation_result = $("#calculation-result");
         calculation_result.removeClass('hidden');
+        $("#calculation-logs").addClass("hidden");
         $('html, body').animate({ scrollTop: calculation_result.offset().top }, 500);
 
-        // Display inputs
+        // Display calculation general info
+        $("#result-name").html(response.input.calc_name);
+        $("#result-date").html(response.input.calc_date);
+
+        // Display input data
         var input_table = $("#input-table").find("tbody");
         input_table.html("");
-        $.each(response.input, function (name, value) {
-            if (name.indexOf("tracking") !== -1) { return; }
-            if (name.indexOf("calc") !== -1) { return; }
-            name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-            input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
-        });
+        Object.keys(response.input)
+            .sort()
+            .forEach(function(name) {
+                if (name.indexOf("tracking") !== -1) { return; }
+                if (name.indexOf("calc") !== -1) { return; }
+                value = response.input[name];
+                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
+            });
 
         //  Plot result
         $.plotResult(response);
         return false;
     };
+    $.displayLogs = function (e) {
+        e.preventDefault();
+
+        // Load log file
+        var id = this.closest("tr").id;
+        $.get($.FORM_PREFIX + "logs/" + id, function (file) {
+            $("#calculation-logs").html("<div class='well' style='white-space: pre'>"+ file +"</div>");
+        });
+
+        // Display log panel and hide result panel
+        $("#calculation-logs").removeClass('hidden');
+        $("#calculation-result").addClass("hidden");
+
+        return false;
+    };
 
     /* Helper functions */
-    $.plotData  = function (plot, layout, output_file_url, yTitle, xList) {
+    $.plotData  = function (plot, layout, output_file_url, yTitle, xList, custom) {
         $.get($.FORM_PREFIX + output_file_url, function (file) {
             var rows = file.split("\n");
 
@@ -363,7 +400,8 @@ $(document).ready(function(){
                 var columnIndex = columnText.indexOf(xList[x]);
                 var name = columnText[columnIndex];
                 var xData = columns[columnIndex];
-                data.push({x: xData, y: yData, name: name, type: "line"});
+                var dataParams = {x: xData, y: yData, name: name, type: "line"};
+                data.push($.extend({}, dataParams, custom || {}));
             }
 
             Plotly.newPlot(plot, data, layout);
@@ -396,4 +434,24 @@ $(document).ready(function(){
         today = mm + '/' + dd + '/' + yyyy + "  " + hh + ":" + min + " " + suffix;
         return today;
     };
+
+    /* File-browsing buttons */
+    $(".niceFileBtn").click(function () {
+        $(this).parent().find("input").click().change(function () {
+            $(this).parent().find(".btn").css("display", "none");
+            $(this).css("display", "block");
+        });
+    });
+
+    /* Number force significant digits */
+    $(".force-num-sig-2").change(function () {
+        var oldVal = parseFloat(this.value);
+        var newVal = oldVal.toFixed(2);
+        if (isNaN(oldVal) || newVal.length < oldVal.toString().length) return;
+        this.value = newVal;
+    });
+
+    /* Number sliders */
+    $(".range-container input[type=text]").on("input", function(){ $(this).closest(".range-container").find("input[type=range]").val($(this).val()); });
+    $(".range-container input[type=range]").on("input", function(){ $(this).closest(".range-container").find("input[type=text]").val($(this).val()); });
 });

@@ -32,14 +32,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	/* File Browsing Button */
-	$(".niceFileBtn").click(function () {
-		$(this).parent().find("input").click().change(function () {
-			$(this).parent().find(".btn").css("display", "none");
-			$(this).css("display", "block");
-		});
-	});
-	
 	/* Instrument Selection */
 	$("#instrument").change(function () {
 		$("#instrument-mode-section").removeClass("hidden");
@@ -89,14 +81,10 @@ $(document).ready(function(){
 		if ($(this).is(":checked")) { $("#methane-section").removeClass("hidden"); }
 		else { $("#methane-section").addClass("hidden"); }
 	});
-	
-	/* Number slider */
-	$(".range-container input[type=text]").on("input", function(){ $(this).closest(".range-container").find("input[type=range]").val($(this).val()); });
-	$(".range-container input[type=range]").on("input", function(){ $(this).closest(".range-container").find("input[type=text]").val($(this).val()); });
 	/***** END FORM ELEMENTS *****/
 	
 	/***** FORM SUBMISSION *****/
-    $.FORM_PREFIX = "/atmos/";
+    $.FORM_PREFIX = "/";
     $.validationConfigFields = {
         calc_name: {
             validators: {

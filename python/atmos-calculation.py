@@ -21,6 +21,6 @@ response["tp_file"] = "profile2.pt"
 response = json.dumps(response)
 
 # Save data
-output_file_name = "python/outputs/" + form_data["tracking_id"] + "_response.json"
+output_file_name = "outputs/" + form_data["tracking_id"] + "_response.json"
 with open(output_file_name, "w") as f:
     f.write(response)
