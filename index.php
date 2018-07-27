@@ -13,7 +13,7 @@ $klein = new \Klein\Klein();
 
 /* Configure Routing: */
 include "routes/common.php";
-include "routes/app.php";
+include "routes/app.example.php";
 include "routes/examples.php";
 include "routes/errors.php";
 include "routes/docs.php";

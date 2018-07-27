@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <!-- Title -->
-    <h1 class="page-header">New ATMOS Calculation</h1>
+    <h2 class="page-header">New Example Calculation</h2>
 
     <!-- Calculation Form -->
     <form enctype="multipart/form-data" class="form-horizontal" action="" method="post" id="calculation-form">

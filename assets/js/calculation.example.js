@@ -133,7 +133,7 @@ $(document).ready(function(){
     };
     $.plotResult = function (response) {
         // VMR Plot
-        var vmrFile = "outputs/" + response.vmr_file;
+        var vmrFile = response.vmr_file;
         var vmrPlot = $('#vmrPlot')[0];
         var vmrLayout = {
             xaxis: { type: "log", range:[-11,0.5],      title: "Abundance",      titlefont:{size:12}},
@@ -146,7 +146,7 @@ $(document).ready(function(){
         $.plotData(vmrPlot, vmrLayout, vmrFile, vmrY, vmrX);
 
         // TP Plot
-        var tpFile = "outputs/" + response.tp_file;
+        var tpFile = response.tp_file;
         var tpPlot = $('#tpPlot')[0];
         var tpLayout = {
             xaxis: { type: "linear", autorange:true,       title: "Temperature [K]", titlefont:{size:12}},

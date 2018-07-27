@@ -10,7 +10,7 @@ $klein->onHttpError(function ($code, $router, $matched, $method_matched, $http_e
             $router->response()->sendHeaders(true, true);
             $service = $router->service();
             $service->pageTitle = "404 File Not Found";
-            $service->isHiddenSubNav = true;
+            $service->isMiniHeader = true;
             $service->isHiddenSidebar = true;
             $service->render('pages/not-found-404.php');
             break;
@@ -20,9 +20,8 @@ $klein->onHttpError(function ($code, $router, $matched, $method_matched, $http_e
             $service = $router->service();
             $service->code = $code;
             $service->pageTitle = "$code Server Error";
-            $service->isHiddenSubNav = true;
+            $service->isMiniHeader = true;
             $service->isHiddenSidebar = true;
             $service->render('pages/server-error.php');
-        // $router->response()->body('Oh no, a bad error happened that caused a '. $code);
     }
 });

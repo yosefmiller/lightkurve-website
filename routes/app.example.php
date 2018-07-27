@@ -1,12 +1,12 @@
 <?php
 
 $klein->respond('/?', function ($req, $res, $service) {
-    $service->pageTitle = 'ATMOS @ EMAC';
+    $service->pageTitle = 'A clever page title goes here | EMAC';
     $service->isMiniHeader = true;
     $service->isHiddenSidebar = true;
     $service->isForm = true;
-    $service->customJSFile = "js/atmos-calculation.js";
-    $service->render('pages/atmos-calculation.php');
+    $service->customJSFile = "js/calculation.example.js";
+    $service->render('examples/pages/atmos-calculation.php');
 });
 
 $klein->respond('POST', '/run', function ($req, $res, $service) {
@@ -52,7 +52,7 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
     ];
 
     /* Execute Python script in background */
-    $command = "python3 python/atmos-calculation.py";
+    $command = "python3 examples/python/atmos-calculation.py";
     $raw_log_file = "outputs/" . $tracking_id . ".log";
     $pid = exec($command . " " . escapeshellarg(json_encode($form_data)) . " > " . $raw_log_file . " 2> " .  $raw_log_file ." &");
 

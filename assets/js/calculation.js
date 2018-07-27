@@ -189,17 +189,17 @@ $(document).ready(function(){
     $.initCalculationList = function () {
         // Define the html for calculation list and results
         var calculation_list_html = '' +
-            '<div class="col-md-12"><h2 class="page-header">Calculation Dashboard<a id="calculation-clear-all" href="#" title="Clear All">Clear All</a></h2></div>' +
+            '<div class="col-md-12"><h3 class="page-header">Calculation Dashboard<a id="calculation-clear-all" href="#" title="Clear All">Clear All</a></h3></div>' +
             '<div class="col-md-12"><table id="calculation-table" class="table table-hover">' +
             '<thead><tr><th>#</th><th>Name</th><th>Date</th><th>Status</th><th>Tools</th></tr></thead>' +
             '<tbody></tbody></table></div>';
 
         var calculation_result_html = '' +
             '<div class="col-md-12">' +
-            '<h2 class="page-header">Calculation Results' +
+            '<h3 class="page-header">Calculation Results' +
             '<small style="float: right" id="result-date"></small>' +
             '<small style="float: right; padding-right: 10px" id="result-name"></small>' +
-            '</h2>' +
+            '</h3>' +
             '</div>' +
             '<div class="col-md-12">' +
             '<h4>Input Data</h4>' +

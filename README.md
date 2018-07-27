@@ -2,47 +2,14 @@
 
 A ready-to-use EMAC model implementation template, with real-time validation, multiple concurrent calculations, persistent session/results, and piped form-data to another language script (eg. python).  
 
-- The `dockerfile-compose.yml` pulls the `nginx`, `phpmyadmin`, and `mysql` images, and runs `Dockerfile` which extends `php:7.0-fpm` and installs dependencies from `config/apt-requirements.txt`.  
-- The `nginx-site.conf` file points all non-existing public files to `index.php`, which handles routing using the Klein router.  
+- The `dockerfile-compose.yml` pulls the `phpmyadmin` and `mysql` images, and runs `Dockerfile` which extends the `phusion/baseimage` (based on `ubuntu`) and installs dependencies such as `php7.0`, `nginx`, `composer`, and `klein`.  
+- The `config/nginx.conf` file points all non-existing public files to `index.php`, which handles routing using the Klein router.  
 - `javascript` and `jquery` are used for front-end validation and dynamic form controls.  
 - `php` is used to handle forms and keep track of users and their calculations.  
 - `python` (or similar) processes the piped input data and outputs a prespecified file when completed.
 
 This template makes use of the _Klein.php_ router. Documentation for Klein is available [on GitHub](https://github.com/klein/klein.php).  
-This template also uses a few client-side libraries: [Bootstrap](http://getbootstrap.com/), [jQuery](https://jquery.com/), [Select2](http://select2.github.io/), [Bootstrap Validator](https://github.com/nghuuphuoc/bootstrapvalidator/tree/v0.5.2)
-
----
-## Server Configuration
-
-#### Skip this if using the Docker configuration.  
-Install **PHP** > 5.3 if not done already.
-
-#### Nginx
-Modify your nginx configuration file. Typical location:
-
-    sudo nano /etc/nginx/sites-available/example.com
-
-Add a new location, relative to document root:
-
-````text
-location /path/to/directory/ {
-    try_files $uri $uri/ /path/to/directory/index.php?$args;
-}
-````
-
-#### Apache
-Add a `.htaccess` file to project directory:
-
-````text
-# Configure Klein routing:
-<IfModule mod_rewrite.c>
-    Options -MultiViews
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule (.*) /path/to/directory/index.php [L]
-</IfModule>
-````
+This template also uses a few client-side libraries: [Bootstrap](http://getbootstrap.com/), [jQuery](https://jquery.com/), [Select2](http://select2.github.io/), [Bootstrap Validator](https://github.com/nghuuphuoc/bootstrapvalidator/tree/v0.5.2), [Plotly](https://plot.ly/javascript)
 
 ---
 ## Layout Customization
@@ -93,8 +60,30 @@ Add a `.htaccess` file to project directory:
 
 ---
 ## Configure Routing
+###### index.php
+````php
+<?php
+
+/* Initialize Klein router (from Composer): */
+require "../vendor/autoload.php";
+$klein = new \Klein\Klein();
+
+/* Configure Routing: */
+include "routes/common.php";
+include "routes/app.example.php";   // Change this as appropriate to reflect project's route file
+include "routes/examples.php";
+include "routes/docs.php";
+include "routes/errors.php";
+
+/* Execute all changes: */
+$klein->dispatch();
+
+````
+
 ###### routes/app.php
 ````php
+<?php
+
 $klein->respond('/?', function ($req, $res, $service) {
     $service->pageTitle = 'A clever page title goes here | EMAC';   // (required) page/tab title
     $service->isMiniHeader = true;                      // (optional) hides main-header and sub-navigation, shrinks sub-header
@@ -181,7 +170,7 @@ $.validationConfigFields = {
     }
 };
 
-/* Display the plots and data according to tool's specifications */
+/* Display the plots and data according to tool's specifications, using Plotly.js */
 $.plotResult = function (response) {
     // VMR Plot
     var vmrFile = "outputs/" + response.vmr_file;
@@ -273,6 +262,11 @@ Remember to properly set folder permissions for the `/outputs` directory to allo
 import sys, json
 form_data = json.loads(sys.argv[1])
 
+# Prepare response
+response = {}
+response["input"] = form_data
+response["status"] = "success"
+
 # Store data into individual variables
 calc_name = form_data["calc_name"]
 planet_template = form_data["planet_template"]
@@ -282,17 +276,13 @@ planet_radius = form_data["planet_radius"]
 # Run calculations...
 # Create plot files...
 # Get calculation results...
-
-# Prepare response
-response = {}
-response["input"] = form_data
-response["status"] = "success"
-response["vmr_file"] = "python/outputs/profile2.pt"
-response["tp_file"] = "python/outputs/profile2.pt"
-response = json.dumps(response)
+# Store results in response...
+response["vmr_file"] = "outputs/profile2.pt"
+response["tp_file"] = "outputs/profile2.pt"
 
 # Save data
-output_file_name = "python/outputs/" + form_data["tracking_id"] + "_response.json"
+response = json.dumps(response)
+output_file_name = "outputs/" + form_data["tracking_id"] + "_response.json"
 with open(output_file_name, "w") as f:
     f.write(response)
 ````
