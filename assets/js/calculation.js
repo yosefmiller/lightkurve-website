@@ -202,7 +202,7 @@ $(document).ready(function(){
             '</h3>' +
             '</div>' +
             '<div class="col-md-12">' +
-            '<h4>Input Data</h4>' +
+            '<h4>Input Values</h4>' +
             '<table id="input-table" class="table table-striped">' +
             '<thead><tr style="text-align: right;"><th>Name</th><th>Value</th></tr></thead><tbody></tbody>' +
             '</table>' +
@@ -339,12 +339,11 @@ $(document).ready(function(){
         $("#result-date").html(response.input.calc_date);
 
         // Display input data
+        var input_order = $.FORM_INPUT_ORDER || Object.keys(response.input).sort();
         var input_table = $("#input-table").find("tbody");
         input_table.html("");
-        Object.keys(response.input)
-            .sort()
-            .forEach(function(name) {
-                if (name.indexOf("tracking") !== -1) { return; }
+        input_order.forEach(function(name) {
+                if (name.indexOf("tracking_id") !== -1) { return; }
                 if (name.indexOf("calc") !== -1) { return; }
                 value = response.input[name];
                 name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

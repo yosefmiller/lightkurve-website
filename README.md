@@ -150,8 +150,9 @@ You can even code a custom validator. See the Pandexo form for an example, such 
 
 ###### assets/js/some-calculation.js
 ````js
-$.FORM_PREFIX = "/";
-$.FORM_CHECK_INTERVAL = 3000;
+$.FORM_PREFIX = "/";            // directory in which form is being served. default: /
+$.FORM_CHECK_INTERVAL = 3000;   // how often to check for calculation results in milliseconds. default: 3000
+$.FORM_INPUT_ORDER = ["some_input_name", "planet_mass", "planet_radius"];   // order to display input values. default: alphabetically
 $.validationConfigFields = {
     some_input_name: {
         validators: {
