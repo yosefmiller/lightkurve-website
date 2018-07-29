@@ -200,7 +200,9 @@ $(document).ready(function(){
             '<small style="float: right" id="result-date"></small>' +
             '<small style="float: right; padding-right: 10px" id="result-name"></small>' +
             '</h3>' +
-            '</div>' +
+            '</div>';
+
+        var calculation_input_html = '' +
             '<div class="col-md-12">' +
             '<h4>Input Values</h4>' +
             '<table id="input-table" class="table table-striped">' +
@@ -210,8 +212,11 @@ $(document).ready(function(){
 
         // Create and hide an empty calculation list and results
         var calculation_list_element = $("#calculation-list");
-        calculation_list_element.addClass("clearfix hidden").html(calculation_list_html);
-        $("#calculation-result").addClass('clearfix hidden').prepend(calculation_result_html);
+        var calculation_result_element = $("#calculation-result");
+        calculation_list_element.html(calculation_list_html).addClass("clearfix hidden");
+        calculation_result_element.prepend(calculation_input_html);
+        calculation_result_element.prepend(calculation_result_html).addClass('clearfix hidden');
+
         $("#calculation-clear-all").click(function (e) {
             e.preventDefault();
             $.resetTrackingID();
@@ -351,7 +356,7 @@ $(document).ready(function(){
             });
 
         //  Plot result
-        $.plotResult(response);
+        if (typeof $.plotResult === "function") $.plotResult(response);
         return false;
     };
     $.displayLogs = function (e) {
@@ -370,9 +375,20 @@ $(document).ready(function(){
         return false;
     };
 
-    /* Helper functions */
-    $.plotData  = function (plot, layout, output_file_url, yTitle, xList, custom, customList) {
-        $.get($.FORM_PREFIX + output_file_url, function (file) {
+    /***** HELPER FUNCTIONS *****/
+
+    /**
+     *  Plot data using Plotly from a datafile:
+     *  - plot:           (dom element) div to host plot
+     *  - layout:         (object) passed directly to plotly for layout/title/axis/legend/shapes
+     *  - outputFileUrl:  (url) plaintext file in which each column (delineated by white-space) contains the column-name followed by the values
+     *  - yNames:         (string or array) name of column containing y values
+     *  - xNames:         (array) name of column containing x values
+     *  - customData:     (object, optional) added to each data entry
+     *  - customDataList: (array of objects, optional) added to each corresponding data entry
+     **/
+    $.plotData = function (plot, layout, outputFileUrl, yNames, xNames, customData, customDataList) {
+        $.get($.FORM_PREFIX + outputFileUrl, function (file) {
             var rows = file.split("\n");
 
             // Parse column titles (first column)
@@ -394,13 +410,14 @@ $(document).ready(function(){
             }
 
             var data = [];
-            var yData = columns[columnText.indexOf(yTitle)];
-            for (var x = 0; x < xList.length; x++) {
-                var columnIndex = columnText.indexOf(xList[x]);
-                var name = columnText[columnIndex];
-                var xData = columns[columnIndex];
+            for (var x = 0; x < xNames.length; x++) {
+                var columnNameX = columnText.indexOf(xNames[x]);
+                var columnNameY = columnText.indexOf($.isArray(yNames) ? yNames[x] : yNames);
+                var name = columnText[columnNameX];
+                var xData = columns[columnNameX];
+                var yData = columns[columnNameY];
                 var dataParams = {x: xData, y: yData, name: name, type: "line"};
-                data.push($.extend({}, dataParams, custom || {}, customList ? customList[x] : {}));
+                data.push($.extend(dataParams, customData || {}, customDataList ? customDataList[x] : {}));
             }
 
             Plotly.newPlot(plot, data, layout);

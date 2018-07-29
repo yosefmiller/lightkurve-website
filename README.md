@@ -173,9 +173,8 @@ $.validationConfigFields = {
 
 /* Display the plots and data according to tool's specifications, using Plotly.js */
 $.plotResult = function (response) {
-    // VMR Plot
-    var vmrFile = "outputs/" + response.vmr_file;
     var vmrPlot = $('#vmrPlot')[0];
+    var vmrFile = "outputs/" + response.vmr_file;
     var vmrLayout = {
         xaxis: { type: "log", range:[-11,0.5],      title: "Abundance",      titlefont:{size:12}},
         yaxis: { type: "log", autorange:"reversed", title: "Pressure [bar]", titlefont:{size:12}},
@@ -184,20 +183,18 @@ $.plotResult = function (response) {
     };
     var vmrY = "Press";
     var vmrX = ["H2O", "CH4", "C2H6", "CO2", "O2", "O3", "CO", "H2CO", "HNO3", "NO2", "SO2", "OCS"];
+    
+    /**
+     *  Plot data using Plotly from a datafile:
+     *  - plot:           (dom element) div to host plot
+     *  - layout:         (object) passed directly to plotly for layout/title/axis/legend/shapes
+     *  - outputFileUrl:  (url) plaintext file in which each column (delineated by white-space) contains the column-name followed by the values
+     *  - yNames:         (string or array) name of column containing y values
+     *  - xNames:         (array) name of column containing x values
+     *  - customData:     (object, optional) added to each data entry
+     *  - customDataList: (array of objects, optional) added to each corresponding data entry
+     **/
     $.plotData(vmrPlot, vmrLayout, vmrFile, vmrY, vmrX);
-
-    // TP Plot
-    var tpFile = "outputs/" + response.tp_file;
-    var tpPlot = $('#tpPlot')[0];
-    var tpLayout = {
-        xaxis: { type: "linear", autorange:true,       title: "Temperature [K]", titlefont:{size:12}},
-        yaxis: { type: "log",    autorange:"reversed", title: "Pressure [bar]",  titlefont:{size:12}},
-        legend: { xanchor: "right", yanchor: "bottom", y: 0.05, x: 1.0},
-        margin: { l:50, r:0, b:30, t:0, pad:0 }
-    };
-    var tpY = "Press";
-    var tpX = ["Temp"];
-    $.plotData(tpPlot, tpLayout, tpFile, tpY, tpX);
 };
 
 /* Must call these to get started */
@@ -289,6 +286,6 @@ with open(output_file_name, "w") as f:
 ````
 
 #### Display results:
-Customize the `plotResult` Javascript function to display the plots and data according to your specifications.
+Customize the `plotResult` Javascript function to display the plots and data according to your specifications (see above).  
 
 #### Discover something amazing with calculation results...
