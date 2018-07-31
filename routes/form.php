@@ -8,14 +8,12 @@ $klein->respond('POST', '/check/[i:id]', function ($req, $res, $service) {
 
     /* Check if response file exists */
     $responseFileLink = "outputs/" . $calculationID . "_response.json";
-    exec("pgrep -f ".$calculationID, $running);
+    exec("pgrep -f ".escapeshellarg($calculationID), $running);
     if (file_exists($responseFileLink)) {
         $res->json(json_decode(file_get_contents($responseFileLink)));
-    }
-    else if (count($running) > 1) {
+    } else if (count($running) > 1) {
         $res->json(["status" => "running", "input" => ["tracking_id" => $calculationID]]);
-    }
-    else {
+    } else {
         $res->json(["status" => "error", "input" => ["tracking_id" => $calculationID]]);
     }
 });
@@ -47,7 +45,7 @@ $klein->respond('POST', '/clear/[i:id]?', function ($req, $res, $service) {
     }
 
     /* Terminate running processes */
-    exec("pkill -f ".$userID);
+    exec("pkill -f ".escapeshellarg($userID));
 
     /* Respond */
     echo "success"; die();

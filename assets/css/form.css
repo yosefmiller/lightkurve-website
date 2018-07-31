@@ -25,7 +25,7 @@ body{
 .radio-chooser-item.radio-chooser-selected {
     background: #f4faff;
 }
-.radio-chooser-item:first-child {
+.radio-chooser-item:not(:last-child) {
     border-right: 1px solid #cce6fa;
     box-sizing: border-box;
 }
@@ -87,6 +87,11 @@ body{
 }
 .form-group.has-feedback.has-error .radio-chooser, .form-group.has-feedback.has-error .radio-chooser-item {
     border-color: #bd8484;
+}
+
+/* Select2 */
+.select2-container .select2-search__field {
+    width: 100% !important;
 }
 
 /* Range Slider */
@@ -164,11 +169,12 @@ body{
 #calculation-table .status-finished-text,
 #calculation-table .status-error-text,
 #calculation-table .status-pending-text { display: none; }
-#calculation-table tr.calculation-running .status-running-text { display: block; }
-#calculation-table tr.calculation-cancelled .status-cancelled-text { display: block; }
-#calculation-table tr.calculation-finished .status-finished-text { display: block; }
-#calculation-table tr.calculation-error .status-error-text { display: block; }
+#calculation-table tr.calculation-running .status-running-text,
+#calculation-table tr.calculation-cancelled .status-cancelled-text,
+#calculation-table tr.calculation-finished .status-finished-text,
+#calculation-table tr.calculation-error .status-error-text,
 #calculation-table tr.calculation-pending .status-pending-text { display: block; }
+#calculation-table tr:not(:first-child) .calculation-delete { display: none; }
 #calculation-table tbody > tr > td { vertical-align: middle; }
 #calculation-clear-all {
     float: right;
@@ -176,7 +182,7 @@ body{
     font-size: 14px;
 }
 
-/*Animated loading icon*/
+/* Animated loading icon */
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -ms-animation: spin .7s infinite linear;

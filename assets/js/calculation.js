@@ -160,6 +160,8 @@ $(document).ready(function(){
         var next_id = current_id + 1;
         if (typeof(isReset) === "boolean" && isReset) {
             next_id = 0;
+        } else if ( !isNaN( parseFloat(isReset) ) ) {
+            next_id = parseFloat(isReset) - 1;
         }
 
         // Set next id element
@@ -184,6 +186,14 @@ $(document).ready(function(){
             $("#calculation-table").find("tbody").html("");
         });
     };
+    $.reduceTrackingID = function (id) {
+        $.post($.FORM_PREFIX + "clear/" + id, function (response) {
+            if (response !== "success") { console.log(response); return; }
+            $.setNextTrackingID(id);
+            $("#calculation-logs, #calculation-result").addClass("hidden");
+            $("#calculation-table tbody tr#" + id).remove();
+        });
+    };
 
     /* Initialize the display */
     $.initCalculationList = function () {
@@ -203,7 +213,7 @@ $(document).ready(function(){
             '</div>';
 
         var calculation_input_html = '' +
-            '<div class="col-md-12">' +
+            '<div class="col-md-6">' +
             '<h4>Input Values</h4>' +
             '<table id="input-table" class="table table-striped">' +
             '<thead><tr style="text-align: right;"><th>Name</th><th>Value</th></tr></thead><tbody></tbody>' +
@@ -250,9 +260,11 @@ $(document).ready(function(){
             '<a class="btn btn-default disabled calculation-view" title="View Results" href="#" role="button"><span class="glyphicon glyphicon-eye-open"></span></a>' +
             // '<a class="btn btn-default disabled calculation-download" title="Download Results" href="#" role="button"><span class="glyphicon glyphicon-download-alt"></span></a>' +
             '<a class="btn btn-default disabled calculation-logs" title="View Log" href="#" role="button"><span class="glyphicon glyphicon-comment"></span></a>' +
+            '<a class="btn btn-default calculation-delete" title="Delete" href="#" role="button"><span class="glyphicon glyphicon-trash"></span></a>' +
             '</div></td>' +
             '</tr>';
         $("#calculation-table").find("tbody").prepend(table_item_html);
+        $(".calculation-delete").click($.deleteCalculation);
     };
 
     /* Run new calculation */
@@ -303,7 +315,6 @@ $(document).ready(function(){
             table_item.find(".calculation-date").html(response.input.calc_date);
             table_item.find(".calculation-tools a").removeClass("disabled");
             table_item.find(".calculation-view").click($.displayResults);
-            table_item.find(".calculation-logs").click($.displayLogs);
         }
         else if (response.status === "running") {
             table_item.attr("class", "calculation-running");
@@ -314,10 +325,12 @@ $(document).ready(function(){
         }
         else if (response.status === "error") {
             table_item.attr("class", "calculation-error");
-            table_item.find(".calculation-tools a.calculation-logs").removeClass("disabled");
-            table_item.find(".calculation-logs").click($.displayLogs);
             if (response.type === "validation") alert("An error occurred with message:\n"+response.message);
         }
+
+        // Display logs button
+        table_item.find(".calculation-tools a.calculation-logs").removeClass("disabled");
+        table_item.find(".calculation-logs").click($.displayLogs);
 
         // Store response
         if (!$.calculation) { $.calculation = []; }
@@ -374,6 +387,15 @@ $(document).ready(function(){
 
         return false;
     };
+    $.deleteCalculation = function (e) {
+        e.preventDefault();
+
+        // Kill the specified id
+        var id = this.closest("tr").id;
+        $.reduceTrackingID(id);
+
+        return false;
+    };
 
     /***** HELPER FUNCTIONS *****/
 
@@ -405,7 +427,8 @@ $(document).ready(function(){
 
                 // Push values to column list
                 for (var j = 0; j < row.length; j++) {
-                    columns[j].push(row[j]);
+                    var value = row[j].indexOf(',') > -1 ? row[j].split(',') : row[j];
+                    columns[j].push(value);
                 }
             }
 
@@ -417,6 +440,7 @@ $(document).ready(function(){
                 var xData = columns[columnNameX];
                 var yData = columns[columnNameY];
                 var dataParams = {x: xData, y: yData, name: name, type: "line"};
+                if (typeof(xData) === "object") dataParams = {z: xData, name: name, type: "heatmap"};
                 data.push($.extend(dataParams, customData || {}, customDataList ? customDataList[x] : {}));
             }
 

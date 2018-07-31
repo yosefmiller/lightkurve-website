@@ -1,12 +1,12 @@
 ## About this template
 
-A ready-to-use EMAC model implementation template, with real-time validation, multiple concurrent calculations, persistent session/results, and piped form-data to another language script (eg. python).  
+A ready-to-use EMAC model implementation template, with real-time validation, multiple concurrent calculations, persistent session/results, immediately accessible logs, and piped form-data to another language script (eg. python).  
 
 - The `dockerfile-compose.yml` pulls the `phpmyadmin` and `mysql` images, and runs `Dockerfile` which extends the `phusion/baseimage` (based on `ubuntu`) and installs dependencies such as `php7.0`, `nginx`, `composer`, and `klein`.  
 - The `config/nginx.conf` file points all non-existing public files to `index.php`, which handles routing using the Klein router.  
 - `javascript` and `jquery` are used for front-end validation and dynamic form controls.  
 - `php` is used to handle forms and keep track of users and their calculations.  
-- `python` (or similar) processes the piped input data and outputs a prespecified file when completed.
+- `python` (or similar) processes the piped input data and outputs a pre-specified file when completed.
 
 This template makes use of the _Klein.php_ router. Documentation for Klein is available [on GitHub](https://github.com/klein/klein.php).  
 This template also uses a few client-side libraries: [Bootstrap](http://getbootstrap.com/), [jQuery](https://jquery.com/), [Select2](http://select2.github.io/), [Bootstrap Validator](https://github.com/nghuuphuoc/bootstrapvalidator/tree/v0.5.2), [Plotly](https://plot.ly/javascript)
@@ -216,7 +216,7 @@ This is how it works:
 
 #### Response Data:
 
-All server responses are received by the Javascript `handleCalculation(response)` function.<br/>
+All server responses are received by the Javascript `handleCalculationResponse(response)` function.<br/>
 Response must have any of the following formats:<br/>
 
 ###### Always sent by `/run` and, if calculation not complete, by `/check/<tracking_id>`:
