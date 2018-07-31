@@ -440,7 +440,7 @@ $(document).ready(function(){
                 var xData = columns[columnNameX];
                 var yData = columns[columnNameY];
                 var dataParams = {x: xData, y: yData, name: name, type: "line"};
-                if (typeof(xData) === "object") dataParams = {z: xData, name: name, type: "heatmap"};
+                if (typeof(xData[0]) === "object") dataParams = {z: xData, name: name, type: "heatmap"};
                 data.push($.extend(dataParams, customData || {}, customDataList ? customDataList[x] : {}));
             }
 
