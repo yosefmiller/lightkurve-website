@@ -213,7 +213,7 @@ $(document).ready(function(){
             '</div>';
 
         var calculation_input_html = '' +
-            '<div class="col-md-6">' +
+            '<div class="col-md-6 table-responsive">' +
             '<h4>Input Values</h4>' +
             '<table id="input-table" class="table table-striped">' +
             '<thead><tr style="text-align: right;"><th>Name</th><th>Value</th></tr></thead><tbody></tbody>' +

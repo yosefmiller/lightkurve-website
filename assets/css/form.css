@@ -78,11 +78,11 @@ body{
 .form-group.has-feedback.has-error .select2 .select2-selection__placeholder {
     color: #b05a5a;
 }
-.form-group.has-feedback.has-error .input-group ~ .form-control-feedback,
-.form-group.has-feedback.has-feedback .input-group ~ .form-control-feedback,
-.form-group.has-feedback.has-success .input-group ~ .form-control-feedback,
+/*.form-group.has-feedback select ~ .help-block,*/
 .form-group.has-feedback select ~ .form-control-feedback,
-.form-group.has-feedback select ~ .help-block {
+.form-group.has-feedback .input-group ~ .form-control-feedback,
+.form-group.has-feedback.has-error .input-group ~ .form-control-feedback,
+.form-group.has-feedback.has-success .input-group ~ .form-control-feedback {
     display: none !important;
 }
 .form-group.has-feedback.has-error .radio-chooser, .form-group.has-feedback.has-error .radio-chooser-item {

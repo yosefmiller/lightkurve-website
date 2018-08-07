@@ -16,7 +16,7 @@ RUN apt-get update && \
                        php7.0-mysqlnd php7.0-mcrypt php7.0-curl \
                        php7.0-bcmath php7.0-mbstring php7.0-soap \
                        php7.0-xml php7.0-zip php7.0-json php7.0-imap \
-                       php-pgsql nginx-full python3-tk
+                       php-pgsql nginx-full python3-dev python3-tk cython git
 
 # Composer PHP dependency manager
 RUN curl -sS https://getcomposer.org/installer | php && \
@@ -25,7 +25,8 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 # PIP Python dependency manager
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3 && \
-    pip3 install jupyter --upgrade
+    pip3 install jupyter numpy lightkurve cython pytest --upgrade
+RUN pip3 install git+https://github.com/mirca/transit-periodogram.git
 
 ##### CONFIGURE SERVICES #####
 # Setup files
