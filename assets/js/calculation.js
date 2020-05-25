@@ -200,7 +200,7 @@ $(document).ready(function(){
         // Define the html for calculation list and results
         var calculation_list_html = '' +
             '<div class="col-md-12"><h3 class="page-header">Calculation Dashboard<a id="calculation-clear-all" href="#" title="Clear All">Clear All</a></h3></div>' +
-            '<div class="col-md-12"><table id="calculation-table" class="table table-hover">' +
+            '<div class="col-md-12"><table id="calculation-table" class="table table-hover table-striped">' +
             '<thead><tr><th>#</th><th>Name</th><th>Date</th><th>Status</th><th>Tools</th></tr></thead>' +
             '<tbody></tbody></table></div>';
 
@@ -361,11 +361,27 @@ $(document).ready(function(){
         var input_table = $("#input-table").find("tbody");
         input_table.html("");
         input_order.forEach(function(name) {
-                if (name.indexOf("tracking_id") !== -1) { return; }
-                if (name.indexOf("calc") !== -1) { return; }
+                if (name.indexOf("tracking_id") !== -1) return;
+                if (name.indexOf("calc") !== -1) return;
                 value = response.input[name];
-                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+                if (value.length === 0) return;
+                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
                 input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
+            });
+
+        // Display output data
+        var output_order = $.FORM_OUTPUT_ORDER || Object.keys(response.output).sort();
+        var output_table = $("#output-table").find("tbody");
+        output_table.html("");
+        output_order.forEach(function(name) {
+                value = response.output[name];
+                if (value.length === 0) return;
+                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
+                output_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
             });
 
         //  Plot result

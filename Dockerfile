@@ -1,17 +1,17 @@
 ##### INITIALIZE #####
 # Load ubuntu base image designed for docker
-FROM phusion/baseimage:0.10.1
+FROM phusion/baseimage:0.10.2
 LABEL maintainer="yosefmiller613@gmail.com"
-ENV REFRESHED_AT 2018-07-27
+ENV REFRESHED_AT 2019-12-23
 ENV DEBIAN_FRONTEND noninteractive
 ENV COMPOSER_ALLOW_SUPERUSER 1
 WORKDIR /var/www
 
 ##### INSTALL DEPENDENCIES #####
 # Nginx and PHP installation
-RUN apt-get update && \
-    apt-get -y upgrade && \
+RUN rm -rf /var/lib/apt/lists/* && \
     apt-get update --fix-missing && \
+    apt-get -y upgrade -o Dpkg::Options::="--force-confdef" && \
     apt-get -y install php7.0 php7.0-fpm php7.0-common php7.0-cli \
                        php7.0-mysqlnd php7.0-mcrypt php7.0-curl \
                        php7.0-bcmath php7.0-mbstring php7.0-soap \
@@ -21,11 +21,12 @@ RUN apt-get update && \
 # Composer PHP dependency manager
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
+    composer config -g repo.packagist composer https://packagist.org && \
     composer require klein/klein
 
 # PIP Python dependency manager
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3 && \
-    pip3 install jupyter numpy lightkurve cython pytest --upgrade
+    pip3 install lightkurve==1.11 cython pytest jupyter
 RUN pip3 install git+https://github.com/mirca/transit-periodogram.git
 
 ##### CONFIGURE SERVICES #####

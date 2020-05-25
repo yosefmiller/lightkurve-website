@@ -36,6 +36,7 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
         "month"              => filter_var($req->param('month'),             FILTER_SANITIZE_STRING),
         "search_radius"      => filter_var($req->param('search_radius'),     FILTER_SANITIZE_STRING),
         "limit_targets"      => filter_var($req->param('limit_targets'),     FILTER_SANITIZE_STRING),
+        "photometry_type"    => filter_var($req->param('photometry_type'),   FILTER_SANITIZE_STRING),
         "is_custom_aperture" => filter_var($req->param('is_custom_aperture'),FILTER_SANITIZE_STRING),
         "aperture_type"      => filter_var($req->param('aperture_type'),     FILTER_SANITIZE_STRING),
         "aperture_percent"   => filter_var($req->param('aperture_percent'),  FILTER_SANITIZE_STRING),
@@ -58,6 +59,8 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
         "is_bin"             => filter_var($req->param('is_bin'),            FILTER_SANITIZE_STRING),
         "bin_size"           => filter_var($req->param('bin_size'),          FILTER_SANITIZE_STRING),
         "bin_method"         => filter_var($req->param('bin_method'),        FILTER_SANITIZE_STRING),
+        "is_normalize"       => filter_var($req->param('is_normalize'),      FILTER_SANITIZE_STRING),
+        "is_view_metadata"   => filter_var($req->param('is_view_metadata'),  FILTER_SANITIZE_STRING)
     ];
 
     /* Execute Python script in background and output to log */

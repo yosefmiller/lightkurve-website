@@ -1,15 +1,17 @@
 $(document).ready(function(){
     /***** FORM ELEMENTS *****/
     /* Nice block level radio selection */
-    $(".radio-chooser-content").click(function () {
+    $(".radio-chooser-item input, .radio-chooser-item label").click(function () {
         $(".radio-chooser-item").removeClass("radio-chooser-selected");
-        $(this).parent().addClass("radio-chooser-selected");
+        $(".radio-chooser input:checked").parent().addClass("radio-chooser-selected");
 
-        var kepler_target_section = $(".kepler-target-section");
-        var kepler_light_curve_section = $(".kepler-light-curve-section");
-        var aperture_percent_section = $(".aperture-percent-section");
-        var aperture_manual_section = $(".aperture-manual-section");
-        switch ( $(this).find("input").attr("id") ) {
+        var kepler_target_section       = $(".kepler-target-section");
+        var kepler_light_curve_section  = $(".kepler-light-curve-section");
+        var photo_aperture_section      = $(".photo-aperture-section");
+        var photo_prf_section           = $(".photo-prf-section");
+        var aperture_percent_section    = $(".aperture-percent-section");
+        var aperture_manual_section     = $(".aperture-manual-section");
+        switch ( $(this).parent().find("input").attr("id") ) {
             case "kepler_light_curve":
                 kepler_target_section.removeClass("hidden");
                 kepler_light_curve_section.removeClass("hidden");
@@ -22,6 +24,14 @@ $(document).ready(function(){
             //     kepler_target_section.addClass("hidden");
             //     kepler_light_curve_section.addClass("hidden");
             //     break;
+            case "photometry_type_aperture":
+                photo_prf_section.addClass("hidden");
+                photo_aperture_section.removeClass("hidden");
+                break;
+            case "photometry_type_prf":
+                photo_aperture_section.addClass("hidden");
+                photo_prf_section.removeClass("hidden");
+                break;
             case "aperture_type_percent":
                 aperture_manual_section.addClass("hidden");
                 aperture_percent_section.removeClass("hidden");
@@ -32,6 +42,9 @@ $(document).ready(function(){
                 break;
         }
     });
+
+    /* Popover Help Tips */
+    $('[data-toggle="popover"]').popover();
 
     /* Quarter/Campaign Selection */
     $("#limiting_factor").change(function () {
@@ -79,9 +92,13 @@ $(document).ready(function(){
     });
 
     $("#isCustomAperture").change(function () {
-        var aperture_section = $(".aperture-section");
+        var aperture_section = $(".aperture-section-custom");
+        var aperture_subsections = $(".aperture-manual-section, .aperture-percent-section");
         if ($(this).is(":checked")) { aperture_section.removeClass("hidden"); }
-        else { aperture_section.addClass("hidden"); }
+        else {
+            aperture_section.addClass("hidden");
+            aperture_subsections.addClass("hidden");
+        }
     });
 
     $("#isRemoveOutliers").change(function () {
@@ -233,16 +250,13 @@ $(document).ready(function(){
         }
     };
     $.plotResult = function (response) {
-        $("#mission").html(response.mission);
-        $("#cdpp").html(response.cdpp);
-
-        if (!response.tpf) { Plotly.purge($('#tpfPlot')[0]); return; }
+        if (!response.tpf) { Plotly.purge($('#tpfPlot')[0]); }
         else { $.tpfFluxPlot(response, true); }
 
-        if (!response.lc_flux_file) { Plotly.purge($('#lcPlot')[0]); return; }
+        if (!response.lc_flux_file) { Plotly.purge($('#lcPlot')[0]); }
         else { $.lcFluxPlot(response, true); }
 
-        if (!response.p_power_file) { Plotly.purge($('#pPlot')[0]); return; }
+        if (!response.p_power_file) { Plotly.purge($('#pPlot')[0]); }
         else { $.pPowerPlot(response); }
     };
     $.initValidation();
@@ -300,7 +314,19 @@ $(document).ready(function(){
             xaxis: { title: "Time - 2454833 (days)", titlefont:{size:12}},
             yaxis: { title: "Normalized Flux",  titlefont:{size:12}},
             legend: { xanchor: "right", yanchor: "bottom", y: 0.05, x: 1.0},
-            margin: { l:60, r:0, b:50, t:0, pad:0 }
+            margin: { l:60, r:0, b:50, t:0, pad:0 },
+            updatemenus: [{
+                buttons: [
+                    { label: 'Show lines', args: [{mode: 'line'}],    method: 'restyle' },
+                    { label: 'Hide lines', args: [{mode: 'markers'}], method: 'restyle' }
+                ],
+                direction: 'down',
+                pad: {'r': 10, 't': 10},
+                showactive: true,
+                type: 'dropdown',
+                x: 0.02, xanchor: 'left',
+                y: 1.10, yanchor: 'top'
+            }]
         };
         var lcCustomData = {
             type: 'scatter',
@@ -317,18 +343,47 @@ $(document).ready(function(){
         var pFile = response.p_power_file;
         var pPlot = $('#pPlot')[0];
         var pLayout = {
-            xaxis: { title: "Frequency [μHz]",     range: [0, 1000], titlefont:{size:12}},
+            xaxis: { title: "Frequency [μHz]",     titlefont:{size:12}},
             yaxis: { title: "Power [ppm^2 / μHz]", titlefont:{size:12}},
             legend: { xanchor: "left", yanchor: "bottom", y: 0.05, x: 1.0},
-            margin: { l:60, r:0, b:50, t:0, pad:0 }
+            margin: { l:60, r:0, b:50, t:0, pad:0 },
+            updatemenus: [{
+                buttons: [
+                    { label:'Frequency/linear scale', method:'update', args: [
+                        { visible:[true,false] },
+                        {
+                            xaxis: { type: 'linear', title: "Frequency [μHz]",     titlefont:{size:12}},
+                            yaxis: { type: 'linear', title: "Power [ppm^2 / μHz]", titlefont:{size:12}},
+                        }
+                    ]},
+                    { label:'Period/log scale', method:'update', args: [
+                        { visible:[false,true] },
+                        {
+                            xaxis: { type: 'log', title: "Period [d]",     titlefont:{size:12}},
+                            yaxis: { type: 'log', title: "Power [ppm^2 / μHz]", titlefont:{size:12}},
+                        }
+                    ]}
+                ],
+                direction: 'down',
+                pad: {'r': 10, 't': 10},
+                showactive: true,
+                active: 0,
+                type: 'dropdown',
+                x: 0.02, xanchor: 'left',
+                y: 1.10, yanchor: 'top'
+            }]
         };
         var pCustomData = {
             type: 'scatter',
             mode: 'line',
             marker: { size: 3 }
         };
+        var pCustomDataList = [
+            {visible: true},
+            {visible: false}
+        ];
         var pY = "power";
-        var pX = ["frequencies"];
-        $.plotData(pPlot, pLayout, pFile, pY, pX, pCustomData);
+        var pX = ["frequencies", "period"];
+        $.plotData(pPlot, pLayout, pFile, pY, pX, pCustomData, pCustomDataList);
     };
 });

@@ -2,17 +2,16 @@ version: '3'
 services:
   php-nginx:
     build: ./
-    image: emac-php-template
+    image: emac-app-lightkurve
     restart: always
     ports:
       - "80:80"
       - "8888:8888"
-    depends_on:
-      - mysql
+#    depends_on:
+#      - mysql
     volumes:
       - ./log/nginx:/var/log/nginx
       - ./:/var/www/html
-      - ./outputs:/var/www/html/outputs
 
   myadmin:
       image: phpmyadmin/phpmyadmin
