@@ -13,6 +13,13 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
     function errorJson ($message, $id) {
         return ["status" => "error", "type" => "validation", "message" => $message, "input" => ["tracking_id" => $id]];
     }
+    function getFormData ($req, $name, $isList = false) {
+        if ($isList) {
+            return filter_var(implode(",", $req->param($name)), FILTER_SANITIZE_STRING);
+        } else {
+            return filter_var($req->param($name), FILTER_SANITIZE_STRING);
+        }
+    }
 
     /* Get user id */
     $userID = $service->getUserId->__invoke($res);
@@ -22,54 +29,76 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
 
     /* Store data */
     $form_data = [
-        "tracking_id"        => $tracking_id,
-        "calc_date"          => filter_var($req->param('calc_date'),         FILTER_SANITIZE_STRING),
-        "calc_name"          => filter_var($req->param('calc_name'),         FILTER_SANITIZE_STRING),
-        "data_archive"       => filter_var($req->param('data_archive'),      FILTER_SANITIZE_STRING),
-        "flux_type"          => filter_var($req->param('flux_type'),         FILTER_SANITIZE_STRING),
-        "target"             => filter_var($req->param('target'),            FILTER_SANITIZE_STRING),
-        "limiting_factor"    => filter_var($req->param('limiting_factor'),   FILTER_SANITIZE_STRING),
-        "quarter_campaign"   => filter_var($req->param('quarter_campaign'),  FILTER_SANITIZE_STRING),
-        "quality_bitmask"    => filter_var($req->param('quality_bitmask'),   FILTER_SANITIZE_STRING),
-        "cadence"            => filter_var($req->param('cadence'),           FILTER_SANITIZE_STRING),
-    //  "month"              => filter_var(implode(",", $req->param('month')), FILTER_SANITIZE_STRING),
-        "month"              => filter_var($req->param('month'),             FILTER_SANITIZE_STRING),
-        "search_radius"      => filter_var($req->param('search_radius'),     FILTER_SANITIZE_STRING),
-        "limit_targets"      => filter_var($req->param('limit_targets'),     FILTER_SANITIZE_STRING),
-        "photometry_type"    => filter_var($req->param('photometry_type'),   FILTER_SANITIZE_STRING),
-        "is_custom_aperture" => filter_var($req->param('is_custom_aperture'),FILTER_SANITIZE_STRING),
-        "aperture_type"      => filter_var($req->param('aperture_type'),     FILTER_SANITIZE_STRING),
-        "aperture_percent"   => filter_var($req->param('aperture_percent'),  FILTER_SANITIZE_STRING),
-        "aperture_rows"      => filter_var($req->param('aperture_rows'),     FILTER_SANITIZE_STRING),
-        "aperture_columns"   => filter_var($req->param('aperture_columns'),  FILTER_SANITIZE_STRING),
-        "aperture_custom"    => filter_var($req->param('aperture_custom'),   FILTER_SANITIZE_STRING),
-        "is_remove_nans"     => filter_var($req->param('is_remove_nans'),    FILTER_SANITIZE_STRING),
-        "is_remove_outliers" => filter_var($req->param('is_remove_outliers'),FILTER_SANITIZE_STRING),
-        "sigma"              => filter_var($req->param('sigma'),             FILTER_SANITIZE_STRING),
-        "is_fill_gaps"       => filter_var($req->param('is_fill_gaps'),      FILTER_SANITIZE_STRING),
-        "is_sff_correction"  => filter_var($req->param('is_sff_correction'), FILTER_SANITIZE_STRING),
-        "windows"            => filter_var($req->param('windows'),           FILTER_SANITIZE_STRING),
-        "is_periodogram"     => filter_var($req->param('is_periodogram'),    FILTER_SANITIZE_STRING),
-        "frequencies"        => filter_var($req->param('frequencies'),       FILTER_SANITIZE_STRING),
-        "is_flatten"         => filter_var($req->param('is_flatten'),        FILTER_SANITIZE_STRING),
-        "window_length"      => filter_var($req->param('window_length'),     FILTER_SANITIZE_STRING),
-        "is_fold"            => filter_var($req->param('is_fold'),           FILTER_SANITIZE_STRING),
-        "period"             => filter_var($req->param('period'),            FILTER_SANITIZE_STRING),
-        "phase"              => filter_var($req->param('phase'),             FILTER_SANITIZE_STRING),
-        "is_bin"             => filter_var($req->param('is_bin'),            FILTER_SANITIZE_STRING),
-        "bin_size"           => filter_var($req->param('bin_size'),          FILTER_SANITIZE_STRING),
-        "bin_method"         => filter_var($req->param('bin_method'),        FILTER_SANITIZE_STRING),
-        "is_normalize"       => filter_var($req->param('is_normalize'),      FILTER_SANITIZE_STRING),
-        "is_view_metadata"   => filter_var($req->param('is_view_metadata'),  FILTER_SANITIZE_STRING)
+        "tracking_id"          => $tracking_id,
+        "calc_date"            => getFormData($req, 'calc_date'),
+        "calc_name"            => getFormData($req, "calc_name"),
+        "data_archive"         => getFormData($req, 'data_archive'),
+        "target"               => getFormData($req, 'target'),
+        "mission"              => getFormData($req, 'mission',    true),
+        "quarter"              => getFormData($req, 'quarter',    true),
+        "campaign"             => getFormData($req, 'campaign',   true),
+        "sector"               => getFormData($req, 'sector',     true),
+        "search_radius"        => getFormData($req, 'search_radius'),
+        "cadence"              => getFormData($req, 'cadence'),
+        "month"                => getFormData($req, 'month',      true),
+        "limit_targets"        => getFormData($req, 'limit_targets'),
+        "is_search_only"       => getFormData($req, 'is_search_only'),
+        "quality_bitmask"      => getFormData($req, 'quality_bitmask'),
+        "cutout_size"          => getFormData($req, 'cutout_size'),
+        
+        "flux_type"            => getFormData($req, 'flux_type'),
+        "photometry_type"      => getFormData($req, 'photometry_type'),
+        "is_custom_aperture"   => getFormData($req, 'is_custom_aperture'),
+        "aperture_type"        => getFormData($req, 'aperture_type'),
+        "aperture_percent"     => getFormData($req, 'aperture_percent'),
+        "aperture_rows"        => getFormData($req, 'aperture_rows'),
+        "aperture_columns"     => getFormData($req, 'aperture_columns'),
+        "aperture_custom"      => getFormData($req, 'aperture_custom'),
+        "is_remove_nans"       => getFormData($req, 'is_remove_nans'),
+        "is_remove_outliers"   => getFormData($req, 'is_remove_outliers'),
+        "outlier_sigma"        => getFormData($req, 'outlier_sigma'),
+        "is_fill_gaps"         => getFormData($req, 'is_fill_gaps'),
+        "is_sff_correction"    => getFormData($req, 'is_sff_correction'),
+        "windows"              => getFormData($req, 'windows'),
+        "is_flatten"           => getFormData($req, 'is_flatten'),
+        "flatten_window"       => getFormData($req, 'flatten_window'),
+        "flatten_polyorder"    => getFormData($req, 'flatten_polyorder'),
+        "flatten_tolerance"    => getFormData($req, 'flatten_tolerance'),
+        "flatten_iterations"   => getFormData($req, 'flatten_iterations'),
+        "flatten_sigma"        => getFormData($req, 'flatten_sigma'),
+        "is_stitch"            => getFormData($req, 'is_stitch'),
+        "is_fold"              => getFormData($req, 'is_fold'),
+        "fold_period"          => getFormData($req, 'fold_period'),
+        "fold_phase"           => getFormData($req, 'fold_phase'),
+        "is_bin"               => getFormData($req, 'is_bin'),
+        "bin_size"             => getFormData($req, 'bin_size'),
+        "bin_count"            => getFormData($req, 'bin_count'),
+        "is_normalize"         => getFormData($req, 'is_normalize'),
+        "normalize_unit"       => getFormData($req, 'normalize_unit'),
+        "is_cdpp"              => getFormData($req, 'is_cdpp'),
+        "cdpp_duration"        => getFormData($req, 'cdpp_duration'),
+        "cdpp_window"          => getFormData($req, 'cdpp_window'),
+        "cdpp_polyorder"       => getFormData($req, 'cdpp_polyorder'),
+        "cdpp_sigma"           => getFormData($req, 'cdpp_sigma'),
+        "is_periodogram"       => getFormData($req, 'is_periodogram'),
+        "frequencies"          => getFormData($req, 'frequencies'),
+        "is_river_plot"        => getFormData($req, 'is_river_plot'),
+        "river_plot_period"    => getFormData($req, 'river_plot_period'),
+        "river_plot_time"      => getFormData($req, 'river_plot_time'),
+        "river_plot_points"    => getFormData($req, 'river_plot_points'),
+        "river_plot_phase_min" => getFormData($req, 'river_plot_phase_min'),
+        "river_plot_phase_max" => getFormData($req, 'river_plot_phase_max'),
+        "river_plot_method"    => getFormData($req, 'river_plot_method'),
+        "is_view_metadata"     => getFormData($req, 'is_view_metadata')
     ];
 
     /* Execute Python script in background and output to log */
-    $command = "python3 -u python/lightkurve-calculation.py";
+    $command = "python3 -u python/master.py";
     $raw_log_file = "outputs/" . $tracking_id . ".log";
 
     $escaped_form_data = escapeshellarg(json_encode($form_data));
     $escaped_log_file = escapeshellarg($raw_log_file);
-    $pid = exec("$command $escaped_form_data > $escaped_log_file 2>&1 &");
+    exec("$command $escaped_form_data > $escaped_log_file 2>&1 &");
 
     /* Respond */
     $res->json(["status" => "running", "input" => $form_data]);

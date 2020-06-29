@@ -61,7 +61,10 @@ body{
 }
 
 /* Form Validation */
-.form-group.has-feedback.has-error p.help-block {
+.form-group .help-block:not(small) {
+    font-weight: normal;
+}
+.form-group.has-feedback.has-error .help-block:not(small) {
     display: none;
 }
 .form-group.has-feedback.has-error small.help-block {
@@ -91,6 +94,11 @@ body{
 /* Select2 */
 .select2-container .select2-search__field {
     width: 100% !important;
+}
+
+/* Popover */
+.popover {
+    max-width: 400px;
 }
 
 /* Range Slider */
