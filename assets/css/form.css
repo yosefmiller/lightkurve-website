@@ -181,7 +181,6 @@ body{
 #calculation-table tr.calculation-finished .status-finished-text,
 #calculation-table tr.calculation-error .status-error-text,
 #calculation-table tr.calculation-pending .status-pending-text { display: block; }
-#calculation-table tr:not(:first-child) .calculation-delete { display: none; }
 #calculation-table tbody > tr > td { vertical-align: middle; }
 #calculation-clear-all {
     float: right;

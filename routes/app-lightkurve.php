@@ -15,7 +15,9 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
     }
     function getFormData ($req, $name, $isList = false) {
         if ($isList) {
-            return filter_var(implode(",", $req->param($name)), FILTER_SANITIZE_STRING);
+            $list  = $req->param($name) ?? array();
+            $value = implode(",", $list);
+            return filter_var($value, FILTER_SANITIZE_STRING);
         } else {
             return filter_var($req->param($name), FILTER_SANITIZE_STRING);
         }
@@ -23,9 +25,10 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
 
     /* Get user id */
     $userID = $service->getUserId->__invoke($res);
-
-    /* Retrieve and sanitize input data */
-    $tracking_id = $userID . "_" . filter_var($req->param('tracking_id'),    FILTER_SANITIZE_STRING);
+    
+    /* Generate calculation tracking id */
+    $tracking_id = $userID . "_" . substr(uniqid(),-5 );
+    $temp_id     = $req->param('tracking_id');
 
     /* Store data */
     $form_data = [
@@ -101,7 +104,7 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
     exec("$command $escaped_form_data > $escaped_log_file 2>&1 &");
 
     /* Respond */
-    $res->json(["status" => "running", "input" => $form_data]);
+    $res->json(["status" => "running", "temp_id" => $temp_id, "input" => $form_data]);
 });
 
 /* Load common form routes */

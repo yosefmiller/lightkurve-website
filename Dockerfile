@@ -35,16 +35,17 @@ ADD config/nginx.conf /etc/nginx/sites-available/default
 ADD config/nginx.sh /etc/service/nginx/run
 ADD config/phpfpm.sh /etc/service/phpfpm/run
 ADD config/jupyter.sh /etc/service/jupyter/run
+ADD config/crontab /etc/cron.d/cleanup
+COPY . /var/www/html
 
 # Setup directories and permissions
-RUN mkdir -p /var/run/php /var/www/html/outputs && \
-    chown -R www-data:www-data /var/run/php && \
-    chown -R www-data:www-data /var/www && \
+RUN mkdir -p /var/run/php /var/log/cleanup /var/www/html/outputs && \
+    chown -R www-data:www-data /var/run/php /var/www && \
     chmod +x /etc/service/nginx/run && \
     chmod +x /etc/service/phpfpm/run && \
     chmod +x /etc/service/jupyter/run && \
     chmod 755 /var/www && \
-    chmod 666 /var/www/html/outputs
+    chmod 766 /var/www/html/outputs
 
 # Disable services start
 RUN update-rc.d -f apache2 remove && \

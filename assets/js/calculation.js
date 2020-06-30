@@ -137,62 +137,36 @@ $(document).ready(function(){
     };
 
     /* Tracking user identification */
-    $.getCurrentTrackingID = function () {
-        // Set fallback id
-        var current_id_elem = $("#tracking_id");
-        var current_id = parseInt(current_id_elem.val()); // starts at 0
+    $.clearTrackingID = function (id) {
+        // Determine intent
+        var clear_url = id ? "clear/" + id : "clear";
 
-        // Use cookies if enabled
-        if ($.isCookiesEnabled()) {
-            // Get next id, if cookie set
-            var next_id_cookie = document.cookie.match(/(^|;) ?trackingId=([^;]*)(;|$)/);
-            if (next_id_cookie) {
-                current_id = parseInt(next_id_cookie[2]);
+        // Clear selected/all calculations files and processes
+        $.post($.FORM_PREFIX + clear_url, function (response) {
+            // Assert success
+            if (response !== "success") { console.log(response); return; }
+
+            // Adjust calculation list accordingly
+            if (id) {
+                delete $.calculation[id];
+                $("#calculation-table").find("tbody tr#" + id).remove();
+            } else {
+                $.calculation = {};
+                $("#calculation-table").find("tbody").html("");
             }
-        }
 
-        // Return current tracking id which represents last calculation's id
-        return current_id;
-    };
-    $.setNextTrackingID = function (isReset) {
-        var current_id_elem = $("#tracking_id");
-        var current_id = $.getCurrentTrackingID();
-        var next_id = current_id + 1;
-        if (typeof(isReset) === "boolean" && isReset) {
-            next_id = 0;
-        } else if ( !isNaN( parseFloat(isReset) ) ) {
-            next_id = parseFloat(isReset) - 1;
-        }
+            // Hide list entirely if empty
+            if ($.isEmptyObject($.calculation)) {
+                $("#calculation-list").addClass("hidden");
+            }
 
-        // Set next id element
-        current_id_elem.val(next_id);
-
-        // Use cookies if enabled
-        if ($.isCookiesEnabled()) {
-            // Set next id cookie
-            var expires = new Date();                                       // today
-            expires.setTime(expires.getTime() + (60 * 60 * 24 * 365 * 5));  // 5 years
-            document.cookie = "trackingId=" + next_id + ";expires=" + expires.toUTCString();
-        }
-
-        // Return next tracking id which will be the new calculation's id
-        return next_id;
-    };
-    $.resetTrackingID = function () {
-        $.post($.FORM_PREFIX + "clear", function (response) {
-            if (response !== "success") { console.log(response); return; }
-            $.setNextTrackingID(true);
-            $("#calculation-list, #calculation-logs, #calculation-result").addClass("hidden");
-            $("#calculation-table").find("tbody").html("");
-        });
-    };
-    $.reduceTrackingID = function (id) {
-        $.post($.FORM_PREFIX + "clear/" + id, function (response) {
-            if (response !== "success") { console.log(response); return; }
-            $.setNextTrackingID(id);
+            // Hide results and logs
             $("#calculation-logs, #calculation-result").addClass("hidden");
-            $("#calculation-table tbody tr#" + id).remove();
+
+            // Readjust the indexes displayed
+            $.updateListIndexes();
         });
+
     };
 
     /* Initialize the display */
@@ -200,7 +174,7 @@ $(document).ready(function(){
         // Define the html for calculation list and results
         var calculation_list_html = '' +
             '<div class="col-md-12"><h3 class="page-header">Calculation Dashboard<a id="calculation-clear-all" href="#" title="Clear All">Clear All</a></h3></div>' +
-            '<div class="col-md-12"><table id="calculation-table" class="table table-hover table-striped">' +
+            '<div class="col-md-12"><table id="calculation-table" class="table table-hover">' +
             '<thead><tr><th>#</th><th>Name</th><th>Date</th><th>Status</th><th>Tools</th></tr></thead>' +
             '<tbody></tbody></table></div>';
 
@@ -224,29 +198,31 @@ $(document).ready(function(){
         var calculation_list_element = $("#calculation-list");
         var calculation_result_element = $("#calculation-result");
         calculation_list_element.html(calculation_list_html).addClass("clearfix hidden");
-        calculation_result_element.prepend(calculation_input_html);
         calculation_result_element.prepend(calculation_result_html).addClass('clearfix hidden');
+        calculation_result_element.append(calculation_input_html);
 
         $("#calculation-clear-all").click(function (e) {
             e.preventDefault();
-            $.resetTrackingID();
+            $.clearTrackingID();
             return false;
         });
 
         // Fetch all calculations
-        var latest_id = $.getCurrentTrackingID();
-        for (var id = 1; id <= latest_id; id++) {
-            $.createListItem(id);
-            calculation_list_element.removeClass("hidden");
-            $.post($.FORM_PREFIX + "check/" + id, $.handleCalculationResponse);
-        }
+        $.get($.FORM_PREFIX + "list", function (response) {
+            // Determine status
+            if (!response.list) { console.log("Error! Cannot initialize list!"); return; }
+
+            // Iterate through calculation list
+            var calculation_list = response.list;
+            $.each(calculation_list, function (key, status) { $.handleCalculationResponse(status, true); });
+        });
     };
     $.createListItem = function (id, name, date) {
         if (typeof(name) !== "string") { name = ""; }
         if (typeof(date) !== "string") { date = ""; }
         var table_item_html = '' +
             '<tr class="calculation-running" id="' + id + '">' +
-            '<td class="calculation-id">' + id + '</td>' +
+            '<td class="calculation-id"></td>' +
             '<td class="calculation-name">' + name + '</td>' +
             '<td class="calculation-date">' + date + '</td>' +
             '<td>' +
@@ -266,11 +242,20 @@ $(document).ready(function(){
         $("#calculation-table").find("tbody").prepend(table_item_html);
         $(".calculation-delete").click($.deleteCalculation);
     };
+    $.updateListIndexes = function () {
+        if (!$.calculation) return;
+        $.each($.calculation, function (index, val) {
+            var el = $("#calculation-table tr#"+index);
+            // el.find(".calculation-id").html("<span title='Calculation ID: "+index+"'>"+(el.index()+1)+"</span>");
+            el.find(".calculation-id").html("<span class='text-muted small'>"+index+"</span>");
+        })
+    };
 
     /* Run new calculation */
     $.newCalculation = function (form) {
         // Increment calculation id
-        var id = $.setNextTrackingID();
+        var temp_id = Math.random().toString(36).substr(2, 5);
+        $("#tracking_id").val(temp_id);
 
         // Set calculation meta data
         var name = form.find("#calc_name").val();
@@ -278,7 +263,7 @@ $(document).ready(function(){
         form.find("#calc_date").val(date);
 
         // Add calculation to table
-        $.createListItem(id, name, date);
+        $.createListItem(temp_id, name, date);
 
         // Bring list into view
         var calculation_list_element = $("#calculation-list");
@@ -301,14 +286,32 @@ $(document).ready(function(){
             }
         });
     };
-    $.handleCalculationResponse  = function (response) {
+    $.handleCalculationResponse  = function (response, initial) {
         // Determine action
-        if (!response.status) { alert("A server error occurred."); return; }
+        if (!response.status) { alert("A server error occurred when handling calculation status."); console.log(response); return; }
+        if (typeof initial !== "boolean") { initial = false; }
+
+        // Get tracking number
+        var tracking_number = response.input.tracking_id.split("_").pop();
+        var calculation_table = $("#calculation-table");
+        var calculation_list  = $("#calculation-list");
+        if (response.temp_id) {
+            // Change temporary ID into permanent ID
+            calculation_table.find("tr#"+response.temp_id).attr("id", tracking_number);
+        }
+
+        // Find table list item
+        var table_item = calculation_table.find("tr#"+tracking_number);
+        if (!table_item.length) {
+            // Create new list item on page reload
+            if (!initial) { console.log("Skipping deleted calculation."); return; }
+            $.createListItem(tracking_number);
+            calculation_list.removeClass("hidden");
+            table_item = calculation_table.find("tr#"+tracking_number);
+        }
+        var is_active = table_item.hasClass("info");
 
         // Update status
-        var tracking_number = response.input.tracking_id.split("_")[2];
-        var table_item = $("#calculation-table").find("tr#"+tracking_number);
-
         if (response.status === "success") {
             table_item.attr("class", "calculation-finished");
             table_item.find(".calculation-name").html(response.input.calc_name);
@@ -328,13 +331,18 @@ $(document).ready(function(){
             if (response.type === "validation") alert("An error occurred with message:\n"+response.message);
         }
 
+        // Update active status
+        if (is_active) table_item.addClass("info");
+
         // Display logs button
         table_item.find(".calculation-tools a.calculation-logs").removeClass("disabled");
         table_item.find(".calculation-logs").click($.displayLogs);
 
         // Store response
-        if (!$.calculation) { $.calculation = []; }
-        $.calculation[response.input.tracking_id.split("_")[2]] = response;
+        if (!$.calculation)   { $.calculation = {}; }
+        if (response.temp_id) { delete $.calculation[response.temp_id]; }
+        $.calculation[tracking_number] = response;
+        $.updateListIndexes();
     };
 
     /* Update display with results */
@@ -342,9 +350,13 @@ $(document).ready(function(){
         e.preventDefault();
 
         // Load response
-        var id = this.closest("tr").id;
-        var response = $.calculation[id];
+        var tr = this.closest("tr");
+        var response = $.calculation[tr.id];
         console.log(response);
+
+        // Display active status
+        $("#calculation-table tr").removeClass("info");
+        $(tr).addClass("info");
 
         // Display result panel and hide log panel
         var calculation_result = $("#calculation-result");
@@ -361,13 +373,11 @@ $(document).ready(function(){
         var input_table = $("#input-table").find("tbody");
         input_table.html("");
         input_order.forEach(function(name) {
-                if (name.indexOf("tracking_id") !== -1) return;
-                if (name.indexOf("calc") !== -1) return;
+                if (name.indexOf("tracking_id") !== -1) { return; }
+                if (name.indexOf("calc") !== -1) { return; }
                 value = response.input[name];
                 if (value.length === 0) return;
-                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
+                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
                 input_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
             });
 
@@ -378,9 +388,7 @@ $(document).ready(function(){
         output_order.forEach(function(name) {
                 value = response.output[name];
                 if (value.length === 0) return;
-                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
+                name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
                 output_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
             });
 
@@ -391,9 +399,13 @@ $(document).ready(function(){
     $.displayLogs = function (e) {
         e.preventDefault();
 
+        // Display active status
+        var tr = this.closest("tr");
+        $("#calculation-table tr").removeClass("info");
+        $(tr).addClass("info");
+
         // Load log file
-        var id = this.closest("tr").id;
-        $.get($.FORM_PREFIX + "logs/" + id, function (file) {
+        $.get($.FORM_PREFIX + "logs/" + tr.id, function (file) {
             $("#calculation-logs").html("<div class='well' style='white-space: pre'>"+ file +"</div>");
         });
 
@@ -408,7 +420,7 @@ $(document).ready(function(){
 
         // Kill the specified id
         var id = this.closest("tr").id;
-        $.reduceTrackingID(id);
+        $.clearTrackingID(id);
 
         return false;
     };
@@ -464,6 +476,7 @@ $(document).ready(function(){
         });
     };
     $.isCookiesEnabled  = function () {
+        return false;
         if (navigator.cookieEnabled) return true;
         // set and read cookie
         document.cookie = "cookietest=1";

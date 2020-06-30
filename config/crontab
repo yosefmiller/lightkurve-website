@@ -1,0 +1,2 @@
+# min hour dayofmonth month dayofweek user command
+*/15 * * * * root (cd /var/www/html && php routes/helpers.php) >> /var/log/cleanup/cleanup.log 2>&1

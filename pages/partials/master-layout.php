@@ -34,7 +34,7 @@
 <?php } ?>
 
 <!-- MAIN NASA HEADER -->
-<?= $this->isMiniHeader ? "" : $this->partial("pages/partials/main-header.php"); ?>
+<?= ($this->isMiniHeader || $this->isHiddenMainNav) ? "" : $this->partial("pages/partials/main-header.php"); ?>
 <!-- END MAIN NASA HEADER -->
 
 <!-- NASA SUB-SITE INFO -->

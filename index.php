@@ -14,9 +14,7 @@ $klein = new \Klein\Klein();
 /* Configure Routing: */
 include "routes/common.php";
 include "routes/app-lightkurve.php";
-include "routes/examples.php";
 include "routes/errors.php";
-include "routes/docs.php";
 
 /* Execute all changes: */
 $klein->dispatch();

@@ -2,49 +2,12 @@ version: '3'
 services:
   php-nginx:
     build: ./
-    image: emac-app-lightkurve
+    image: lightkurve-website
     restart: always
     ports:
       - "80:80"
       - "8888:8888"
-#    depends_on:
-#      - mysql
     volumes:
       - ./log/nginx:/var/log/nginx
+      - ./log/cleanup:/var/log/cleanup
       - ./:/var/www/html
-
-  myadmin:
-      image: phpmyadmin/phpmyadmin
-      ports:
-          - "8080:80"
-      environment:
-          - PMA_ARBITRARY=1
-          - PMA_HOST=mysql
-      restart: always
-      depends_on:
-          - mysql
-
-  mysql:
-    image: mysql:5.6
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: emacrocks!
-      MYSQL_DATABASE: emac
-      MYSQL_USER: emac
-      MYSQL_PASSWORD: emacrocks!
-    # To persist db data, uncomment the following volumes statement, and see the outer
-    # volumes section below:
-    #volumes:
-    #    - db_data:/var/lib/mysql
-
-# To persist db data, uncomment at least the next two lines, and see the further note below
-#volumes:
-#   db_data:  # NOTE that this statement alone persists data in Docker's volume storage
-              # area. To clear this data entirely, use: docker volume rm db_data
-              # To persist elsewhere, uncomment the following, and make sure a directory
-              # exists at the desired location as specified by "device:"
-      # driver_opts:
-      #     type: none
-      #     device: data/db
-      #     o: bind

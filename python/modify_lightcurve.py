@@ -97,6 +97,7 @@ def modify (lc):
         river_plot_method    = form_data.get("river_plot_method",     default='mean')
 
         riverplot_axis = lc.plot_river(riverplot_period, epoch_time=riverplot_time, bin_points=riverplot_points, minimum_phase=riverplot_phase_min, maximum_phase=riverplot_phase_max, method=riverplot_method)
+        print("River plot is not yet supported.")
 
     if is_cdpp:
         cdpp_duration   = form_data.get("cdpp_duration",    type='int',   default=13)
