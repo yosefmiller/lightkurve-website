@@ -61,6 +61,10 @@ body{
 }
 
 /* Form Validation */
+.row > .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
 .form-group .help-block:not(small) {
     font-weight: normal;
 }

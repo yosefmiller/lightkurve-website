@@ -58,8 +58,8 @@ def modify (lc):
         lc_trend = lc.copy()
 
     if is_fold:
-        period = form_data.get("period", type="float", default=False)
-        phase  = form_data.get("phase", type="float", default=0.0)
+        period = form_data.get("fold_period", type="float", default=False)
+        phase  = form_data.get("fold_phase", type="float", default=0.0)
 
         if not period:
             # todo stop usage of transit_periodogram
@@ -74,7 +74,7 @@ def modify (lc):
             period = periods[numpy.argmax(power)]
             print('Best Fit Period: {} days'.format(period))
 
-        lc = lc.fold(period=period, epoch_time=phase)
+        lc = lc.fold(period=period, t0=phase)
         print("Folded at period = ", period, " and phase = ", phase, ".")
 
     if is_bin:
@@ -97,6 +97,7 @@ def modify (lc):
         river_plot_method    = form_data.get("river_plot_method",     default='mean')
 
         riverplot_axis = lc.plot_river(riverplot_period, epoch_time=riverplot_time, bin_points=riverplot_points, minimum_phase=riverplot_phase_min, maximum_phase=riverplot_phase_max, method=riverplot_method)
+        print("Generated river plot.")
         print("River plot is not yet supported.")
 
     if is_cdpp:
@@ -107,13 +108,54 @@ def modify (lc):
 
         cdpp_result = lc.estimate_cdpp(transit_duration=cdpp_duration, savgol_window=cdpp_window, savgol_polyorder=cdpp_polyorder, sigma=cdpp_sigma)
         response.add("CDPP Noise Metric", str(cdpp_result) + " ppm", True)
+        print("Computed CDPP Noise Metric.")
 
     if is_periodogram:
-#        frequencies = float(form_data.get("frequencies") or 1.0)
-        print("Computing periodogram.")
-        import astropy.units as u
-        periodogram = lc.to_periodogram(minimum_period=0.9*u.day, maximum_period=1.2*u.day, oversample_factor=10)
-        response.add("period_at_max_power", str(p.period_at_max_power), True)
-        response.add("p_power_file",        write_files.periodogram(p))
+        # Method
+        p_method = form_data.get("p_method", default='lombscargle')
+        p_args = {'method': p_method}
+        if p_method == 'lombscargle':
+            # Get values
+            p_args["normalization"]      = form_data.get("p_ls_normalization",      type='',      default='amplitude')
+            p_args["ls_method"]          = form_data.get("p_ls_method",             type='',      default='fast')
+            p_args["oversample_factor"]  = form_data.get("p_ls_oversample",         type='int',   default=None, force=False)
+            p_args["nterms"]             = form_data.get("p_ls_nterms",             type='int',   default=1)
+            p_args["nyquist_factor"]     = form_data.get("p_ls_nyquist",            type='int',   default=1)
+            p_freq_period                = form_data.get("p_ls_freq_period",        type='',      default=None)
+            p_freq_period_unit           = form_data.get("p_ls_frequencies_unit",   type='',      default='')
+            p_freq_period_value          = form_data.get("p_ls_frequencies",        type='float', default=None, force=False)
+            p_freq_period_min            = form_data.get("p_ls_frequencies_min",    type='float', default=None, force=False)
+            p_freq_period_max            = form_data.get("p_ls_frequencies_max",    type='float', default=None, force=False)
+
+            # Frequency/Period
+            if p_freq_period:
+                # Units
+                import astropy.units as u
+                if p_freq_period_unit == "microhertz":
+                    p_args["freq_unit"] = u.microhertz
+                elif p_freq_period_unit == "1/day":
+                    p_args["freq_unit"] = 1/u.day
+
+                # Values
+                if p_freq_period == "frequency":
+                    p_args["frequency"]         = p_freq_period_value
+                    p_args["minimum_frequency"] = p_freq_period_min
+                    p_args["maximum_frequency"] = p_freq_period_max
+                elif p_freq_period == "period":
+                    p_args["period"]            = p_freq_period_value
+                    p_args["minimum_period"]    = p_freq_period_min
+                    p_args["maximum_period"]    = p_freq_period_max
+
+
+        elif p_method == 'boxleastsquares':
+            # minimum_period, maximum_period, period, frequency_factor, duration
+            pass
+
+        # Compute periodogram
+        print("Computing periodogram...")
+        periodogram = lc.to_periodogram(**p_args)
+        print("Computed periodogram.")
+        response.add("Period at Max Power", str(periodogram.period_at_max_power), True)
+        response.add("p_power_file",        write_files.periodogram(periodogram))
 
     response.add("lc_flux_file", write_files.lightcurve(lc, lc_trend))

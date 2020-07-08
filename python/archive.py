@@ -62,8 +62,7 @@ def prepare_args ():
 
     # Month
     if cadence == 'short':
-        month = list(map(int, month.split(",")))
-        args['month'] = int(month)
+        args['month'] = list(map(int, month.split(",")))
 
     # Limit
     if limit_targets.isdigit():

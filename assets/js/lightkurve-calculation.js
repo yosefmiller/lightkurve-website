@@ -10,6 +10,7 @@ $(document).ready(function(){
         var tpf_section                 = $(".tpf-section");
         var lc_section                  = $(".lc-section");
         var target_section              = $("#target-section");
+        var month_section               = $("#cadence-month-section");
 
         var photo_aperture_section      = $(".photo-aperture-section");
         var photo_prf_section           = $(".photo-prf-section");
@@ -21,21 +22,23 @@ $(document).ready(function(){
                 tpf_section.hide();
                 kepler_section.show();
                 lc_section.show();
-                target_section.attr("class", "col-md-6");
+                month_section.hide();
+                target_section.removeClass("col-md-4").addClass("col-md-6");
                 break;
             case "search_target_pixel":
                 tess_section.hide();
                 lc_section.hide();
                 kepler_section.show();
                 tpf_section.show();
-                target_section.attr("class", "col-md-6");
+                month_section.hide();
+                target_section.removeClass("col-md-4").addClass("col-md-6");
                 break;
             case "search_tesscut":
                 kepler_section.hide();
                 lc_section.hide();
                 tess_section.show();
                 tpf_section.show();
-                target_section.attr("class", "col-md-4");
+                target_section.removeClass("col-md-6").addClass("col-md-4");
                 break;
 
             case "photometry_type_aperture":
@@ -121,10 +124,62 @@ $(document).ready(function(){
         }
     });
 
+    /* Periodogram Selection */
+    $("#p_method").change(function () {
+        var p_ls_section      = $(".p-ls-section");
+        var p_bls_section     = $(".p-bls-section");
+        switch ($("#p_method").val()) {
+            case "lombscargle":
+                p_bls_section.hide();
+                p_ls_section.show();
+                break;
+            case "boxleastsquares":
+                p_ls_section.hide();
+                p_bls_section.show();
+                break;
+        }
+    });
+    $("#p_ls_freq_period").change(function () {
+        var p_lc_freq_section = $(".p-lc-freq-section");
+        switch ($("#p_ls_freq_period").val()) {
+            case "frequency":
+            case "period":
+                p_lc_freq_section.show();
+                break;
+        }
+    });
+    $("#p_ls_normalization").change(function () {
+        var p_ls_frequencies_unit = $("#p_ls_frequencies_unit");
+        var p_ls_oversample       = $("#p_ls_oversample");
+        switch ($("#p_ls_normalization").val()) {
+            case "amplitude":
+                p_ls_oversample.attr("placeholder", "5 (default)");
+                p_ls_frequencies_unit.val("1/day").change();
+                break;
+            case "psd":
+                p_ls_oversample.attr("placeholder", "1 (default)");
+                p_ls_frequencies_unit.val("microhertz").change();
+                break;
+        }
+    });
+    $("#p_ls_frequencies_unit").change(function () {
+        var unit_selected = $("#p_ls_frequencies_unit :selected").text();
+        var unit_text     = $(".p-lc-freq-section .input-group-addon");
+        unit_text.text(unit_selected);
+    });
+
     /* Search Button */
     $("#search_button, #run_button").click(function () {
+        // Determine button
         var is_search_only = $(this).is("#search_button") ? "1" : "";
         $("#is_search_only").val(is_search_only);
+
+        // Set calculation name
+        var calc_name = $("#calc_name");
+        var target = $("#target");
+        if ( !calc_name.val() && target.val() ) {
+            calc_name.val( target.val() );
+        }
     });
 
     /* Manual Aperture Grid handlers */
@@ -177,9 +232,11 @@ $(document).ready(function(){
     });
 
     $("#isPeriodogram").change(function () {
-        var periodogram_section = $("#periodogram-section");
-        if ($(this).is(":checked")) { periodogram_section.show(); }
-        else { periodogram_section.hide(); }
+        var p_section = $(".p-section");
+        var p_ls_section      = $(".p-ls-section");
+        var p_bls_section     = $(".p-bls-section");
+        if ($(this).is(":checked")) { p_section.show(); p_ls_section.hide(); p_bls_section.hide(); }
+        else { p_section.hide(); p_ls_section.hide(); p_bls_section.hide(); }
     });
 
     $("#isFlatten").change(function () {
@@ -222,15 +279,9 @@ $(document).ready(function(){
 
     /***** FORM SUBMISSION *****/
     $.FORM_PREFIX = "/";
-    // $.FORM_INPUT_ORDER = [ "data_archive", "flux_type", "target", "limiting_factor", "quarter_campaign",
-    //                         "quality_bitmask", "cadence", "month", "search_radius", "limit_targets" ];
     $.validationConfigFields = {
         calc_name: {
-            validators: {
-                notEmpty: {
-                    message: 'Calculation name is required'
-                }
-            }
+            validators: {}
         },
         data_archive: {
             validators: {
@@ -573,6 +624,9 @@ $(document).ready(function(){
 
         if (!response.p_power_file) { Plotly.purge($('#pPlot')[0]); }
         else { $.pPowerPlot(response); }
+
+        if (!response.river_plot_file) { Plotly.purge($('#rPlot')[0]); }
+        else { $.riverPlot(response); }
     };
     $.initValidation();
     $.initCalculationList();
@@ -701,4 +755,8 @@ $(document).ready(function(){
         var pX = ["frequencies", "period"];
         $.plotData(pPlot, pLayout, pFile, pY, pX, pCustomData, pCustomDataList);
     };
+
+    $.riverPlot = function (response) {
+        // River Plot todo
+    }
 });
