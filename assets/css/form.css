@@ -1,3 +1,4 @@
+/* General */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 body{
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -99,6 +100,17 @@ body{
 .select2-container .select2-search__field {
     width: 100% !important;
 }
+.input-with-dropdown {
+    display: flex;
+}
+.input-with-dropdown .input-group-btn {
+    width: auto;
+    left: -8px;
+}
+.input-with-dropdown .input-group-btn .select2-selection {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 
 /* Popover */
 .popover {
@@ -148,7 +160,7 @@ body{
     border-radius: 0;
     background-color: rgb(153, 153, 153);
 }
-.range input::-moz-slider-thumb {
+.range input::-moz-range-thumb {
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     -ms-appearance: none !important;
@@ -170,7 +182,7 @@ body{
 .form-group.has-success .range input::-webkit-slider-thumb {
     background-color: rgb(92, 184, 92);
 }
-.form-group.has-success .range input::-moz-slider-thumb {
+.form-group.has-success .range input::-moz-range-thumb {
     background-color: rgb(92, 184, 92);
 }
 

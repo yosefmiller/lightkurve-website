@@ -3,9 +3,9 @@ import lightkurve
 
 def search ():
     # Prepare argument list
-    data_archive   = form_data.get("data_archive")
-    target         = form_data.get("target")
-    is_search_only = form_data.get("is_search_only")
+    data_archive   = form_data.get("data_archive",   type="str")
+    target         = form_data.get("target",         type="str")
+    is_search_only = form_data.get("is_search_only", type="boolean")
 
     # Perform search from archive
     print("Searching archive for target.")
@@ -16,9 +16,9 @@ def search ():
         args          = prepare_args()
         search_result = lightkurve.search_lightcurvefile(target, **args)
     elif data_archive == 'search_tesscut':
-        sector = form_data.get("sector")
+        sector = form_data.get("sector", type="list")
         if sector:
-            sector        = list(map(int, sector.split(",")))
+            sector        = list(map(int, sector))
             search_result = lightkurve.search_tesscut(target, sector=sector)
         else:
             search_result = lightkurve.search_tesscut(target)
@@ -34,35 +34,35 @@ def search ():
 
 def prepare_args ():
     # Store data into individual variables
-    mission          = form_data.get("mission")
-    quarter          = form_data.get("quarter")
-    campaign         = form_data.get("campaign")
-    sector           = form_data.get("sector")
-    cadence          = form_data.get("cadence")
-    month            = form_data.get("month")
+    mission          = form_data.get("mission",       type="list")
+    quarter          = form_data.get("quarter",       type="list")
+    campaign         = form_data.get("campaign",      type="list")
+    sector           = form_data.get("sector",        type="list")
+    cadence          = form_data.get("cadence",       type="str")
+    month            = form_data.get("month",         type="list")
     search_radius    = form_data.get("search_radius", type="float")
-    limit_targets    = form_data.get("limit_targets")
+    limit_targets    = form_data.get("limit_targets", type="int")
 
     # Cadence / radius / bitmask
-    args  = {'cadence': cadence, 'radius': search_radius}
+    args  = dict(cadence=cadence, radius=search_radius)
 
     # Mission (str, list of str)
-    args['mission'] = list(map(str, mission.split(",")))
+    args['mission'] = list(map(str, mission))
 
     # Kepler Quarter / K2 campaign / TESS sector (int, list of ints)
     if "kepler" in mission:
         if quarter:
-            args['quarter'] = list(map(int, quarter.split(",")))
+            args['quarter'] = list(map(int, quarter))
     if "k2" in mission:
         if campaign:
-            args['campaign'] = list(map(int, campaign.split(",")))
+            args['campaign'] = list(map(int, campaign))
     if "tess" in mission:
         if sector:
-            args['sector'] = list(map(int, sector.split(",")))
+            args['sector'] = list(map(int, sector))
 
     # Month
     if cadence == 'short':
-        args['month'] = list(map(int, month.split(",")))
+        args['month'] = list(map(int, month))
 
     # Limit
     if limit_targets.isdigit():

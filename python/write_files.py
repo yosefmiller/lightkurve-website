@@ -58,5 +58,6 @@ def periodogram (p):
     print("Wrote Periodogram power file. Limited results to ", limit, " values.")
     return p_power_file
 
-def river_plot (lc):
-    pass
+def river_plot (axis):
+    print("River plot is not yet supported.")
+    return ""

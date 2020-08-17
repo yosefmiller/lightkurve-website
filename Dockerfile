@@ -1,8 +1,8 @@
 ##### INITIALIZE #####
 # Load ubuntu base image designed for docker
-FROM phusion/baseimage:0.10.2
+FROM phusion/baseimage:0.11
 LABEL maintainer="yosefmiller613@gmail.com"
-ENV REFRESHED_AT 2019-12-23
+ENV REFRESHED_AT 2020-08-16
 ENV DEBIAN_FRONTEND noninteractive
 ENV COMPOSER_ALLOW_SUPERUSER 1
 WORKDIR /var/www
@@ -12,11 +12,7 @@ WORKDIR /var/www
 RUN rm -rf /var/lib/apt/lists/* && \
     apt-get update --fix-missing && \
     apt-get -y upgrade -o Dpkg::Options::="--force-confdef" && \
-    apt-get -y install php7.0 php7.0-fpm php7.0-common php7.0-cli \
-                       php7.0-mysqlnd php7.0-mcrypt php7.0-curl \
-                       php7.0-bcmath php7.0-mbstring php7.0-soap \
-                       php7.0-xml php7.0-zip php7.0-json php7.0-imap \
-                       php-pgsql nginx-full python3-dev python3-tk cython git
+    apt-get -y install php-fpm php-cli php-json php-zip unzip nginx-core python3-pip git
 
 # Composer PHP dependency manager
 RUN curl -sS https://getcomposer.org/installer | php && \
@@ -25,8 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     composer require klein/klein
 
 # PIP Python dependency manager
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3 && \
-    pip3 install lightkurve==1.11 cython pytest jupyter
+RUN pip3 install lightkurve==1.11.1 cython pytest jupyter
 RUN pip3 install git+https://github.com/mirca/transit-periodogram.git
 
 ##### CONFIGURE SERVICES #####
@@ -50,7 +45,7 @@ RUN mkdir -p /var/run/php /var/log/cleanup /var/www/html/outputs && \
 # Disable services start
 RUN update-rc.d -f apache2 remove && \
     update-rc.d -f nginx remove && \
-    update-rc.d -f php7.0-fpm remove
+    update-rc.d -f php7.2-fpm remove
 
 # Expose port
 EXPOSE 80 8888

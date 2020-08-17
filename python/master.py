@@ -7,6 +7,13 @@ import warnings
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 warnings.filterwarnings("ignore", message="Using a non-tuple sequence")
 
+# Disable progress bar output
+import tqdm
+def nop(it, *a, **k):
+    print("[progress bar disabled]")
+    return it
+tqdm.tqdm = nop
+
 # Import scripts
 from helpers import form_data, response
 
@@ -25,7 +32,7 @@ import archive, get_lightcurve, modify_lightcurve, write_files
 search_results = archive.search()
 
 # Retrieve lightcurve
-if not form_data.get("is_search_only"):
+if not form_data.get("is_search_only", type="boolean"):
     lightcurve          = get_lightcurve.get(search_results)
     lightcurve_modified = modify_lightcurve.modify(lightcurve)
 
