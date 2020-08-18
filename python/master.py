@@ -1,6 +1,6 @@
 ########## LIGHTKURVE SCRIPT BEGIN ##########
 
-print ("Beginning script execution...", end=" ")
+print ("``Beginning script execution...", end=" ")
 
 # Ignore numpy version warning
 import warnings
@@ -26,7 +26,7 @@ response.add("status", "success")
 print("initialized.\n")
 
 ########## CALCULATION BEGIN ##########
-import archive, get_lightcurve, modify_lightcurve, write_files
+import archive, get_lightcurve, modify_lightcurve
 
 # Find data file
 search_results = archive.search()
@@ -43,6 +43,6 @@ output_file_name = "outputs/" + form_data.id() + "_response.json"
 with open(output_file_name, "w") as f:
     f.write(response.get())
 
-print ("\nFinished execution!")
+print ("\n``Finished execution!")
 
 ########## LIGHTKURVE SCRIPT END ##########

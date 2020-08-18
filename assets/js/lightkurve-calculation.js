@@ -617,21 +617,21 @@ $(document).ready(function(){
         else { $("#searchResultsTable").html(response.search_results).find("table").addClass("table table-striped"); }
 
         if (!response.tpf) { Plotly.purge($('#tpfPlot')[0]); }
-        else { $.tpfFluxPlot(response, true); }
+        else { $.tpfPlot(response, true); }
 
-        if (!response.lc_flux_file) { Plotly.purge($('#lcPlot')[0]); }
-        else { $.lcFluxPlot(response, true); }
+        if (!response.lightcurve_file) { Plotly.purge($('#lcPlot')[0]); }
+        else { $.lightcurvePlot(response, true); }
 
-        if (!response.p_power_file) { Plotly.purge($('#pPlot')[0]); }
-        else { $.pPowerPlot(response); }
+        if (!response.periodogram_file) { Plotly.purge($('#pPlot')[0]); }
+        else { $.periodogramPlot(response); }
 
-        if (!response.river_plot_file) { Plotly.purge($('#rPlot')[0]); }
+        if (!response.river_plot) { Plotly.purge($('#rPlot')[0]); }
         else { $.riverPlot(response); }
     };
     $.initValidation();
     $.initCalculationList();
 
-    $.tpfFluxPlot = function (response, isShowAperture) {
+    $.tpfPlot = function (response, isShowAperture) {
         // TargetPixelFile Flux Frame Plot
         var tpfPlot = $('#tpfPlot')[0];
         var tpfFile = response.tpf.flux_file;
@@ -675,9 +675,9 @@ $(document).ready(function(){
         $.plotData(tpfPlot, tpfLayout, tpfFile, tpfY, tpfX, tpfCustomData, tpfCustomDataList);
     };
 
-    $.lcFluxPlot = function (response, isLines) {
+    $.lightcurvePlot = function (response, isLines) {
         // LightCurve Flux Plot
-        var lcFile = response.lc_flux_file;
+        var lcFile = response.lightcurve_file;
         var lcPlot = $('#lcPlot')[0];
         var lcLayout = {
             xaxis: { title: "Time - 2454833 (days)", titlefont:{size:12}},
@@ -707,9 +707,9 @@ $(document).ready(function(){
         $.plotData(lcPlot, lcLayout, lcFile, lcY, lcX, lcCustomData);
     };
 
-    $.pPowerPlot = function (response) {
+    $.periodogramPlot = function (response) {
         // LightCurve Periodogram Plot
-        var pFile = response.p_power_file;
+        var pFile = response.periodogram_file;
         var pPlot = $('#pPlot')[0];
         var pLayout = {
             xaxis: { title: "Frequency [μHz]",     titlefont:{size:12}},
@@ -758,5 +758,35 @@ $(document).ready(function(){
 
     $.riverPlot = function (response) {
         // River Plot todo
+        var rFile = response.river_plot.file;
+        var rPlot = $('#rPlot')[0];
+        var rLayout = {
+            xaxis: { title: "Phase", titlefont:{size:12}, zeroline: false },
+            yaxis: { title: "Cycle", titlefont:{size:12}, autorange: "reversed" }, // scaleanchor: "x", scaleratio: response.river_plot.aspect
+            legend: { xanchor: "left", yanchor: "bottom", y: 0.05, x: 1.0 },
+            margin: { l:60, r:0, b:50, t:0, pad:0 }
+        };
+        var rCustomData = {
+            type: 'heatmap',
+            x: response.river_plot.phase,
+            y: response.river_plot.cycle,
+            zmin: response.river_plot.flux_min,
+            zmax: response.river_plot.flux_max
+        };
+        var rCustomDataList = [
+            {
+                colorscale: response.river_plot.color_map,
+                opacity: 0.8,
+                hoverinfo: "x+y+z",
+                colorbar: {
+                    title: response.river_plot.color_label,
+                    titleside: "right",
+                    ticks: 'outside'
+                }
+            }
+        ];
+        var rY = "flux";
+        var rX = ["flux"];
+        $.plotData(rPlot, rLayout, rFile, rY, rX, rCustomData, rCustomDataList);
     }
 });

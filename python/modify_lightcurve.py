@@ -19,26 +19,26 @@ def modify (lc):
 
     if is_remove_nans:
         lc = lc.remove_nans()
-        print("Removed NaNs.")
+        print("``Removed NaNs.")
 
     if is_remove_outliers:
         sigma = form_data.get("outlier_sigma", type="float", default=5.0)
         lc = lc.remove_outliers(sigma=sigma)
-        print("Removed outliers at sigma = ", sigma, ".")
+        print("``Removed outliers at sigma = ", sigma, ".")
 
     if is_sff_correction:
         windows = form_data.get("sff_windows", type="int", default=1)
         lc = lc.to_corrector().correct(windows=windows)
-        print("Applied SFF correction at windows = ", windows, ".")
+        print("``Applied SFF correction at windows = ", windows, ".")
 
     if is_remove_outliers:
         sigma = form_data.get("outlier_sigma", type="float", default=5.0)
         lc = lc.remove_outliers(sigma=sigma)
-        print("Removed outliers at sigma = ", sigma, ".")
+        print("``Removed outliers at sigma = ", sigma, ".")
 
     if is_fill_gaps:
         lc = lc.fill_gaps()
-        print("Filled gaps.")
+        print("``Filled gaps.")
 
     if is_flatten:
         flatten_window      = form_data.get("flatten_window",     type="int", default=101)
@@ -53,7 +53,7 @@ def modify (lc):
         flatten_args = dict(window_length=flatten_window, polyorder=flatten_polyorder, break_tolerance=flatten_tolerance, niters=flatten_iterations, sigma=flatten_sigma)
 
         lc, lc_trend = lc.flatten(return_trend=True, **flatten_args)
-        print("Flattened at window_length = ", flatten_window, ".")
+        print("``Flattened at window_length = ", flatten_window, ".")
     else:
         lc_trend = lc.copy()
 
@@ -63,7 +63,7 @@ def modify (lc):
 
         if not period:
             # todo stop usage of transit_periodogram
-            print("Computing best fit using transit periodogram. This may take some time.")
+            print("``Computing best fit using transit periodogram. This may take some time.")
             periods = numpy.arange(0.3, 1.5, 0.0001)
             durations = numpy.arange(0.005, 0.15, 0.001)
             power, _, _, _, _, _, _ = transit_periodogram(time=lc.time,
@@ -72,33 +72,33 @@ def modify (lc):
                                                           periods=periods,
                                                           durations=durations)
             period = periods[numpy.argmax(power)]
-            print('Best Fit Period: {} days'.format(period))
+            print('``Best Fit Period: {} days'.format(period))
 
         lc = lc.fold(period=period, t0=phase)
-        print("Folded at period = ", period, " and phase = ", phase, ".")
+        print("``Folded at period = ", period, " and phase = ", phase, ".")
 
     if is_bin:
         bin_size  = form_data.get("bin_size",  type="float", default=None)
         bin_count = form_data.get("bin_count", type="int",   default=None)
         lc = lc.bin(time_bin_size=bin_size, n_bins=bin_count)
-        print("Binned at time interval = ", bin_size or '[blank]', " and count = ", bin_count or '[blank]')
+        print("``Binned at time interval = ", bin_size or '[blank]', " and count = ", bin_count or '[blank]')
 
     if is_normalize:
         normalize_unit = form_data.get("normalize_unit", type="str")
         lc = lc.normalize(unit=normalize_unit)
-        print("Normalized lightcurve.")
+        print("``Normalized lightcurve.")
 
     if is_river_plot:
         river_plot_period    = form_data.get("river_plot_period",     type='float')
-        river_plot_time      = form_data.get("river_plot_time",       type='float', default=None)
+        river_plot_time      = form_data.get("river_plot_time",       type='float', default=0.0)
         river_plot_points    = form_data.get("river_plot_points",     type='int',   default=1)
         river_plot_phase_min = form_data.get("river_plot_phase_min",  type='float', default=-0.5)
         river_plot_phase_max = form_data.get("river_plot_phase_max",  type='float', default=0.5)
         river_plot_method    = form_data.get("river_plot_method",     type='str',   default='mean')
 
-        river_plot_axis = lc.plot_river(river_plot_period, epoch_time=river_plot_time, bin_points=river_plot_points, minimum_phase=river_plot_phase_min, maximum_phase=river_plot_phase_max, method=river_plot_method)
-        response.add("river_plot_file", write_files.river_plot(river_plot_axis))
-        print("Generated river plot.")
+        river_plot_axis = lc.plot_river(bin_points=river_plot_points, minimum_phase=river_plot_phase_min, maximum_phase=river_plot_phase_max, method=river_plot_method)
+        response.add("river_plot", write_files.river_plot(river_plot_axis))
+        print("``Generated river plot.")
 
     if is_cdpp:
         cdpp_duration   = form_data.get("cdpp_duration",    type='int',   default=13)
@@ -108,7 +108,7 @@ def modify (lc):
 
         cdpp_result = lc.estimate_cdpp(transit_duration=cdpp_duration, savgol_window=cdpp_window, savgol_polyorder=cdpp_polyorder, sigma=cdpp_sigma)
         response.add("CDPP Noise Metric", str(cdpp_result) + " ppm", True)
-        print("Computed CDPP Noise Metric.")
+        print("``Computed CDPP Noise Metric.")
 
     if is_periodogram:
         # Method
@@ -149,7 +149,7 @@ def modify (lc):
 
         elif p_method == 'boxleastsquares':
             # minimum_period, maximum_period, period, frequency_factor, duration
-            print("Box Least Squares not implemented yet.")
+            print("``Box Least Squares not implemented yet.")
             p_args["duration"]          = form_data.get("p_bls_duration",         type='float', default=None)
             p_args["period"]            = form_data.get("p_bls_period",           type='float', default=None)
             p_args["minimum_period"]    = form_data.get("p_bls_minimum_period",   type='float', default=None)
@@ -159,10 +159,10 @@ def modify (lc):
             pass
 
         # Compute periodogram
-        print("Computing periodogram...")
+        print("``Computing periodogram...")
         periodogram = lc.to_periodogram(**p_args)
-        print("Computed periodogram.")
+        print("``Computed periodogram.")
         response.add("Period at Max Power", str(periodogram.period_at_max_power), True)
-        response.add("p_power_file",        write_files.periodogram(periodogram))
+        response.add("periodogram_file",        write_files.periodogram(periodogram))
 
-    response.add("lc_flux_file", write_files.lightcurve(lc, lc_trend))
+    response.add("lightcurve_file", write_files.lightcurve(lc, lc_trend))

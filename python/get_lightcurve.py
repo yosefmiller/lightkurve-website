@@ -17,11 +17,11 @@ def get (search_result):
         args = dict(download_dir="outputs", quality_bitmask=quality_bitmask)
 
     # Download
-    print("Downloading target from archive.")
+    print("``Downloading target from archive.")
     file = search_result.download_all(**args) if is_stitch else search_result.download(**args)
 
     # Retrieve lightcurve
-    print("Converting to lightcurve.")
+    print("``Converting to lightcurve.")
     if data_archive == 'search_target_pixel':
         # Output header files
         if form_data.get("is_view_metadata", type="boolean"):
@@ -58,7 +58,7 @@ def tpf_to_lc (tpf):
     photometry_type = form_data.get("photometry_type", type="str")
     if photometry_type == "photometry_type_prf":
         method = 'prf'
-        print("Performing PRF photometry.")
+        print("``Performing PRF photometry.")
 
         args3 = dict()
     else:
@@ -82,7 +82,7 @@ def tpf_to_lc (tpf):
                 aperture_columns = form_data.get("aperture_columns", type="int")
                 aperture_custom  = form_data.get("aperture_custom", type="str").split(",")
                 aperture_custom  = [True if x == "1" else False for x in aperture_custom]
-                print("Parsing aperture list of length ", numpy.shape(aperture_custom),
+                print("``Parsing aperture list of length ", numpy.shape(aperture_custom),
                       " to ", aperture_rows, " rows and ", aperture_columns, " columns.")
                 aperture_mask = numpy.reshape(aperture_custom, (aperture_rows, aperture_columns))[::-1]
 

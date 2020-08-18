@@ -8,7 +8,7 @@ def search ():
     is_search_only = form_data.get("is_search_only", type="boolean")
 
     # Perform search from archive
-    print("Searching archive for target.")
+    print("``Searching archive for target.")
     if data_archive == 'search_target_pixel':
         args          = prepare_args()
         search_result = lightkurve.search_targetpixelfile(target, **args)
@@ -28,7 +28,7 @@ def search ():
         if data_archive != "search_tesscut":
             response.add("MAST Observation ID", ", ".join(str(v) for v in search_result.obsid), True)
         response.add("search_results", search_result.__repr__(html=True))
-        print("Completed search.")
+        print("``Completed search.")
 
     return search_result
 

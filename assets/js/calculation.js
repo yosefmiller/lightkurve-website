@@ -406,7 +406,9 @@ $(document).ready(function(){
 
         // Load log file
         $.get($.FORM_PREFIX + "logs/" + tr.id, function (file) {
-            $("#calculation-logs").html("<div class='well' style='white-space: pre'>"+ file +"</div>");
+            file = file.replace(/^``(.*)$/mg, "<span class='text-primary'>$1</span>");
+            $("#calculation-logs").html("<div class='well' style='white-space: pre'></div>");
+            $("#calculation-logs .well").html(file);
         });
 
         // Display log panel and hide result panel

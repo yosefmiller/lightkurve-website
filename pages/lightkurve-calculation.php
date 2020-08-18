@@ -708,27 +708,27 @@
                     </div>
 	                <div class="clearfix collapse riverplot-section visible hidden-sm" style="margin-bottom:15px;"></div>
 	                
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-4 form-group collapse riverplot-section hidden">
 		                <input type="text" class="form-control" id="river_plot_period" name="river_plot_period" placeholder="Period">
 		                <label for="river_plot_period" class="help-block">Period <small>(at which to fold the light curve)</small></label>
 	                </div>
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-4 form-group collapse riverplot-section hidden">
 		                <input type="text" class="form-control" id="river_plot_time" name="river_plot_time" placeholder="Leave blank to use first time value">
 		                <label for="river_plot_time" class="help-block">Epoch time <small>(phase mid point for plotting)</small></label>
 	                </div>
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-6 form-group collapse riverplot-section">
 		                <input type="text" class="form-control" id="river_plot_points" name="river_plot_points" placeholder="1 (default)">
 		                <label for="river_plot_points" class="help-block">Number of points in each bin</label>
 	                </div>
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-6 form-group collapse riverplot-section">
 		                <input type="text" class="form-control" id="river_plot_phase_min" name="river_plot_phase_min" placeholder="-0.5 (default)">
 		                <label for="river_plot_phase_min" class="help-block">Minimum phase to plot</label>
 	                </div>
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-6 form-group collapse riverplot-section">
 		                <input type="text" class="form-control" id="river_plot_phase_max" name="river_plot_phase_max" placeholder="0.5 (default)">
 		                <label for="river_plot_phase_max" class="help-block">Maximum phase to plot</label>
 	                </div>
-	                <div class="col-md-4 form-group collapse riverplot-section">
+	                <div class="col-md-6 form-group collapse riverplot-section">
 		                <select class="form-control" id="river_plot_method" name="river_plot_method">
 			                <option value="mean" title="Display the average value in each bin" selected>Mean (default)</option>
 			                <option value="median" title="Display the average value in each bin">Median</option>
