@@ -1,6 +1,6 @@
 $(document).ready(function(){
     /* Default settings */
-    $.FORM_PREFIX = "/";
+    $.FORM_PREFIX = $("base").attr("href");
     $.FORM_CHECK_INTERVAL = 3000;
     $.validationConfigFields = {};
 

@@ -5,6 +5,7 @@ defined('IS_COOKIES_ENABLED') or define('IS_COOKIES_ENABLED', false);
 $klein->respond(function ($req, $res, $service, $app) {
     $service->layout('pages/partials/master-layout.php');
     $service->subNavigation = json_decode(file_get_contents("pages/models/sub-navigation.json"), true);
+    $service->baseDirectory = $_SERVER['HTTP_BASE_URI'] ?: "/";
     $service->getUserId = function ($response) {
         /* RETURN A UNIQUE USER ID, AND GENERATE NEW ID IF NEEDED */
         if ( IS_COOKIES_ENABLED && isset($_COOKIE["userId"]) && strlen($_COOKIE["userId"]) > 10 ) {

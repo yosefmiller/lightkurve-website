@@ -4,15 +4,15 @@ from astropy.visualization import PercentileInterval
 
 def get (search_result):
     # Initialize
-    quality_bitmask = form_data.get("quality_bitmask",    type="int",   force=False)
-    cutout_size     = form_data.get("cutout_size", (5,5), type="float", force=False)
-    data_archive    = form_data.get("data_archive",       type="str")
-    target          = form_data.get("target",             type="str")
-    is_stitch       = form_data.get("is_stitch",          type="boolean")
+    quality_bitmask = form_data.get("quality_bitmask", type="int",   force=False)
+    cutout_size     = form_data.get("cutout_size", 5,  type="float", force=False)
+    data_archive    = form_data.get("data_archive",    type="str")
+    target          = form_data.get("target",          type="str")
+    is_stitch       = form_data.get("is_stitch",       type="boolean")
 
     # Prepare arguments
     if data_archive == "search_tesscut":
-        args = dict(download_dir="outputs", cutout_size=cutout_size)
+        args = dict(download_dir="outputs", cutout_size=(cutout_size,cutout_size))
     else:
         args = dict(download_dir="outputs", quality_bitmask=quality_bitmask)
 
@@ -74,8 +74,7 @@ def tpf_to_lc (tpf):
 
             if aperture_type == "aperture_type_percent":
                 aperture_percent = form_data.get("aperture_percent", type="int")
-                aperture_mask = numpy.nanmedian(tpf.flux, axis=0) > numpy.nanpercentile(numpy.nanmedian(tpf.flux, axis=0),
-                                                                                        aperture_percent)
+                aperture_mask = numpy.nanmedian(tpf.flux, axis=0) > numpy.nanpercentile(numpy.nanmedian(tpf.flux, axis=0), aperture_percent)
 
             elif aperture_type == "aperture_type_manual":
                 aperture_rows    = form_data.get("aperture_rows", type="int")
@@ -87,7 +86,13 @@ def tpf_to_lc (tpf):
                 aperture_mask = numpy.reshape(aperture_custom, (aperture_rows, aperture_columns))[::-1]
 
             elif aperture_type == "aperture_type_threshold":
-                pass
+                aperture_mask = "threshold"
+
+            elif aperture_type == "aperture_type_pipeline":
+                aperture_mask = "pipeline"
+
+        # Centroid Method: str, ‘moments’ or ‘quadratic’
+        centroid_method = "moments"
 
         # Set tpf output data and write flux to file for plotting
         tpf_response = dict(
@@ -99,7 +104,6 @@ def tpf_to_lc (tpf):
         response.add("tpf", tpf_response)
 
         # Set the args
-        # todo include parameter centroid_method: str, ‘moments’ or ‘quadratic’
-        args3 = dict(aperture_mask=aperture_mask)
+        args3 = dict(aperture_mask=aperture_mask, centroid_method=centroid_method)
 
     return tpf.to_lightcurve(method=method, **args3)

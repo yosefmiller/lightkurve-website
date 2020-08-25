@@ -65,7 +65,7 @@ def prepare_args ():
         args['month'] = list(map(int, month))
 
     # Limit
-    if limit_targets.isdigit():
-        args['limit'] = int(limit_targets)
+    if limit_targets:
+        args['limit'] = limit_targets
 
     return args

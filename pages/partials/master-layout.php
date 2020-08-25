@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title><?= $this->escape($this->pageTitle); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="/" />
+    <base href="<?= $this->baseDirectory ?>" />
     <link href="img/nasa_favicon.ico" rel="icon">
     <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
     <link href="css/vendor/select2.min.css" rel="stylesheet">

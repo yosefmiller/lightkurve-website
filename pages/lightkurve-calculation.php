@@ -170,7 +170,7 @@
                 </div>
             </div>
         </div>
-	    <hr class="col-md-11 col-md-offset-1">
+	    <hr class="col-md-11 col-md-offset-1 collapse tess-section kepler-section">
 	    
 	    <!-- PHOTOMETRY OPTIONS -->
         <div class="row collapse tess-section kepler-section">
@@ -201,7 +201,7 @@
                     </div>
 	                
 	                <!-- Flux type -->
-	                <div class="col-md-12 form-group collapse lc-section">
+	                <div class="col-md-12 form-group collapse lcf-section">
 		                <div class="radio-chooser">
 			                <div class="radio-chooser-item">
 				                <input type="radio" name="flux_type" id="sap" value="sap" />
@@ -304,7 +304,7 @@
         <hr class="col-md-11 col-md-offset-1 collapse tess-section kepler-section">
 		
 		<!-- LIGHTCURVE OPTIONS -->
-        <div class="row">
+        <div class="row collapse lightcurve-section">
             <label class="col-md-2 control-label" for="">Lightcurve Options</label>
             <div class="col-md-10">
 	            <!-- Remove NaNs -->
@@ -404,7 +404,7 @@
                 </div>
 
 	            <!-- Stitch -->
-                <div class="row collapse lc-section">
+                <div class="row collapse lcf-section">
                     <div class="col-md-6">
                         <div class="checkbox icheck-peterriver">
                             <input type="checkbox" id="isStitch" name="is_stitch" />
@@ -479,10 +479,10 @@
 
             </div>
         </div>
-        <hr class="col-md-11 col-md-offset-1">
+        <hr class="col-md-11 col-md-offset-1 collapse lightcurve-section">
         
 		<!-- CONVERT LIGHTCURVE -->
-        <div class="row">
+        <div class="row collapse lightcurve-section">
             <label class="col-md-2 control-label" for="">Convert Lightcurve</label>
             <div class="col-md-10">
 	            <!-- Periodogram -->
@@ -684,14 +684,14 @@
              
             </div>
         </div>
-        <hr class="col-md-11 col-md-offset-1">
+        <hr class="col-md-11 col-md-offset-1 collapse lightcurve-section">
         
 		<!-- VIEWING OPTIONS -->
-        <div class="row">
+        <div class="row collapse lightcurve-section">
             <label class="col-md-2 control-label" for="">Viewing Options</label>
             <div class="col-md-10">
                 <!-- River plot -->
-                <div class="row">
+                <div class="row collapse fold-section">
                     <div class="col-md-12">
                         <div class="checkbox icheck-midnightblue">
                             <input type="checkbox" id="isRiverPlot" name="is_river_plot" />
@@ -820,7 +820,7 @@
         
             </div>
         </div>
-        <hr class="col-md-11 col-md-offset-1">
+        <hr class="col-md-11 col-md-offset-1 collapse lightcurve-section">
 		
 		<!-- SUBMIT -->
         <div class="row">

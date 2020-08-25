@@ -8,7 +8,7 @@ $(document).ready(function(){
         var kepler_section              = $(".kepler-section");
         var tess_section                = $(".tess-section");
         var tpf_section                 = $(".tpf-section");
-        var lc_section                  = $(".lc-section");
+        var lcf_section                 = $(".lcf-section");
         var target_section              = $("#target-section");
         var month_section               = $("#cadence-month-section");
 
@@ -16,18 +16,20 @@ $(document).ready(function(){
         var photo_prf_section           = $(".photo-prf-section");
         var aperture_percent_section    = $(".aperture-percent-section");
         var aperture_manual_section     = $(".aperture-manual-section");
+        var lightcurve_section          = $(".lightcurve-section");
         switch ( $(this).parent().find("input").attr("id") ) {
             case "search_light_curve":
                 tess_section.hide();
                 tpf_section.hide();
                 kepler_section.show();
-                lc_section.show();
+                lcf_section.show();
+                lightcurve_section.show();
                 month_section.hide();
                 target_section.removeClass("col-md-4").addClass("col-md-6");
                 break;
             case "search_target_pixel":
                 tess_section.hide();
-                lc_section.hide();
+                lcf_section.hide();
                 kepler_section.show();
                 tpf_section.show();
                 month_section.hide();
@@ -35,7 +37,7 @@ $(document).ready(function(){
                 break;
             case "search_tesscut":
                 kepler_section.hide();
-                lc_section.hide();
+                lcf_section.hide();
                 tess_section.show();
                 tpf_section.show();
                 target_section.removeClass("col-md-6").addClass("col-md-4");
@@ -44,10 +46,12 @@ $(document).ready(function(){
             case "photometry_type_aperture":
                 photo_prf_section.hide();
                 photo_aperture_section.show();
+                lightcurve_section.show();
                 break;
             case "photometry_type_prf":
                 photo_aperture_section.hide();
                 photo_prf_section.show();
+                lightcurve_section.hide();
                 break;
             case "aperture_type_percent":
                 aperture_manual_section.hide();
@@ -278,7 +282,6 @@ $(document).ready(function(){
     /***** END FORM ELEMENTS *****/
 
     /***** FORM SUBMISSION *****/
-    $.FORM_PREFIX = "/";
     $.validationConfigFields = {
         calc_name: {
             validators: {}
