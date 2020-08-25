@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <!-- Title -->
-    <h2 class="page-header">New LightKurve Calculation</h2>
+    <h3 class="page-header">New LightKurve Calculation</h3>
 
     <!-- Calculation Form -->
     <form enctype="multipart/form-data" class="form-horizontal" action="" method="post" id="calculation-form">

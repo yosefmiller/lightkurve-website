@@ -197,8 +197,8 @@ $(document).ready(function(){
         // Create and hide an empty calculation list and results
         var calculation_list_element = $("#calculation-list");
         var calculation_result_element = $("#calculation-result");
-        calculation_list_element.html(calculation_list_html).addClass("clearfix hidden");
-        calculation_result_element.prepend(calculation_result_html).addClass('clearfix hidden');
+        calculation_list_element.html(calculation_list_html).addClass("row hidden");
+        calculation_result_element.prepend(calculation_result_html).addClass('row hidden');
         calculation_result_element.append(calculation_input_html);
 
         $("#calculation-clear-all").click(function (e) {

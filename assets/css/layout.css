@@ -11,6 +11,13 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
+/* Body */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /* NASA Header */
 #nasa__main-navigation {
     margin: 0;
@@ -63,7 +70,6 @@
     background: transparent;
     border: none;
     position: relative;
-    margin-bottom: 20px;
 }
 #nasa__subsite-section:after {
     content: "";
@@ -334,13 +340,18 @@
     color: #428bca;
 }
 
+/* Main Content */
+#nasa__main-section {
+    margin: 30px 0;
+}
+
 /* Footer */
 .footer {
     border-top: 8px solid #AF3C00;
     background-color: #2E2E2E;
     min-height: 30px;
     width: 100%;
-    margin-top: 20px;
+    margin-top: auto;
 }
 .footer .nav > li:not(:last-child) {
     /*margin-right: 10px;*/
@@ -380,8 +391,9 @@
     .navbar-brand_heading {
         display: none;
     }
-    .nasa__sub-logo, .nasa__sub-name-right {
-        display: none;
+    .nasa__sub-logo, .nasa__sub-name {
+        float: none;
+        justify-content: center;
     }
 }
 @media (max-width: 767px) {   /*xs*/

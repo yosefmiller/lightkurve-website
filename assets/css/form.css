@@ -3,6 +3,9 @@
 body{
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+.page-header {
+    margin: 20px 0;
+}
 
 /* Radio Chooser */
 .radio-chooser {
@@ -59,6 +62,15 @@ body{
 .radio-chooser-title {
     font-weight: 100;
     font-size: 18px;
+}
+@media (max-width: 767px) {
+    .radio-chooser {
+        flex-direction: column;
+    }
+    .radio-chooser-item:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #cce6fa;
+    }
 }
 
 /* Form Validation */
