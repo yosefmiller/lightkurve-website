@@ -455,13 +455,13 @@ $(document).ready(function(){
         },
         bin_size: {
             validators: {
-                notEmpty: {
-                    message: 'Time interval is required'
+                integer: {
+                    message: 'Bin size must be an integer'
                 },
                 greaterThan: {
                     value: 0,
                     inclusive: false,
-                    message: 'Time interval must be greater than zero'
+                    message: 'Bin size must be greater than zero'
                 }
             }
         },

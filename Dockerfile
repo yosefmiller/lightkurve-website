@@ -21,7 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     composer require klein/klein
 
 # PIP Python dependency manager
-RUN pip3 install lightkurve==1.11.1 cython pytest jupyter
+RUN pip3 install lightkurve==1.11.3 cython pytest jupyter
 RUN pip3 install git+https://github.com/mirca/transit-periodogram.git
 
 ##### CONFIGURE SERVICES #####

@@ -10,12 +10,17 @@ def modify (lc):
     is_sff_correction  = form_data.get("is_sff_correction",  type="boolean")
     is_fill_gaps       = form_data.get("is_fill_gaps",       type="boolean")
     is_periodogram     = form_data.get("is_periodogram",     type="boolean")
+    is_seismology      = form_data.get("is_seismology",      type="boolean")
     is_flatten         = form_data.get("is_flatten",         type="boolean")
     is_fold            = form_data.get("is_fold",            type="boolean")
     is_bin             = form_data.get("is_bin",             type="boolean")
     is_normalize       = form_data.get("is_normalize",       type="boolean")
     is_river_plot      = form_data.get("is_river_plot",      type="boolean")
     is_cdpp            = form_data.get("is_cdpp",            type="boolean")
+
+    if is_seismology and not is_periodogram:
+        print("``Seismology not implemented yet.")
+        seismology = lc.to_seismology()
 
     if is_remove_nans:
         lc = lc.remove_nans()
@@ -78,10 +83,13 @@ def modify (lc):
         print("``Folded at period = ", period, " and phase = ", phase, ".")
 
     if is_bin:
-        bin_size  = form_data.get("bin_size",  type="float", default=None)
-        bin_count = form_data.get("bin_count", type="int",   default=None)
-        lc = lc.bin(time_bin_size=bin_size, n_bins=bin_count)
-        print("``Binned at time interval = ", bin_size or '[blank]', " and count = ", bin_count or '[blank]')
+        bin_size   = form_data.get("bin_size",   type="int", default=None)
+        bin_count  = form_data.get("bin_count",  type="int", default=None)
+        bin_method = form_data.get("bin_method", type="str", default="mean")
+        if bin_count:
+            bin_size = None
+        lc = lc.bin(binsize=bin_size, bins=bin_count, method=bin_method)
+        print("``Binned at cadence size = ", bin_size or '[blank]', ", count = ", bin_count or '[blank]', ", and method = ", bin_method)
 
     if is_normalize:
         normalize_unit = form_data.get("normalize_unit", type="str")
@@ -164,5 +172,9 @@ def modify (lc):
         print("``Computed periodogram.")
         response.add("Period at Max Power", str(periodogram.period_at_max_power), True)
         response.add("periodogram_file",        write_files.periodogram(periodogram))
+
+    if is_seismology and is_periodogram:
+        print("``Seismology not implemented yet.")
+        seismology = lc.to_seismology()
 
     response.add("lightcurve_file", write_files.lightcurve(lc, lc_trend))

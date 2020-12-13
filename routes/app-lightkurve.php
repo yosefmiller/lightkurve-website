@@ -36,9 +36,9 @@ $klein->respond('POST', '/run', function ($req, $res, $service) {
                       "is_custom_aperture", "aperture_type", "aperture_percent", "aperture_rows", "aperture_columns", "aperture_custom",
                       "is_remove_nans", "is_remove_outliers", "outlier_sigma", "is_fill_gaps", "is_sff_correction", "sff_windows",
                       "is_flatten", "flatten_window", "flatten_polyorder", "flatten_tolerance", "flatten_iterations", "flatten_sigma",
-                      "is_stitch", "is_fold", "fold_period", "fold_phase", "is_bin", "bin_size", "bin_count", "is_normalize", "normalize_unit",
+                      "is_stitch", "is_fold", "fold_period", "fold_phase", "is_bin", "bin_size", "bin_count", "bin_method", "is_normalize", "normalize_unit",
                       "is_periodogram", "p_method", "p_ls_normalization", "p_ls_method", "p_ls_oversample", "p_ls_nterms", "p_ls_nyquist", "p_ls_freq_period", "p_ls_frequencies", "p_ls_frequencies_unit", "p_ls_frequencies_min", "p_ls_frequencies_max",
-                      "p_bls_duration", "p_bls_period", "p_bls_minimum_period", "p_bls_maximum_period", "p_bls_frequency_factor", "p_bls_time_unit",
+                      "p_bls_duration", "p_bls_period", "p_bls_minimum_period", "p_bls_maximum_period", "p_bls_frequency_factor", "p_bls_time_unit", "is_seismology",
                       "is_cdpp", "cdpp_duration", "cdpp_window", "cdpp_polyorder", "cdpp_sigma",
                       "is_river_plot", "river_plot_period", "river_plot_time", "river_plot_points", "river_plot_phase_min", "river_plot_phase_max", "river_plot_method",
                       "is_view_metadata" ];

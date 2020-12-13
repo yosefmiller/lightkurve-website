@@ -166,9 +166,12 @@ body {
     float: right;
     text-align: right;
 }
-.nasa__sub-name > div {
+.nasa__sub-name > div, .nasa__sub-name > a {
     display: flex;
+    text-align: center;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .nasa__sub-name a {
     font-family: Lato, sans-serif;

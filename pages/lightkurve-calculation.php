@@ -444,18 +444,29 @@
                     </div>
 	                <div class="clearfix collapse bin-section visible hidden-sm"></div>
                  
-	                <div class="col-md-6 form-group collapse bin-section" style="margin-top:15px;">
+	                <div class="col-md-4 form-group collapse bin-section" style="margin-top:15px;">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="bin_size" name="bin_size" placeholder="Time interval">
-                            <span class="input-group-addon">days</span>
+                            <input type="text" class="form-control" id="bin_size" name="bin_size" placeholder="13 (default)">
+                            <span class="input-group-addon">cadences</span>
                         </div>
-                        <label for="bin_size" class="help-block">Time interval for the binned time series</label>
+                        <label for="bin_size" class="help-block">Number of cadences to include in every bin</label>
 	                </div>
 	                
-	                <div class="col-md-6 form-group collapse bin-section" style="margin-top:15px;">
-                        <input type="text" class="form-control" id="bin_count" name="bin_count" placeholder="Leave blank to fit all original points">
+	                <div class="col-md-4 form-group collapse bin-section" style="margin-top:15px;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="bin_count" name="bin_count" placeholder="Overrides bin size">
+                            <span class="input-group-addon">bins</span>
+                        </div>
                         <label for="bin_count" class="help-block">Number of bins</label>
                     </div>
+
+                    <div class="col-md-4 form-group collapse bin-section" style="margin-top:15px;">
+			            <select class="form-control" id="bin_method" name="bin_method">
+				            <option value="mean" selected>Mean (default)</option>
+				            <option value="median">Median</option>
+			            </select>
+			            <label for="normalize_unit" class="help-block">Summary statistic method</label>
+		            </div>
                 </div>
 	
 	            <!-- Normalize -->
