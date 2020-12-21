@@ -143,10 +143,20 @@ $(document).ready(function(){
                 break;
         }
     });
-    $("#p_ls_freq_period").change(function () {
+    $("#p_ls_freq_period").select2({
+        theme: "bootstrap",
+        width: "100%",
+        minimumResultsForSearch: -1,
+        allowClear: true
+    }).change(function () {
         var p_lc_freq_section = $(".p-lc-freq-section");
         switch ($("#p_ls_freq_period").val()) {
+            case "":
+                p_lc_freq_section.hide();
+                break;
             case "frequency":
+                p_lc_freq_section.show();
+                break;
             case "period":
                 p_lc_freq_section.show();
                 break;
@@ -182,7 +192,7 @@ $(document).ready(function(){
         var calc_name = $("#calc_name");
         var target = $("#target");
         if ( !calc_name.val() && target.val() ) {
-            calc_name.val( target.val() );
+            calc_name.val( target.val() ).change();
         }
     });
 
@@ -283,9 +293,6 @@ $(document).ready(function(){
 
     /***** FORM SUBMISSION *****/
     $.validationConfigFields = {
-        calc_name: {
-            validators: {}
-        },
         data_archive: {
             validators: {
                 notEmpty: {
@@ -760,7 +767,7 @@ $(document).ready(function(){
     };
 
     $.riverPlot = function (response) {
-        // River Plot todo
+        // River Plot
         var rFile = response.river_plot.file;
         var rPlot = $('#rPlot')[0];
         var rLayout = {

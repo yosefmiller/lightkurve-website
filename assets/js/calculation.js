@@ -386,10 +386,12 @@ $(document).ready(function(){
         var output_table = $("#output-table").find("tbody");
         output_table.html("");
         output_order.forEach(function(name) {
-                value = response.output[name];
+                var value = response.output[name];
+                var title = "";
+                if (typeof value == "object") { title = value[1]; value = value[0]; }
                 if (value.length === 0) return;
                 name = name.replace("_", " ").replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-                output_table.append('<tr><th>'+name+'</th><td>'+value+'</td></tr>');
+                output_table.append('<tr title="' + title + '"><th>'+name+'</th><td>'+value+'</td></tr>');
             });
 
         //  Plot result

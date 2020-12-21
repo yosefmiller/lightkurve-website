@@ -9,18 +9,16 @@ def modify (lc):
     is_remove_outliers = form_data.get("is_remove_outliers", type="boolean")
     is_sff_correction  = form_data.get("is_sff_correction",  type="boolean")
     is_fill_gaps       = form_data.get("is_fill_gaps",       type="boolean")
-    is_periodogram     = form_data.get("is_periodogram",     type="boolean")
-    is_seismology      = form_data.get("is_seismology",      type="boolean")
     is_flatten         = form_data.get("is_flatten",         type="boolean")
     is_fold            = form_data.get("is_fold",            type="boolean")
     is_bin             = form_data.get("is_bin",             type="boolean")
     is_normalize       = form_data.get("is_normalize",       type="boolean")
+    is_periodogram     = form_data.get("is_periodogram",     type="boolean")
+    is_seismology      = form_data.get("is_seismology",      type="boolean")
     is_river_plot      = form_data.get("is_river_plot",      type="boolean")
     is_cdpp            = form_data.get("is_cdpp",            type="boolean")
 
-    if is_seismology and not is_periodogram:
-        print("``Seismology not implemented yet.")
-        seismology = lc.to_seismology()
+    lc_seismology = lc.copy() if is_seismology and not is_periodogram else None
 
     if is_remove_nans:
         lc = lc.remove_nans()
@@ -67,7 +65,7 @@ def modify (lc):
         phase  = form_data.get("fold_phase",  type="float", default=0.0)
 
         if not period:
-            # todo stop usage of transit_periodogram
+            # todo stop usage of transit_periodogramf
             print("``Computing best fit using transit periodogram. This may take some time.")
             periods = numpy.arange(0.3, 1.5, 0.0001)
             durations = numpy.arange(0.005, 0.15, 0.001)
@@ -118,6 +116,7 @@ def modify (lc):
         response.add("CDPP Noise Metric", str(cdpp_result) + " ppm", True)
         print("``Computed CDPP Noise Metric.")
 
+    # Next options should really be located in another file todo
     if is_periodogram:
         # Method
         p_method = form_data.get("p_method", type="str", default='lombscargle')
@@ -131,7 +130,6 @@ def modify (lc):
             p_args["nyquist_factor"]     = form_data.get("p_ls_nyquist",            type='int',   default=1)
             p_freq_period                = form_data.get("p_ls_freq_period",        type='str',   default=None)
             p_freq_period_unit           = form_data.get("p_ls_frequencies_unit",   type='str',   default='')
-            p_freq_period_value          = form_data.get("p_ls_frequencies",        type='float', default=None, force=False)
             p_freq_period_min            = form_data.get("p_ls_frequencies_min",    type='float', default=None, force=False)
             p_freq_period_max            = form_data.get("p_ls_frequencies_max",    type='float', default=None, force=False)
 
@@ -146,35 +144,42 @@ def modify (lc):
 
                 # Values
                 if p_freq_period == "frequency":
-                    p_args["frequency"]         = p_freq_period_value
                     p_args["minimum_frequency"] = p_freq_period_min
                     p_args["maximum_frequency"] = p_freq_period_max
                 elif p_freq_period == "period":
-                    p_args["period"]            = p_freq_period_value
                     p_args["minimum_period"]    = p_freq_period_min
                     p_args["maximum_period"]    = p_freq_period_max
 
 
         elif p_method == 'boxleastsquares':
-            # minimum_period, maximum_period, period, frequency_factor, duration
-            print("``Box Least Squares not implemented yet.")
-            p_args["duration"]          = form_data.get("p_bls_duration",         type='float', default=None)
-            p_args["period"]            = form_data.get("p_bls_period",           type='float', default=None)
+            # Get values
+            p_args["duration"]          = form_data.get("p_bls_duration",         type='float', default=0.25)
+            p_args["frequency_factor"]  = form_data.get("p_bls_frequency_factor", type='int',   default=10)
             p_args["minimum_period"]    = form_data.get("p_bls_minimum_period",   type='float', default=None)
             p_args["maximum_period"]    = form_data.get("p_bls_maximum_period",   type='float', default=None)
-            p_args["frequency_factor"]  = form_data.get("p_bls_frequency_factor", type='int',   default=None)
-            p_args["time_unit"]         = form_data.get("p_bls_time_unit",        type='str',   default=None)
-            pass
+            p_period_unit               = form_data.get("p_bls_time_unit",        type='str',   default=None)
+
+            # Units
+            import astropy.units as u
+            if p_period_unit == "day":
+                p_args["time_unit"] = u.day
 
         # Compute periodogram
         print("``Computing periodogram...")
         periodogram = lc.to_periodogram(**p_args)
         print("``Computed periodogram.")
-        response.add("Period at Max Power", str(periodogram.period_at_max_power), True)
-        response.add("periodogram_file",        write_files.periodogram(periodogram))
+        response.add("Max Period",             str(periodogram.max_power),              True)
+        response.add("Period at Max Power",    str(periodogram.period_at_max_power),    True)
+        response.add("Frequency at Max Power", str(periodogram.frequency_at_max_power), True)
+        response.add("periodogram_file",       write_files.periodogram(periodogram))
 
-    if is_seismology and is_periodogram:
-        print("``Seismology not implemented yet.")
+
+    if is_seismology:
+        # diagnose_deltanu, diagnose_numax, estimate_logg(teff), estimate_mass(teff), estimate_radius(teff), plot_echelle
+        print("``Seismology not fully implemented yet.")
+        lc = lc_seismology if lc_seismology else lc
         seismology = lc.to_seismology()
+        response.add("Estimated NuMax",   str(seismology.estimate_numax()),   True, "Frequency of the peak of the seismic oscillation modes envelope")
+        response.add("Estimated DeltaNu", str(seismology.estimate_deltanu()), True, "Average value of the large frequency spacing, DeltaNu, of the seismic oscillations of the target")
 
     response.add("lightcurve_file", write_files.lightcurve(lc, lc_trend))

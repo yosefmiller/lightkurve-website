@@ -597,33 +597,26 @@
 				            <!-- Frequency/Period -->
 				            <div class="col-md-4 form-group">
 					            <select class="form-control" id="p_ls_freq_period" name="p_ls_freq_period" data-placeholder="Select limit (optional)">
-						            <option value=""></option>
+						            <option value="" selected></option>
 						            <option value="frequency">Frequency</option>
 						            <option value="period">Period</option>
 					            </select>
 					            <label for="p_ls_freq_period" class="help-block">Custom limit</label>
 				            </div>
 				            <div class="clearfix collapse visible hidden-sm p-lc-freq-section"></div>
-				            <div class="col-md-4 form-group collapse p-lc-freq-section">
+				            <div class="col-md-6 form-group collapse p-lc-freq-section">
 					            <div class="input-with-dropdown">
-						            <input type="text" class="form-control" id="p_ls_frequencies" name="p_ls_frequencies" placeholder="Value">
+						            <input type="text" class="form-control" id="p_ls_frequencies_min" name="p_ls_frequencies_min" placeholder="Minimum">
 						            <div class="input-group-btn">
-							            <select class="form-control" id="p_ls_frequencies_unit" name="p_ls_frequencies_unit">
-								            <option value="microhertz">μHz</option>
-								            <option value="1/day" selected>1/day</option>
+							            <select class="form-control" id="p_ls_frequencies_unit" name="p_ls_frequencies_unit" title="Select frequency unit">
+								            <option value="microhertz" title="1/μHz is used for period.">μHz</option>
+								            <option value="1/day" selected title="Day is used for period.">1/day</option>
 							            </select>
 						            </div>
 					            </div>
-					            <label for="p_ls_frequencies" class="help-block">Limit value</label>
-				            </div>
-				            <div class="col-md-4 form-group collapse p-lc-freq-section">
-					            <div class="input-group">
-						            <input type="text" class="form-control" id="p_ls_frequencies_min" name="p_ls_frequencies_min" placeholder="Minimum">
-						            <span class="input-group-addon">1/day</span>
-					            </div>
 					            <label for="p_ls_frequencies_min" class="help-block">Limit Min</label>
 				            </div>
-				            <div class="col-md-4 form-group collapse p-lc-freq-section">
+				            <div class="col-md-6 form-group collapse p-lc-freq-section">
 					            <div class="input-group">
 						            <input type="text" class="form-control" id="p_ls_frequencies_max" name="p_ls_frequencies_max" placeholder="Maximum">
 						            <span class="input-group-addon">1/day</span>
@@ -646,25 +639,18 @@
 					            <input type="text" class="form-control" id="p_bls_frequency_factor" name="p_bls_frequency_factor" placeholder="10 (default)">
 					            <label for="p_bls_frequency_factor" class="help-block">Frequency Factor</label>
 				            </div>
-				            <div class="col-md-4 form-group">
+				            <div class="col-md-6 form-group">
 					            <div class="input-with-dropdown">
-						            <input type="text" class="form-control" id="p_bls_period" name="p_bls_period" placeholder="Value">
+						            <input type="text" class="form-control" id="p_bls_minimum_period" name="p_bls_minimum_period" placeholder="Minimum">
 						            <div class="input-group-btn">
 							            <select class="form-control" id="p_bls_time_unit" name="p_bls_time_unit">
 								            <option value="day" selected>day</option>
 							            </select>
 						            </div>
 					            </div>
-					            <label for="p_bls_period" class="help-block">Period</label>
-				            </div>
-				            <div class="col-md-4 form-group">
-					            <div class="input-group">
-						            <input type="text" class="form-control" id="p_bls_minimum_period" name="p_bls_minimum_period" placeholder="Minimum">
-						            <span class="input-group-addon">day</span>
-					            </div>
 					            <label for="p_bls_minimum_period" class="help-block">Minimum Period</label>
 				            </div>
-				            <div class="col-md-4 form-group">
+				            <div class="col-md-6 form-group">
 					            <div class="input-group">
 						            <input type="text" class="form-control" id="p_bls_maximum_period" name="p_bls_maximum_period" placeholder="Maximum">
 						            <span class="input-group-addon">day</span>
